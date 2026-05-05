@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Cognitive Diagnostic Models · Dr. I Nyoman Indhi Wiradika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy:   #032454;
+    --gold:   #fcc209;
+    --silver: #e7eaee;
+    --accent: #032454;
+    --accent-light: #e7eaee;
+    --bg: #f9fafb;
+    --paper: #ffffff;
+    --text: #032454;
+    --text-muted: #4a5f7e;
+    --border: #dde1e8;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249,250,251,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 2rem; height: 58px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.65rem;
+    text-decoration: none;
+  }
+  .nav-logo span {
+    font-family: var(--font-heading); font-size: 1.05rem;
+    font-weight: 600; color: var(--navy); letter-spacing: -0.01em;
+  }
+  .nav-back {
+    font-size: 0.82rem; font-weight: 500; color: var(--text-muted);
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--navy); }
+
+  /* ─── PROGRESS ────────────────────────────── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 2px; width: 0%; background: var(--gold);
+    transition: width 0.1s linear;
+  }
+
+  /* ─── ARTICLE ─────────────────────────────── */
+  article {
+    max-width: 720px; margin: 0 auto;
+    padding: 110px 2rem 80px;
+  }
+  .post-meta {
+    font-size: 0.78rem; color: var(--gold); font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .post-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+    text-wrap: balance;
+  }
+  .post-subtitle {
+    font-size: 1.15rem; color: var(--text-muted);
+    line-height: 1.55; margin-bottom: 2.5rem;
+    text-wrap: pretty;
+  }
+
+  .post-author {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .post-author img {
+    width: 44px; height: 44px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 2px solid var(--gold);
+  }
+  .post-author .info { flex: 1; }
+  .post-author .name {
+    font-size: 0.92rem; font-weight: 600; color: var(--navy);
+  }
+  .post-author .date {
+    font-size: 0.78rem; color: var(--text-muted);
+  }
+  .post-author .reading {
+    font-size: 0.78rem; color: var(--text-muted);
+    font-style: italic; font-family: var(--font-heading);
+  }
+
+  /* ─── PROSE ───────────────────────────────── */
+  .prose h2 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem; font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 3rem 0 1.2rem;
+    color: var(--navy);
+    position: relative;
+  }
+  .prose h2::before {
+    content: '';
+    position: absolute; left: -1rem; top: 0.55rem;
+    width: 4px; height: 1.6rem;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  .prose h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem; font-weight: 600;
+    margin: 2.2rem 0 0.8rem;
+    color: var(--navy);
+  }
+  .prose p {
+    font-size: 1.05rem; color: var(--text);
+    margin-bottom: 1.3rem;
+    text-wrap: pretty;
+  }
+  .prose strong { color: var(--navy); font-weight: 600; }
+  .prose em { color: var(--navy); }
+  .prose a {
+    color: var(--navy);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+  .prose a:hover { color: var(--gold); }
+
+  .prose blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 0.5rem 1.4rem;
+    margin: 1.8rem 0;
+    font-style: italic;
+    color: var(--navy);
+    background: var(--paper);
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+
+  .prose ul, .prose ol {
+    margin: 1.2rem 0 1.5rem 1.4rem;
+  }
+  .prose li {
+    font-size: 1.02rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .prose li::marker { color: var(--gold); }
+
+  /* Inline code */
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--accent-light);
+    color: var(--navy);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+  }
+
+  /* ─── FIGURE / VIZ CARD ───────────────────── */
+  figure {
+    margin: 2.4rem 0;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem;
+    box-shadow: 0 1px 3px rgba(3,36,84,0.04);
+  }
+  figure .viz-label {
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  figure .viz-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 0.3rem;
+  }
+  figure figcaption {
+    font-size: 0.85rem; color: var(--text-muted);
+    line-height: 1.55;
+    margin-top: 1rem;
+    text-align: left;
+    font-style: italic;
+    font-family: var(--font-heading);
+  }
+
+  /* ─── KEY FINDING CALLOUT ─────────────────── */
+  .callout {
+    background: linear-gradient(135deg, var(--navy) 0%, #051a3d 100%);
+    color: white;
+    padding: 2rem 2.2rem;
+    border-radius: 10px;
+    margin: 2.4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 4px; background: var(--gold);
+  }
+  .callout .label {
+    font-size: 0.7rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .callout p {
+    color: white; font-size: 1.08rem;
+    margin-bottom: 0; line-height: 1.6;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ─── STAT GRID ───────────────────────────── */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  .stat-grid .item {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .stat-grid .num {
+    font-family: var(--font-heading);
+    font-size: 2rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+    display: block;
+  }
+  .stat-grid .lbl {
+    font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  /* ─── COMPARISON TABLE ────────────────────── */
+  .compare-table {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+  .compare-table > div {
+    padding: 1.4rem 1.6rem;
+  }
+  .compare-table .col-header {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .compare-table .traditional {
+    background: var(--accent-light);
+  }
+  .compare-table .traditional .col-header { color: var(--text-muted); }
+  .compare-table .cdm {
+    background: var(--navy); color: white;
+  }
+  .compare-table .cdm .col-header { color: var(--gold); }
+  .compare-table .cdm li { color: white; }
+  .compare-table ul {
+    margin: 0; padding-left: 1.2rem;
+    list-style: none;
+  }
+  .compare-table li {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    position: relative;
+  }
+  .compare-table li::before {
+    content: '→';
+    position: absolute; left: -0.7rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ─── INTERACTIVE ICC VIZ ─────────────────── */
+  .icc-viz {
+    background: var(--paper);
+    padding: 1.5rem 1.8rem;
+  }
+  .icc-controls {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+  }
+  .icc-controls .ctrl { flex: 1; min-width: 140px; }
+  .icc-controls label {
+    font-size: 0.75rem; color: var(--text-muted);
+    display: block; margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  .icc-controls input[type=range] {
+    width: 100%;
+    accent-color: var(--gold);
+  }
+  .icc-controls .val {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ─── REFERENCES ──────────────────────────── */
+  .references {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
+  }
+  .references h2 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem; font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+  .ref-item {
+    font-size: 0.85rem; color: var(--text-muted);
+    margin-bottom: 0.9rem;
+    padding-left: 2.5rem; position: relative;
+    line-height: 1.55;
+  }
+  .ref-item .num {
+    position: absolute; left: 0; top: 0;
+    font-family: var(--font-heading);
+    font-weight: 700; color: var(--gold);
+    font-size: 0.95rem;
+    width: 2rem;
+  }
+  .ref-item a {
+    color: var(--navy); text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+  }
+  .ref-item a:hover { color: var(--gold); }
+
+  /* ─── CITE BOX ────────────────────────────── */
+  .cite-box {
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+    margin: 2.4rem 0;
+  }
+  .cite-box .cite-label {
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .cite-box .cite-text {
+    font-size: 0.92rem; color: var(--text);
+    font-family: var(--font-mono);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+  .cite-box .cite-link {
+    font-size: 0.82rem;
+    color: var(--navy); font-weight: 500;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .cite-box .cite-link:hover { color: var(--gold); }
+
+  /* ─── TAGS ────────────────────────────────── */
+  .post-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2.5rem;
+  }
+  .post-tags .tag {
+    background: var(--accent-light); color: var(--navy);
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+  }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    max-width: 1100px; margin: 0 auto;
+    padding: 2rem;
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  /* ─── REVEAL ANIMATIONS ───────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* SVG animations */
+  @keyframes drawPath {
+    from { stroke-dashoffset: var(--len, 200); }
+    to   { stroke-dashoffset: 0; }
+  }
+
+  /* Intro */
+  .post-meta, .post-title, .post-subtitle, .post-author {
+    animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .post-title { animation-delay: 0.1s; }
+  .post-subtitle { animation-delay: 0.2s; }
+  .post-author { animation-delay: 0.3s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── MOBILE ──────────────────────────────── */
+  @media (max-width: 640px) {
+    article { padding: 90px 1.4rem 60px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-table { grid-template-columns: 1fr; }
+    figure { padding: 1.2rem; }
+    .callout { padding: 1.4rem 1.6rem; }
+    .post-author { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="6" y1="1" x2="6" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="27" x2="39" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="4" x2="39" y2="4" stroke="#e7eaee" stroke-width="1" stroke-dasharray="2.5 2"/>
+        <path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" stroke="#fcc209" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="14.5" r="2" fill="#032454"/>
+        <line x1="18" y1="14.5" x2="18" y2="27" stroke="#032454" stroke-width="0.9" stroke-dasharray="2 1.5"/>
+      </svg>
+      <span>Wiradika</span>
+    </a>
+    <a href="../index.html" class="nav-back">← Back to home</a>
+  </div>
+</nav>
+
+<article>
+  <div class="post-meta">Educational Assessment · Psychometrics</div>
+  <h1 class="post-title">Understanding Cognitive Diagnostic Models</h1>
+  <p class="post-subtitle">Moving toward more meaningful assessment: seeing what lies beneath the surface of traditional test scores.</p>
+
+  <div class="post-author">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIbGNtcwIQAABtbnRyUkdCIFhZWiAH4gADABQACQAOAB1hY3NwTVNGVAAAAABzYXdzY3RybAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWhhbmS0qt0fE8gDPPVRFEUoepjiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAABxjcHJ0AAABDAAAAAx3dHB0AAABGAAAABRyWFlaAAABLAAAABRnWFlaAAABQAAAABRiWFlaAAABVAAAABRyVFJDAAABaAAAAGBnVFJDAAABaAAAAGBiVFJDAAABaAAAAGBkZXNjAAAAAAAAAAR1UDMAAAAAAAAAAAAAAAAAdGV4dAAAAABDQzAAWFlaIAAAAAAAAPNRAAEAAAABFsxYWVogAAAAAAAAg98AAD2/////u1hZWiAAAAAAAABKvwAAsTcAAAq5WFlaIAAAAAAAACg4AAARCgAAyLljdXJ2AAAAAAAAACoAAAB8APgBnAJ1A4MEyQZOCBIKGAxiDvQRzxT2GGocLiBDJKwpai5+M+s5sz/WRldNNlR2XBdkHWyGdVZ+jYgskjacq6eMstu+mcrH12Xkd/H5////7QCEUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGgcAigAYkZCTUQwYTAwMGE0NTAzMDAwMGZkNmYwMDAwY2NjYzAwMDBlZWNjMDAwMDQ1Y2QwMDAwODgwYzAxMDA5M2M4MDEwMGI3ZjgwMTAwZDlmODAxMDAxMWY5MDEwMGRhYjgwMzAwAP/bAEMABAIDAwMCBAMDAwQEBAQFCQYFBQUFCwgIBgkNCw0NDQsMDA4QFBEODxMPDAwSGBITFRYXFxcOERkbGRYaFBYXFv/bAEMBBAQEBQUFCgYGChYPDA8WFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFv/CABEICAAIAAMBIgACEQEDEQH/xAAcAAEBAAMBAQEBAAAAAAAAAAAAAQIDBAUGBwj/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAH9GoKFBQKCyiyiygFBQKAFBUosFSlBYAFAsoBQALKALKAAUCygCygFAAsoAAoAAUEoALKAAACgAAACygAAACgAAAAAAAAAAAAAUSygAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAABKCUeDZRZRZQCpSgqUoKBZRYKABZkSgAsGSCgUAFAUAAVClABQABQAoAFABQAFAAFgoAAFlJQAAWCxQAACpQAAACgAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAACiKIoiwLAAAAAAAAAAAAAAABKIsCiLAAAAAAAACVDwrKKCgAqkspbKEFsososoSgFSiwUCyigBQLKAKAAFSgoAsoAsoABQAUAFABUoAAsoAAABUoAAABQAALBQAAAUAAAAAAAAAAAAAACygAAAAAAAAAAAAAAAAAAFKSoCkUSZQSiKIoiiLAAAAAAAAAAAAAACKIsAAAAAAAPCSlKAWBbKCgFspLKUCykUAKCoUChQLKAUAoABQAFCygAAoAKALKCgAAAFAAsFAASgFAAAAKAAAUAAAFgUAAAAAAAAAAAAACwUAAAAAAAAAAAAAAAABYLBlAUEUIBQQslKBLCgkyglgAWAAAAAAAAAAAAAEURRFEAAAB4QLZQAC2UAWUZY0WUFAFlFgqUoFlFlBQBZQBZQACgFAFlJQAoAFABQWUAAAAoAAKAAACoKgoAFlEsKAUJRAAqCgoAAAAAAAAAAAAFlJZQAAAAAAAAAAAAAAABQSwAtxpUBYEospJQlgsBQQWwJRKgKSoWKShFEAAAAAAMjEAAAAAEWAAHg2UtxpQCiy" alt="Dr. I Nyoman Indhi Wiradika">
+    <div class="info">
+      <div class="name">Dr. I Nyoman Indhi Wiradika</div>
+      <div class="date">Published February 13, 2026 · Updated May 2026</div>
+    </div>
+    <div class="reading">10 min read</div>
+  </div>
+
+  <div class="prose">
+
+    <p>Imagine two students who both score <strong>70%</strong> on a digital competency exam. On the surface, they look identical: same total, same grade. But what if we looked closer? One student might have aced the technical pedagogy items while stumbling on data privacy. The other might show the exact opposite pattern. Even with the same final number, their actual learning needs are worlds apart.</p>
+
+    <p>This is the puzzle that <strong>Cognitive Diagnostic Models (CDMs)</strong> were built to solve. Instead of trying to squeeze a student's entire ability into a single number, CDMs ask a much more useful question: which specific skills has this learner mastered, and where are they still struggling?</p>
+
+    <h2>The problem with "one number"</h2>
+
+    <p>Traditional assessment often treats ability as a single, continuous line. A student is simply "high" or "low" on that scale. Most assessments in Indonesian education today still operate this way. While this is helpful for ranking or sorting students, it leaves us blind when it comes to <strong>diagnosis</strong>. We know a student is struggling, but we don't always know where the gap is.</p>
+
+    <div class="compare-table reveal">
+      <div class="traditional">
+        <div class="col-header">Classical Test Theory</div>
+        <ul>
+          <li>One score, one ability dimension</li>
+          <li>Norm-referenced: compares students</li>
+          <li>Focuses on ranking and sorting</li>
+          <li>Cannot diagnose specific gaps</li>
+          <li>Treats all wrong answers as equal</li>
+        </ul>
+      </div>
+      <div class="cdm">
+        <div class="col-header">Cognitive Diagnostic Models</div>
+        <ul>
+          <li>Provides a profile across multiple skills</li>
+          <li>Criterion-referenced: diagnoses mastery</li>
+          <li>Identifies specific mastery patterns</li>
+          <li>Pinpoints exactly what to teach next</li>
+          <li>Each item targets specific attributes</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>How CDMs work</h2>
+
+    <p>A CDM framework is generally built on three core components:</p>
+
+    <ol>
+      <li><strong>Attributes</strong>: These are the discrete cognitive skills you want to diagnose. For instance, in digital competency, this might include <em>technological literacy</em> or the <em>ethical use of tools</em>.</li>
+      <li><strong>The Q-matrix</strong>: This is a mapping tool (a binary table) that connects each test item to the specific attributes it requires. If Item 5 requires skills 2 and 4, we mark it accordingly.</li>
+      <li><strong>A response model</strong>: This is the mathematical rule that translates a student's answers into a profile of mastered attributes. Common models include DINA, DINO, or the more flexible G-DINA.</li>
+    </ol>
+
+    <h3>Visualizing the Q-matrix</h3>
+
+    <figure class="reveal">
+      <div class="viz-label">Visualization 01</div>
+      <div class="viz-title">Mapping items to required attributes</div>
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+        <!-- Headers -->
+        <text x="60" y="20" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4a5f7e">Items ↓ / Attributes →</text>
+
+        <!-- Attribute headers -->
+        <g font-family="Playfair Display,serif" font-size="13" font-weight="600" fill="#032454" text-anchor="middle">
+          <text x="220" y="50">A1</text>
+          <text x="290" y="50">A2</text>
+          <text x="360" y="50">A3</text>
+          <text x="430" y="50">A4</text>
+          <text x="500" y="50">A5</text>
+        </g>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#4a5f7e" text-anchor="middle">
+          <text x="220" y="64">Tech.</text>
+          <text x="290" y="64">Pedagogy</text>
+          <text x="360" y="64">Content</text>
+          <text x="430" y="64">Ethics</text>
+          <text x="500" y="64">Critical</text>
+        </g>
+
+        <!-- Item rows -->
+        <g font-family="JetBrains Mono,monospace" font-size="11" fill="#4a5f7e" text-anchor="end">
+          <text x="180" y="95">Item 1</text>
+          <text x="180" y="130">Item 2</text>
+          <text x="180" y="165">Item 3</text>
+          <text x="180" y="200">Item 4</text>
+          <text x="180" y="235">Item 5</text>
+        </g>
+
+        <!-- Q-matrix cells -->
+        <rect x="200" y="80" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="220" y="95" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="270" y="80" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="290" y="95" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="340" y="80" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="360" y="95" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="410" y="80" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="430" y="95" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="480" y="80" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="500" y="95" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+
+        <rect x="200" y="115" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="220" y="130" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="270" y="115" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="290" y="130" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="340" y="115" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="360" y="130" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="410" y="115" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="430" y="130" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="480" y="115" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="500" y="130" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+
+        <rect x="200" y="150" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="220" y="165" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="270" y="150" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="290" y="165" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="340" y="150" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="360" y="165" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="410" y="150" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="430" y="165" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="480" y="150" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="500" y="165" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+
+        <rect x="200" y="185" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="220" y="200" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="270" y="185" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="290" y="200" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="340" y="185" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="360" y="200" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="410" y="185" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="430" y="200" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="480" y="185" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="500" y="200" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+
+        <rect x="200" y="220" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="220" y="235" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="270" y="220" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="290" y="235" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="340" y="220" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="360" y="235" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+        <rect x="410" y="220" width="40" height="22" fill="#fcc209" rx="3"/>
+        <text x="430" y="235" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#032454" text-anchor="middle">1</text>
+        <rect x="480" y="220" width="40" height="22" fill="#e7eaee" rx="3"/>
+        <text x="500" y="235" font-family="JetBrains Mono,monospace" font-size="12" fill="#9aa5b8" text-anchor="middle">0</text>
+
+        <!-- Legend -->
+        <g transform="translate(60, 260)">
+          <rect x="0" y="0" width="14" height="14" fill="#fcc209" rx="2"/>
+          <text x="20" y="11" font-family="Inter,sans-serif" font-size="10" fill="#4a5f7e">Required (1)</text>
+          <rect x="120" y="0" width="14" height="14" fill="#e7eaee" rx="2"/>
+          <text x="140" y="11" font-family="Inter,sans-serif" font-size="10" fill="#4a5f7e">Not required (0)</text>
+        </g>
+      </svg>
+      <figcaption>Think of the Q-matrix as the bridge between test items and cognitive theory. Each row represents a test item, and each column is a cognitive skill. A "1" means that skill is necessary to answer the item correctly.</figcaption>
+    </figure>
+
+    <h2>The G-DINA model: a flexible approach</h2>
+
+    <p>Among the different types of CDMs, the <strong>Generalized DINA (G-DINA)</strong> model has become one of the most widely used. Developed by Jimmy de la Torre in 2011, its main strength is its flexibility. Instead of forcing a specific cognitive process on the data, G-DINA is a "saturated" model that lets the data show us what is really happening. It can adapt to find main effects, interactions, or compensatory pathways depending on how students are actually performing.</p>
+
+    <figure class="reveal" id="gdina-fig">
+      <div class="viz-label">Visualization 02</div>
+      <div class="viz-title">G-DINA item response curve (2 attributes)</div>
+      <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;" id="gdina-svg">
+        <!-- Background grid -->
+        <g stroke="#e7eaee" stroke-width="1">
+          <line x1="80" y1="60"  x2="540" y2="60"/>
+          <line x1="80" y1="120" x2="540" y2="120"/>
+          <line x1="80" y1="180" x2="540" y2="180"/>
+          <line x1="80" y1="240" x2="540" y2="240"/>
+        </g>
+
+        <!-- Axes -->
+        <line x1="80" y1="40" x2="80" y2="270" stroke="#032454" stroke-width="2"/>
+        <line x1="80" y1="270" x2="540" y2="270" stroke="#032454" stroke-width="2"/>
+
+        <!-- Y-axis labels -->
+        <g font-family="JetBrains Mono,monospace" font-size="10" fill="#4a5f7e" text-anchor="end">
+          <text x="72" y="64">1.0</text>
+          <text x="72" y="124">0.75</text>
+          <text x="72" y="184">0.5</text>
+          <text x="72" y="244">0.25</text>
+          <text x="72" y="274">0</text>
+        </g>
+        <text x="35" y="155" font-family="Inter,sans-serif" font-size="11" fill="#032454" font-weight="600" text-anchor="middle" transform="rotate(-90 35 155)">P(correct)</text>
+
+        <!-- X-axis labels -->
+        <g font-family="JetBrains Mono,monospace" font-size="10" fill="#4a5f7e" text-anchor="middle">
+          <text x="140" y="287">[0,0]</text>
+          <text x="270" y="287">[1,0]</text>
+          <text x="400" y="287">[0,1]</text>
+          <text x="510" y="287">[1,1]</text>
+        </g>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#4a5f7e" text-anchor="middle">
+          <text x="140" y="302">Neither</text>
+          <text x="270" y="302">Only A1</text>
+          <text x="400" y="302">Only A2</text>
+          <text x="510" y="302">Both</text>
+        </g>
+
+        <!-- Bars -->
+        <rect x="115" y="245" width="50" height="25" fill="#e7eaee" rx="2"/>
+        <text x="140" y="240" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#032454" text-anchor="middle">0.10</text>
+
+        <rect x="245" y="170" width="50" height="100" fill="#e7eaee" rx="2"/>
+        <text x="270" y="165" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#032454" text-anchor="middle">0.45</text>
+
+        <rect x="375" y="146" width="50" height="124" fill="#e7eaee" rx="2"/>
+        <text x="400" y="141" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#032454" text-anchor="middle">0.55</text>
+
+        <rect x="485" y="58" width="50" height="212" fill="#fcc209" rx="2"/>
+        <text x="510" y="53" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#032454" text-anchor="middle">0.92</text>
+
+        <path d="M140 245 Q 200 210, 270 170 Q 340 158, 400 146 Q 450 100, 510 58"
+              stroke="#032454" stroke-width="1.5" fill="none" stroke-dasharray="3 3" opacity="0.5"/>
+      </svg>
+      <figcaption>This chart shows the probability of getting an item right based on which skills a student has. Notice how mastering both skills yields the highest probability, but even having just one skill still makes a big difference.</figcaption>
+    </figure>
+
+    <h2>Insights from a recent study</h2>
+
+    <p>To see how this works in practice, we recently conducted a study with <strong>270 informatics education students</strong>. We used a 32-item instrument to profile their mastery across five digital competency attributes. These were based on the <em>European DigCompEdu</em> framework combined with vocational IT skills.</p>
+
+    <div class="stat-grid reveal">
+      <div class="item">
+        <span class="num">270</span>
+        <div class="lbl">Students</div>
+      </div>
+      <div class="item">
+        <span class="num">32</span>
+        <div class="lbl">Items</div>
+      </div>
+      <div class="item">
+        <span class="num">93.71%</span>
+        <div class="lbl">Accuracy</div>
+      </div>
+      <div class="item">
+        <span class="num">0.011</span>
+        <div class="lbl">RMSEA₂ (Fit)</div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="label">Key Finding</div>
+      <p>Using the G-DINA model, we achieved a <strong>classification accuracy of 93.71%</strong>. This means we could reliably pinpoint each student’s unique mastery profile across all five attributes, rather than just ranking them by a single score.</p>
+    </div>
+
+    <h3>A closer look at student progress</h3>
+
+    <p>One of the most interesting findings from our diagnostic profiles was the shape of student progress. We expected to see a smooth upward curve as students moved through semesters, but instead, we found a more complex trajectory.</p>
+
+    <figure class="reveal">
+      <div class="viz-label">Visualization 03</div>
+      <div class="viz-title">Competency development across semesters</div>
+      <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+        <!-- Grid -->
+        <g stroke="#e7eaee" stroke-width="1">
+          <line x1="60" y1="50"  x2="560" y2="50"/>
+          <line x1="60" y1="110" x2="560" y2="110"/>
+          <line x1="60" y1="170" x2="560" y2="170"/>
+          <line x1="60" y1="230" x2="560" y2="230"/>
+        </g>
+
+        <!-- Axes -->
+        <line x1="60" y1="30" x2="60" y2="260" stroke="#032454" stroke-width="2"/>
+        <line x1="60" y1="260" x2="560" y2="260" stroke="#032454" stroke-width="2"/>
+
+        <!-- Y labels -->
+        <g font-family="JetBrains Mono,monospace" font-size="10" fill="#4a5f7e" text-anchor="end">
+          <text x="52" y="54">100%</text>
+          <text x="52" y="114">75%</text>
+          <text x="52" y="174">50%</text>
+          <text x="52" y="234">25%</text>
+          <text x="52" y="264">0</text>
+        </g>
+        <text x="20" y="145" font-family="Inter,sans-serif" font-size="11" fill="#032454" font-weight="600" text-anchor="middle" transform="rotate(-90 20 145)">Mastery rate</text>
+
+        <!-- X labels -->
+        <g font-family="Inter,sans-serif" font-size="11" fill="#032454" font-weight="500" text-anchor="middle">
+          <text x="120" y="280">Sem 1</text>
+          <text x="220" y="280">Sem 2</text>
+          <text x="320" y="280">Sem 3</text>
+          <text x="420" y="280">Sem 4</text>
+          <text x="520" y="280">Sem 5+</text>
+        </g>
+
+        <!-- Highlight the dip region -->
+        <rect x="270" y="30" width="100" height="230" fill="#fcc209" opacity="0.08"/>
+        <text x="320" y="48" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#fcc209" text-anchor="middle" letter-spacing="1">CRITICAL TRANSITION</text>
+
+        <!-- Female line -->
+        <path d="M 120 175 L 220 145 L 320 175 L 420 105 L 520 75"
+              stroke="#fcc209" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"
+              class="anim-path"/>
+        <g fill="#fcc209">
+          <circle cx="120" cy="175" r="5"/>
+          <circle cx="220" cy="145" r="5"/>
+          <circle cx="320" cy="175" r="5"/>
+          <circle cx="420" cy="105" r="5"/>
+          <circle cx="520" cy="75" r="5"/>
+        </g>
+
+        <!-- Male line -->
+        <path d="M 120 195 L 220 175 L 320 215 L 420 135 L 520 110"
+              stroke="#032454" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"
+              class="anim-path"/>
+        <g fill="#032454">
+          <circle cx="120" cy="195" r="5"/>
+          <circle cx="220" cy="175" r="5"/>
+          <circle cx="320" cy="215" r="5"/>
+          <circle cx="420" cy="135" r="5"/>
+          <circle cx="520" cy="110" r="5"/>
+        </g>
+
+        <!-- Legend -->
+        <g transform="translate(380, 50)">
+          <line x1="0" y1="6" x2="20" y2="6" stroke="#fcc209" stroke-width="3"/>
+          <circle cx="10" cy="6" r="4" fill="#fcc209"/>
+          <text x="28" y="10" font-family="Inter,sans-serif" font-size="11" fill="#032454">Female</text>
+          <line x1="80" y1="6" x2="100" y2="6" stroke="#032454" stroke-width="3"/>
+          <circle cx="90" cy="6" r="4" fill="#032454"/>
+          <text x="108" y="10" font-family="Inter,sans-serif" font-size="11" fill="#032454">Male</text>
+        </g>
+
+        <path d="M 320 240 Q 290 250, 270 245" stroke="#4a5f7e" stroke-width="1" fill="none" marker-end="url(#arrowhead)"/>
+        <text x="270" y="260" font-family="Playfair Display,serif" font-size="11" font-style="italic" fill="#4a5f7e" text-anchor="end">third-semester decline</text>
+
+        <defs>
+          <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill="#4a5f7e"/>
+          </marker>
+        </defs>
+      </svg>
+      <figcaption>Student trajectories showed a surprising dip around the third semester before recovering. Without the detail of CDMs, this might have looked like a small drop in average scores. We also found that female students consistently outperformed males across all five attributes.</figcaption>
+    </figure>
+
+    <p>Two key patterns emerged that simple total scores would have hidden:</p>
+
+    <ul>
+      <li><strong>Female students consistently outperformed males</strong> across all five dimensions, not just on average, but for every single skill measured.</li>
+      <li><strong>A non-linear path to mastery</strong>: competency dipped significantly in the third semester. This points to a critical transition window where students might need extra support.</li>
+    </ul>
+
+    <blockquote>
+      A test that only gives you a number tells you that something happened. A diagnostic test tells you <em>what</em> happened and what you can do about it.
+    </blockquote>
+
+    <h2>Why this matters for education</h2>
+
+    <p>For future teachers, generic support isn't enough. If a student is great at technical skills but lags in digital ethics, a general-purpose course is a waste of their time. CDMs allow us to be much more strategic:</p>
+
+    <ol>
+      <li><strong>Targeted support</strong>: We can design specific modules for the skills where students are actually struggling.</li>
+      <li><strong>Adaptive curriculum</strong>: We can sequence courses based on readiness rather than just time spent in a classroom.</li>
+      <li><strong>Focused resources</strong>: We can put more resources into that critical third-semester window to help students through the dip.</li>
+    </ol>
+
+    <h2>The bigger picture</h2>
+
+    <p>CDMs aren't a magic fix for everything. They require careful planning, from defining skills to designing the right test items. But when they are used correctly, they offer something traditional testing cannot: <strong>clear, actionable insight</strong>.</p>
+
+    <p>In education, knowing <em>how</em> students are doing is only half the battle. We also need to know <em>where</em> they are stuck. CDMs give us a principled, data-driven way to find out and help them move forward.</p>
+
+    <div class="post-tags">
+      <span class="tag">Cognitive Diagnostic Models</span>
+      <span class="tag">G-DINA</span>
+      <span class="tag">Educational Assessment</span>
+      <span class="tag">Psychometrics</span>
+      <span class="tag">Digital Competency</span>
+      <span class="tag">Teacher Education</span>
+    </div>
+
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="references">
+    <h2>References</h2>
+
+    <div class="ref-item" id="ref-1">
+      <div class="num">[1]</div>
+      Wiradika, I. N. I., Hadi, S., Khairudin, M., &amp; Fajaruddin, S. (2026). Profiling Digital Competency of Prospective Vocational IT Educators Using Generalized DINA Model: A Cognitive Diagnostic Approach. <em>Buletin Ilmiah Sarjana Teknik Elektro</em>, 8(1), 241–257. <a href="https://doi.org/10.12928/biste.v8i1.15340" target="_blank">https://doi.org/10.12928/biste.v8i1.15340</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[2]</div>
+      de la Torre, J. (2011). The Generalized DINA Model Framework. <em>Psychometrika</em>, 76(2), 179–199. <a href="https://doi.org/10.1007/s11336-011-9207-7" target="_blank">https://doi.org/10.1007/s11336-011-9207-7</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[3]</div>
+      de la Torre, J., &amp; Minchen, N. (2014). Cognitively Diagnostic Assessments and the Cognitive Diagnosis Model Framework. <em>Psicología Educativa</em>, 20(2), 89–97. <a href="https://doi.org/10.1016/j.pse.2014.11.001" target="_blank">https://doi.org/10.1016/j.pse.2014.11.001</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[4]</div>
+      Ma, W., &amp; de la Torre, J. (2020). GDINA: An R Package for Cognitive Diagnosis Modeling. <em>Journal of Statistical Software</em>, 93(14), 1–26. <a href="https://doi.org/10.18637/jss.v093.i14" target="_blank">https://doi.org/10.18637/jss.v093.i14</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[5]</div>
+      Sessoms, J., &amp; Henson, R. A. (2018). Applications of Diagnostic Classification Models: A Literature Review and Critical Commentary. <em>Measurement: Interdisciplinary Research and Perspectives</em>, 16(1), 1–17. <a href="https://doi.org/10.1080/15366367.2018.1435104" target="_blank">https://doi.org/10.1080/15366367.2018.1435104</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[6]</div>
+      Bradshaw, L., &amp; Templin, J. (2014). Combining Item Response Theory and Diagnostic Classification Models. <em>Psychometrika</em>, 79(3), 403–425. <a href="https://doi.org/10.1007/s11336-013-9350-4" target="_blank">https://doi.org/10.1007/s11336-013-9350-4</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <span>© 2026 Dr. I Nyoman Indhi Wiradika</span>
+  <span>Universitas Pendidikan Ganesha</span>
+</footer>
+
+<script>
+  // Reading progress
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // Animate paths in trajectory chart on scroll
+  const trajectoryFig = document.querySelectorAll('.anim-path');
+  const pathObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.strokeDasharray = e.target.getTotalLength();
+        e.target.style.strokeDashoffset = e.target.getTotalLength();
+        e.target.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1)';
+        setTimeout(() => { e.target.style.strokeDashoffset = '0'; }, 50);
+        pathObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  trajectoryFig.forEach(p => pathObs.observe(p));
+</script>
+
+</body>
+</html>
