@@ -183,6 +183,54 @@
   .canvas-wrap { width: 100%; }
   .canvas-wrap canvas { display: block; width: 100%; }
 
+  /* ─── ICC INTERACTIVE CONTROLS ───────────────────── */
+  .icc-controls {
+    display: flex; flex-wrap: wrap; gap: 1.2rem;
+    margin-top: 1.2rem; padding-top: 1.2rem;
+    border-top: 1px dashed var(--border);
+  }
+  .icc-ctrl { flex: 1; min-width: 130px; }
+  .icc-ctrl label {
+    font-size: 0.72rem; font-weight: 600; color: var(--text-muted);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0.35rem;
+  }
+  .icc-ctrl label .val {
+    font-family: var(--font-mono); font-size: 0.8rem;
+    color: var(--gold); font-weight: 700;
+  }
+  .icc-ctrl input[type=range] {
+    width: 100%; accent-color: var(--gold); cursor: pointer;
+  }
+  .icc-stat {
+    display: flex; flex-wrap: wrap; gap: 0;
+    margin-top: 1rem; border: 1px solid var(--border);
+    border-radius: 7px; overflow: hidden;
+  }
+  .icc-stat .s-item {
+    flex: 1; min-width: 80px;
+    padding: 0.6rem 1rem;
+    border-right: 1px solid var(--border);
+    background: var(--accent-light);
+  }
+  .icc-stat .s-item:last-child { border-right: none; }
+  .icc-stat .s-label {
+    font-size: 0.63rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem;
+  }
+  .icc-stat .s-val {
+    font-family: var(--font-mono); font-size: 0.9rem;
+    font-weight: 700; color: var(--navy);
+  }
+  .s-val.favor-focal   { color: #b88800; }
+  .s-val.favor-ref     { color: #032454; }
+  .s-val.no-dif        { color: #2e7d32; }
+  .s-val.ets-a         { color: #2e7d32; }
+  .s-val.ets-b         { color: #f57f17; }
+  .s-val.ets-c         { color: #c62828; }
+  .s-val.nonuniform    { color: #c62828; }
+  .s-val.uniform-type  { color: #2e7d32; }
+
   /* ─── CALLOUT ─────────────────────────────── */
   .callout {
     background: linear-gradient(135deg, var(--navy) 0%, #051a3d 100%);
@@ -569,6 +617,26 @@
         <canvas id="canvas-uniform" aria-label="ICC curves showing uniform DIF"></canvas>
       </div>
       <figcaption>The gold curve (focal group) is shifted left; at every ability level, the focal group has a higher probability of a correct response. This advantage is constant across the full ability range, which is the defining characteristic of uniform DIF. The shaded region between the curves represents the magnitude of the differential functioning.</figcaption>
+      <div class="icc-controls">
+        <div class="icc-ctrl">
+          <label>Reference difficulty <em>b</em><span class="val" id="b-ref-val">0.0</span></label>
+          <input type="range" id="b-ref" min="-2" max="2" step="0.1" value="0">
+        </div>
+        <div class="icc-ctrl">
+          <label>Focal difficulty <em>b</em><span class="val" id="b-foc-val">-0.8</span></label>
+          <input type="range" id="b-foc" min="-2" max="2" step="0.1" value="-0.8">
+        </div>
+        <div class="icc-ctrl">
+          <label>Discrimination <em>a</em> (shared)<span class="val" id="a-unif-val">1.5</span></label>
+          <input type="range" id="a-unif" min="0.3" max="3" step="0.1" value="1.5">
+        </div>
+      </div>
+      <div class="icc-stat">
+        <div class="s-item"><div class="s-label">Gap at θ = 0</div><div class="s-val" id="stat-gap">+0.340</div></div>
+        <div class="s-item"><div class="s-label">MH D-DIF</div><div class="s-val" id="stat-ddif">−2.82</div></div>
+        <div class="s-item"><div class="s-label">Direction</div><div class="s-val favor-focal" id="stat-dir">Favors Focal</div></div>
+        <div class="s-item"><div class="s-label">ETS Category</div><div class="s-val ets-c" id="stat-ets">C</div></div>
+      </div>
     </figure>
 
     <h2>Two types of DIF</h2>
@@ -588,6 +656,30 @@
         <canvas id="canvas-nonuniform" aria-label="ICC curves showing non-uniform DIF"></canvas>
       </div>
       <figcaption>The two curves intersect. At lower ability levels, the focal group (gold) has the higher probability of a correct response. At higher ability levels, the reference group (navy) predominates. This reversal, which defines non-uniform DIF, indicates that the item interacts with ability in a manner that differs across groups. The standard Mantel-Haenszel procedure is insensitive to this pattern; Lord's chi-square or logistic regression are the appropriate alternatives.</figcaption>
+      <div class="icc-controls">
+        <div class="icc-ctrl">
+          <label>Reference discrimination <em>a</em><span class="val" id="a-ref2-val">2.0</span></label>
+          <input type="range" id="a-ref2" min="0.3" max="3" step="0.1" value="2">
+        </div>
+        <div class="icc-ctrl">
+          <label>Reference difficulty <em>b</em><span class="val" id="b-ref2-val">0.5</span></label>
+          <input type="range" id="b-ref2" min="-2" max="2" step="0.1" value="0.5">
+        </div>
+        <div class="icc-ctrl">
+          <label>Focal discrimination <em>a</em><span class="val" id="a-foc2-val">0.7</span></label>
+          <input type="range" id="a-foc2" min="0.3" max="3" step="0.1" value="0.7">
+        </div>
+        <div class="icc-ctrl">
+          <label>Focal difficulty <em>b</em><span class="val" id="b-foc2-val">-0.5</span></label>
+          <input type="range" id="b-foc2" min="-2" max="2" step="0.1" value="-0.5">
+        </div>
+      </div>
+      <div class="icc-stat">
+        <div class="s-item"><div class="s-label">DIF Type</div><div class="s-val nonuniform" id="stat-type2">Non-uniform</div></div>
+        <div class="s-item"><div class="s-label">Crossing Point</div><div class="s-val" id="stat-cross">θ ≈ 1.0</div></div>
+        <div class="s-item"><div class="s-label">Low θ Advantage</div><div class="s-val favor-focal" id="stat-low">Focal</div></div>
+        <div class="s-item"><div class="s-label">High θ Advantage</div><div class="s-val favor-ref" id="stat-high">Reference</div></div>
+      </div>
     </figure>
 
     <div class="callout reveal">
@@ -1278,37 +1370,117 @@ function drawICC(canvasId, curves, options) {
   }
 }
 
-// ─── Initialize canvases ────────────────────────────────
-function initCanvases() {
-  // Uniform DIF: same discrimination, different difficulty
-  drawICC('canvas-uniform', [
-    { a: 1.5, b: 0.0,  color: '#032454', label: 'Reference', legendLabel: 'Male (Reference)',  labelOffset:  5 },
-    { a: 1.5, b: -0.8, color: '#fcc209', label: 'Focal',     legendLabel: 'Female (Focal)',    labelOffset: -14 }
-  ], {
-    shade:  true,
-    gapAt:  0,
-    legend: true
-  });
+// ─── Interactive: Uniform DIF ───────────────────────────
+function redrawUniform() {
+  const a    = parseFloat(document.getElementById('a-unif').value);
+  const bRef = parseFloat(document.getElementById('b-ref').value);
+  const bFoc = parseFloat(document.getElementById('b-foc').value);
 
-  // Non-uniform DIF: crossing curves
-  drawICC('canvas-nonuniform', [
-    { a: 2.0, b: 0.5,  color: '#032454', label: 'Reference', legendLabel: 'Male (Reference)',  labelOffset: -10 },
-    { a: 0.7, b: -0.5, color: '#fcc209', label: 'Focal',     legendLabel: 'Female (Focal)',    labelOffset:   5 }
-  ], {
-    showCross: true,
-    legend:    true,
-    regionLabels: [
-      { text: 'Focal advantage here',     tx: -1.8, ty: 0.78, color: '#b88800' },
-      { text: 'Reference advantage here', tx:  2.2, ty: 0.58, color: '#4a5f7e' }
-    ]
-  });
+  document.getElementById('a-unif-val').textContent = a.toFixed(1);
+  document.getElementById('b-ref-val').textContent  = bRef.toFixed(1);
+  document.getElementById('b-foc-val').textContent  = bFoc.toFixed(1);
+
+  // Gap at θ = 0
+  const pRef = logistic(0, a, bRef);
+  const pFoc = logistic(0, a, bFoc);
+  const gap  = pFoc - pRef;
+
+  // MH D-DIF approximation: −2.35 × a × (b_ref − b_foc)
+  const dDIF = -2.35 * a * (bRef - bFoc);
+  const absDIF = Math.abs(dDIF);
+  const ets    = absDIF < 1.0 ? 'A' : absDIF < 1.5 ? 'B' : 'C';
+  const etsClass = 'ets-' + ets.toLowerCase();
+
+  let dir = 'None', dirClass = 'no-dif';
+  if      (gap >  0.02) { dir = 'Favors Focal';      dirClass = 'favor-focal'; }
+  else if (gap < -0.02) { dir = 'Favors Reference';  dirClass = 'favor-ref';   }
+
+  document.getElementById('stat-gap').textContent  = (gap >= 0 ? '+' : '') + gap.toFixed(3);
+  document.getElementById('stat-ddif').textContent = dDIF.toFixed(2);
+
+  const dirEl = document.getElementById('stat-dir');
+  dirEl.textContent = dir; dirEl.className = 's-val ' + dirClass;
+
+  const etsEl = document.getElementById('stat-ets');
+  etsEl.textContent = ets; etsEl.className = 's-val ' + etsClass;
+
+  drawICC('canvas-uniform', [
+    { a, b: bRef, color: '#032454', label: 'Reference', legendLabel: 'Reference Group', labelOffset:  5 },
+    { a, b: bFoc, color: '#fcc209', label: 'Focal',     legendLabel: 'Focal Group',     labelOffset: -14 }
+  ], { shade: true, gapAt: 0, legend: true });
 }
 
-// Draw on load and on resize
-window.addEventListener('DOMContentLoaded', initCanvases);
+// ─── Interactive: Non-uniform DIF ──────────────────────
+function redrawNonUniform() {
+  const aRef = parseFloat(document.getElementById('a-ref2').value);
+  const bRef = parseFloat(document.getElementById('b-ref2').value);
+  const aFoc = parseFloat(document.getElementById('a-foc2').value);
+  const bFoc = parseFloat(document.getElementById('b-foc2').value);
+
+  document.getElementById('a-ref2-val').textContent = aRef.toFixed(1);
+  document.getElementById('b-ref2-val').textContent = bRef.toFixed(1);
+  document.getElementById('a-foc2-val').textContent = aFoc.toFixed(1);
+  document.getElementById('b-foc2-val').textContent = bFoc.toFixed(1);
+
+  // Find crossing point
+  let crossT = null;
+  for (let i = 0; i < 3000; i++) {
+    const t1 = -3 + 6 * i / 3000;
+    const t2 = -3 + 6 * (i + 1) / 3000;
+    const d1 = logistic(t1, aRef, bRef) - logistic(t1, aFoc, bFoc);
+    const d2 = logistic(t2, aRef, bRef) - logistic(t2, aFoc, bFoc);
+    if (d1 * d2 < 0) { crossT = (t1 + t2) / 2; break; }
+  }
+
+  const typeEl  = document.getElementById('stat-type2');
+  const crossEl = document.getElementById('stat-cross');
+  const lowEl   = document.getElementById('stat-low');
+  const highEl  = document.getElementById('stat-high');
+
+  if (crossT !== null) {
+    typeEl.textContent = 'Non-uniform'; typeEl.className = 's-val nonuniform';
+    crossEl.textContent = 'θ ≈ ' + crossT.toFixed(1);
+    const atLow = logistic(-2, aFoc, bFoc) - logistic(-2, aRef, bRef);
+    if (atLow > 0) {
+      lowEl.textContent  = 'Focal';     lowEl.className  = 's-val favor-focal';
+      highEl.textContent = 'Reference'; highEl.className = 's-val favor-ref';
+    } else {
+      lowEl.textContent  = 'Reference'; lowEl.className  = 's-val favor-ref';
+      highEl.textContent = 'Focal';     highEl.className = 's-val favor-focal';
+    }
+  } else {
+    typeEl.textContent = 'Uniform'; typeEl.className = 's-val uniform-type';
+    crossEl.textContent = 'None';
+    const atMid = logistic(0, aFoc, bFoc) > logistic(0, aRef, bRef);
+    const adv = atMid ? 'Focal' : 'Reference';
+    const cls = atMid ? 'favor-focal' : 'favor-ref';
+    lowEl.textContent  = adv; lowEl.className  = 's-val ' + cls;
+    highEl.textContent = adv; highEl.className = 's-val ' + cls;
+  }
+
+  drawICC('canvas-nonuniform', [
+    { a: aRef, b: bRef, color: '#032454', label: 'Reference', legendLabel: 'Reference Group', labelOffset: -10 },
+    { a: aFoc, b: bFoc, color: '#fcc209', label: 'Focal',     legendLabel: 'Focal Group',     labelOffset:   5 }
+  ], { showCross: true, legend: true });
+}
+
+// ─── Wire up controls & init ────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  ['b-ref', 'b-foc', 'a-unif'].forEach(id =>
+    document.getElementById(id).addEventListener('input', redrawUniform));
+  redrawUniform();
+
+  ['a-ref2', 'b-ref2', 'a-foc2', 'b-foc2'].forEach(id =>
+    document.getElementById(id).addEventListener('input', redrawNonUniform));
+  redrawNonUniform();
+});
+
 window.addEventListener('resize', () => {
   clearTimeout(window._resizeTimer);
-  window._resizeTimer = setTimeout(initCanvases, 120);
+  window._resizeTimer = setTimeout(() => {
+    redrawUniform();
+    redrawNonUniform();
+  }, 120);
 });
 </script>
 
