@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is This Test Fair? A Practical Introduction to Differential Item Functioning · I Nyoman Indhi Wiradika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+<style>
+  :root {
+    --navy:   #032454;
+    --gold:   #fcc209;
+    --silver: #e7eaee;
+    --accent: #032454;
+    --accent-light: #e7eaee;
+    --bg: #f9fafb;
+    --paper: #ffffff;
+    --text: #032454;
+    --text-muted: #4a5f7e;
+    --border: #dde1e8;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249,250,251,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 2rem; height: 58px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.65rem;
+    text-decoration: none;
+  }
+  .nav-logo span {
+    font-family: var(--font-heading); font-size: 1.05rem;
+    font-weight: 600; color: var(--navy); letter-spacing: -0.01em;
+  }
+  .nav-back {
+    font-size: 0.82rem; font-weight: 500; color: var(--text-muted);
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--navy); }
+
+  /* ─── PROGRESS ────────────────────────────── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 2px; width: 0%; background: var(--gold);
+    transition: width 0.1s linear;
+  }
+
+  /* ─── ARTICLE ─────────────────────────────── */
+  article {
+    max-width: 720px; margin: 0 auto;
+    padding: 110px 2rem 80px;
+  }
+  .post-meta {
+    font-size: 0.78rem; color: var(--gold); font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .post-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+    text-wrap: balance;
+  }
+  .post-subtitle {
+    font-size: 1.15rem; color: var(--text-muted);
+    line-height: 1.55; margin-bottom: 2.5rem;
+    text-wrap: pretty;
+  }
+  .post-author {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .post-author img {
+    width: 44px; height: 44px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 2px solid var(--gold);
+  }
+  .post-author .info { flex: 1; }
+  .post-author .name { font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+  .post-author .date { font-size: 0.78rem; color: var(--text-muted); }
+  .post-author .reading {
+    font-size: 0.78rem; color: var(--text-muted);
+    font-style: italic; font-family: var(--font-heading);
+  }
+
+  /* ─── PROSE ───────────────────────────────── */
+  .prose h2 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem; font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 3rem 0 1.2rem; color: var(--navy);
+    position: relative;
+  }
+  .prose h2::before {
+    content: '';
+    position: absolute; left: -1rem; top: 0.55rem;
+    width: 4px; height: 1.6rem;
+    background: var(--gold); border-radius: 2px;
+  }
+  .prose h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem; font-weight: 600;
+    margin: 2.2rem 0 0.8rem; color: var(--navy);
+  }
+  .prose p {
+    font-size: 1.05rem; color: var(--text);
+    margin-bottom: 1.3rem; text-wrap: pretty;
+  }
+  .prose strong { color: var(--navy); font-weight: 600; }
+  .prose em { color: var(--navy); }
+  .prose a {
+    color: var(--navy); text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px; transition: color 0.2s;
+  }
+  .prose a:hover { color: var(--gold); }
+  .prose blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 0.5rem 1.4rem; margin: 1.8rem 0;
+    font-style: italic; color: var(--navy);
+    background: var(--paper); font-size: 1.08rem; line-height: 1.6;
+  }
+  .prose ul, .prose ol { margin: 1.2rem 0 1.5rem 1.4rem; }
+  .prose li { font-size: 1.02rem; margin-bottom: 0.5rem; color: var(--text); }
+  .prose li::marker { color: var(--gold); }
+  .prose code {
+    font-family: var(--font-mono); font-size: 0.88em;
+    background: var(--accent-light); color: var(--navy);
+    padding: 0.1em 0.4em; border-radius: 3px;
+  }
+
+  /* ─── FIGURE ──────────────────────────────── */
+  figure {
+    margin: 2.4rem 0; background: var(--paper);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.8rem; box-shadow: 0 1px 3px rgba(3,36,84,0.04);
+  }
+  figure .viz-label {
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.7rem;
+  }
+  figure .viz-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 0.3rem;
+  }
+  figure figcaption {
+    font-size: 0.85rem; color: var(--text-muted);
+    line-height: 1.55; margin-top: 1rem; text-align: left;
+    font-style: italic; font-family: var(--font-heading);
+  }
+  .canvas-wrap { width: 100%; }
+  .canvas-wrap canvas { display: block; width: 100%; }
+
+  /* ─── CALLOUT ─────────────────────────────── */
+  .callout {
+    background: linear-gradient(135deg, var(--navy) 0%, #051a3d 100%);
+    color: white; padding: 2rem 2.2rem;
+    border-radius: 10px; margin: 2.4rem 0;
+    position: relative; overflow: hidden;
+  }
+  .callout::before {
+    content: ''; position: absolute; top: 0; right: 0; bottom: 0;
+    width: 4px; background: var(--gold);
+  }
+  .callout .label {
+    font-size: 0.7rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .callout p { color: white; font-size: 1.08rem; margin-bottom: 0; line-height: 1.6; }
+  .callout strong { color: var(--gold); }
+
+  /* ─── COMPARE TABLE ───────────────────────── */
+  .compare-table {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; margin: 2rem 0;
+  }
+  .compare-table > div { padding: 1.4rem 1.6rem; }
+  .compare-table .col-header {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .compare-table .traditional { background: var(--accent-light); }
+  .compare-table .traditional .col-header { color: var(--text-muted); }
+  .compare-table .dif-side { background: var(--navy); color: white; }
+  .compare-table .dif-side .col-header { color: var(--gold); }
+  .compare-table .dif-side li { color: white; }
+  .compare-table ul { margin: 0; padding-left: 1.2rem; list-style: none; }
+  .compare-table li {
+    font-size: 0.92rem; line-height: 1.55; margin-bottom: 0.5rem;
+    padding-left: 0.5rem; position: relative;
+  }
+  .compare-table li::before {
+    content: '→'; position: absolute; left: -0.7rem;
+    color: var(--gold); font-weight: 700;
+  }
+
+  /* ─── METHOD GRID ─────────────────────────── */
+  .method-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; margin: 2rem 0;
+  }
+  .method-card {
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.3rem;
+  }
+  .method-card .m-badge {
+    display: inline-block; background: var(--accent-light);
+    color: var(--navy); font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 4px; margin-bottom: 0.7rem;
+  }
+  .method-card .m-name {
+    font-family: var(--font-heading); font-size: 1rem;
+    font-weight: 600; color: var(--navy); margin-bottom: 0.4rem;
+  }
+  .method-card .m-stat {
+    font-family: var(--font-mono); font-size: 0.8rem;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .method-card .m-desc {
+    font-size: 0.83rem; color: var(--text-muted); line-height: 1.5;
+  }
+
+  /* ─── STEP ROW ────────────────────────────── */
+  .step-row {
+    display: flex; align-items: center; gap: 0.9rem;
+    margin: 3rem 0 0.8rem;
+  }
+  .step-num {
+    width: 30px; height: 30px; background: var(--gold);
+    color: var(--navy); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 0.8rem;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .step-label {
+    font-family: var(--font-heading); font-size: 1.15rem;
+    font-weight: 600; color: var(--navy);
+  }
+
+  /* ─── CODE BLOCK ──────────────────────────── */
+  .code-wrap {
+    margin: 1.2rem 0 1.8rem;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid #21262d;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .code-header {
+    background: #161b22; padding: 0.55rem 1.2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #21262d;
+  }
+  .code-lang {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    font-weight: 600; color: #fcc209; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .code-label {
+    font-family: var(--font-mono); font-size: 0.7rem; color: #8b949e;
+  }
+  .copy-btn {
+    background: none; border: 1px solid #30363d; color: #8b949e;
+    border-radius: 5px; font-size: 0.68rem; padding: 0.18rem 0.55rem;
+    cursor: pointer; font-family: var(--font-mono); transition: all 0.2s;
+    margin-left: 0.5rem;
+  }
+  .copy-btn:hover { color: #e6edf3; border-color: #8b949e; }
+  .copy-btn.copied { color: #3fb950; border-color: #3fb950; }
+  .code-wrap pre { margin: 0 !important; border-radius: 0 !important; font-size: 0.84rem !important; line-height: 1.72 !important; }
+  .code-wrap pre code { font-family: var(--font-mono) !important; }
+
+  /* ─── ETS TABLE ───────────────────────────── */
+  .ets-table {
+    width: 100%; border-collapse: collapse;
+    margin: 2rem 0; font-size: 0.9rem;
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden;
+  }
+  .ets-table th {
+    background: var(--navy); color: white;
+    padding: 0.75rem 1.2rem; text-align: left;
+    font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  .ets-table td {
+    padding: 0.85rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle; color: var(--text);
+    font-size: 0.92rem;
+  }
+  .ets-table tr:last-child td { border-bottom: none; }
+  .ets-table tr:hover td { background: var(--accent-light); }
+  .ets-badge {
+    width: 28px; height: 28px; border-radius: 50%;
+    font-weight: 700; font-size: 0.88rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+  }
+  .ets-badge.a { background: #e8f5e9; color: #2e7d32; }
+  .ets-badge.b { background: #fff8e1; color: #f57f17; }
+  .ets-badge.c { background: #ffebee; color: #c62828; }
+
+  /* ─── WORKFLOW ────────────────────────────── */
+  .wf-flow {
+    display: flex; align-items: stretch;
+    flex-wrap: nowrap; gap: 0; margin: 2.4rem 0;
+  }
+  .wf-step {
+    flex: 1; background: var(--paper);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 0.7rem; text-align: center;
+  }
+  .wf-num {
+    width: 24px; height: 24px; background: var(--gold);
+    color: var(--navy); border-radius: 50%;
+    font-weight: 700; font-size: 0.72rem; font-family: var(--font-mono);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .wf-title { font-size: 0.78rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+  .wf-sub { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.35; }
+  .wf-arrow {
+    display: flex; align-items: center;
+    color: var(--gold); font-size: 1.2rem;
+    font-weight: 700; padding: 0 0.25rem; flex-shrink: 0;
+  }
+
+  /* ─── TIP ─────────────────────────────────── */
+  .tip {
+    background: #f0f7ff; border: 1px solid #b3d4f5;
+    border-left: 4px solid #2196f3;
+    border-radius: 6px; padding: 1rem 1.3rem; margin: 1.6rem 0;
+  }
+  .tip .tip-label {
+    font-size: 0.68rem; font-weight: 700; color: #1565c0;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .tip p { font-size: 0.95rem; color: #1a3a5c; margin-bottom: 0; }
+
+  /* ─── CITE BOX ────────────────────────────── */
+  .cite-box {
+    background: var(--paper); border: 2px solid var(--gold);
+    border-radius: 10px; padding: 1.6rem 1.8rem; margin: 2.4rem 0;
+  }
+  .cite-box .cite-label {
+    font-size: 0.72rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .cite-box .cite-text {
+    font-size: 0.92rem; color: var(--text);
+    font-family: var(--font-mono); line-height: 1.7; margin-bottom: 0.8rem;
+  }
+  .cite-box .cite-link {
+    font-size: 0.82rem; color: var(--navy); font-weight: 500;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .cite-box .cite-link:hover { color: var(--gold); }
+
+  /* ─── STAT GRID ───────────────────────────── */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; margin: 2.5rem 0;
+  }
+  .stat-grid .item {
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.2rem; text-align: center;
+  }
+  .stat-grid .num {
+    font-family: var(--font-heading); font-size: 2rem;
+    font-weight: 700; color: var(--gold); line-height: 1; display: block;
+  }
+  .stat-grid .lbl {
+    font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.4rem;
+  }
+
+  /* ─── TAGS ────────────────────────────────── */
+  .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; }
+  .post-tags .tag {
+    background: var(--accent-light); color: var(--navy);
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+  }
+
+  /* ─── REFERENCES ──────────────────────────── */
+  .references {
+    margin-top: 4rem; padding-top: 2rem;
+    border-top: 2px solid var(--border);
+  }
+  .references h2 {
+    font-family: var(--font-heading); font-size: 1.3rem;
+    font-weight: 600; margin-bottom: 1.2rem;
+  }
+  .ref-item {
+    font-size: 0.85rem; color: var(--text-muted);
+    margin-bottom: 0.9rem; padding-left: 2.5rem;
+    position: relative; line-height: 1.55;
+  }
+  .ref-item .num {
+    position: absolute; left: 0; top: 0;
+    font-family: var(--font-heading); font-weight: 700;
+    color: var(--gold); font-size: 0.95rem; width: 2rem;
+  }
+  .ref-item a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); }
+  .ref-item a:hover { color: var(--gold); }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    max-width: 1100px; margin: 0 auto; padding: 2rem;
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  /* ─── REVEAL ──────────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .post-meta, .post-title, .post-subtitle, .post-author {
+    animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .post-title { animation-delay: 0.1s; }
+  .post-subtitle { animation-delay: 0.2s; }
+  .post-author { animation-delay: 0.3s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── MOBILE ──────────────────────────────── */
+  @media (max-width: 640px) {
+    article { padding: 90px 1.4rem 60px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-table { grid-template-columns: 1fr; }
+    .method-grid { grid-template-columns: 1fr; }
+    figure { padding: 1.2rem; }
+    .callout { padding: 1.4rem 1.6rem; }
+    .wf-flow { flex-direction: column; }
+    .wf-arrow { transform: rotate(90deg); align-self: center; }
+    .post-author { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="6" y1="1" x2="6" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="27" x2="39" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="4" x2="39" y2="4" stroke="#e7eaee" stroke-width="1" stroke-dasharray="2.5 2"/>
+        <path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" stroke="#fcc209" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="14.5" r="2" fill="#032454"/>
+        <line x1="18" y1="14.5" x2="18" y2="27" stroke="#032454" stroke-width="0.9" stroke-dasharray="2 1.5"/>
+      </svg>
+      <span>Wiradika</span>
+    </a>
+    <a href="../index.html" class="nav-back">← Back to home</a>
+  </div>
+</nav>
+
+<article>
+  <div class="post-meta">Item Response Theory · Educational Measurement · R Tutorial</div>
+  <h1 class="post-title">Is This Test Fair? A Practical Introduction to Differential Item Functioning</h1>
+  <p class="post-subtitle">When two students answer the same question differently, not because of what they know, but because of who they are. This article introduces the concept, the detection methods, and the practical implications for instrument development.</p>
+
+  <div class="post-author">
+    <img src="../uploads/photo-1776825797764.jpg" alt="I Nyoman Indhi Wiradika">
+    <div class="info">
+      <div class="name">I Nyoman Indhi Wiradika</div>
+      <div class="date">Published May 17, 2026</div>
+    </div>
+    <div class="reading">14 min read</div>
+  </div>
+
+  <div class="prose">
+
+    <p>Consider two elementary school students: Student A, a female student who grew up in a mountain farming village, and Student B, a male student who lives near the coast. Their teacher administers an ecological awareness test. Both students possess a genuine and comparable understanding of the natural environment. Their true ecological knowledge is, by any reasonable standard, equivalent.</p>
+
+    <p>Then comes item 12: <em>"Why is it important to protect mangrove forests for coastal communities?"</em> Student B responds with confidence and detail, drawing on direct experience. Student A struggles, not because she lacks ecological awareness, but because mangroves are simply absent from her lived environment.</p>
+
+    <p>The item has not measured a difference in ability. It has measured a difference in <em>context familiarity</em>. This is the core problem that <strong>Differential Item Functioning (DIF)</strong> analysis is designed to detect, and addressing it is one of the most consequential steps in constructing assessments that are genuinely valid across groups.</p>
+
+    <h2>What exactly is DIF?</h2>
+
+    <p>DIF occurs when examinees from different groups who have the <strong>same level of the underlying trait</strong> still have different probabilities of answering an item correctly. The critical qualifier is "same level of the trait." DIF is not simply about different average scores between groups, as that could reflect a real ability difference. DIF concerns whether the item is functioning <em>consistently</em> across groups once ability is held constant.</p>
+
+    <blockquote>
+      DIF is not about whether groups score differently. It is about whether the item measures the same thing for all groups.
+    </blockquote>
+
+    <p>In IRT terms, we say an item shows DIF when its Item Characteristic Curve (ICC) is <em>not the same</em> for two groups. One group has a higher probability of success than the other, even at identical ability levels. The two groups used in DIF analysis have standard names:</p>
+
+    <ul>
+      <li><strong>Reference group</strong>: the majority or baseline group (e.g., male students, higher grade)</li>
+      <li><strong>Focal group</strong>: the group whose performance is under scrutiny (e.g., female students, lower grade)</li>
+    </ul>
+
+    <div class="compare-table reveal">
+      <div class="traditional">
+        <div class="col-header">Impact (Not DIF)</div>
+        <ul>
+          <li>Groups score differently on average</li>
+          <li>Reflects real differences in ability</li>
+          <li>ICC curves are parallel across groups</li>
+          <li>The item is functioning correctly</li>
+          <li>No revision needed</li>
+        </ul>
+      </div>
+      <div class="dif-side">
+        <div class="col-header">Differential Item Functioning</div>
+        <ul>
+          <li>Groups differ even at the same ability</li>
+          <li>Reflects bias in the item itself</li>
+          <li>ICC curves diverge or cross</li>
+          <li>The item is measuring something extra</li>
+          <li>Review and possibly revise the item</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Seeing DIF through the ICC</h2>
+
+    <p>The Item Characteristic Curve provides the most direct means of visualizing DIF. On a properly functioning item, examinees with ability θ = 1.0 should have the same probability of a correct response regardless of gender, grade, or background. When this condition is violated, the ICC curves for the two groups will diverge.</p>
+
+    <figure class="reveal">
+      <div class="viz-label">Visualization 01</div>
+      <div class="viz-title">Uniform DIF: same discrimination, different difficulty</div>
+      <div class="canvas-wrap">
+        <canvas id="canvas-uniform" aria-label="ICC curves showing uniform DIF"></canvas>
+      </div>
+      <figcaption>The gold curve (focal group) is shifted left; at every ability level, the focal group has a higher probability of a correct response. This advantage is constant across the full ability range, which is the defining characteristic of uniform DIF. The shaded region between the curves represents the magnitude of the differential functioning.</figcaption>
+    </figure>
+
+    <h2>Two types of DIF</h2>
+
+    <p>DIF is not homogeneous in its manifestation. Researchers distinguish between two forms, and the distinction has consequences for both the choice of detection method and the interpretation of findings.</p>
+
+    <h3>Uniform DIF</h3>
+    <p>The advantage of one group over the other is <strong>consistent in direction</strong> across all ability levels. One ICC curve is displaced (easier or harder) for the focal group throughout the entire ability continuum. Uniform DIF is more readily detected and more straightforward to interpret substantively.</p>
+
+    <h3>Non-uniform DIF</h3>
+    <p>The advantage is <strong>not consistent in direction</strong>; it reverses at some point on the ability scale. At lower ability levels the focal group may outperform the reference group, while at higher ability levels the pattern is reversed. The two ICC curves intersect.</p>
+
+    <figure class="reveal">
+      <div class="viz-label">Visualization 02</div>
+      <div class="viz-title">Non-uniform DIF: ICC curves that intersect</div>
+      <div class="canvas-wrap">
+        <canvas id="canvas-nonuniform" aria-label="ICC curves showing non-uniform DIF"></canvas>
+      </div>
+      <figcaption>The two curves intersect. At lower ability levels, the focal group (gold) has the higher probability of a correct response. At higher ability levels, the reference group (navy) predominates. This reversal, which defines non-uniform DIF, indicates that the item interacts with ability in a manner that differs across groups. The standard Mantel-Haenszel procedure is insensitive to this pattern; Lord's chi-square or logistic regression are the appropriate alternatives.</figcaption>
+    </figure>
+
+    <div class="callout reveal">
+      <div class="label">Why DIF Matters</div>
+      <p>Even <strong>small DIF can compound</strong> across a multi-item instrument. If five items each favor one group by a small margin, the cumulative effect on total scores can be substantial, particularly in high-stakes examinations where marginal score differences determine promotion, scholarship eligibility, or admission decisions. DIF analysis is therefore not merely a technical consideration; it is a matter of measurement validity and equity.</p>
+    </div>
+
+    <h2>Three methods for detecting DIF</h2>
+
+    <p>Several statistical procedures have been developed to detect DIF, each with distinct requirements, assumptions, and statistical targets. Three methods are most widely employed in educational measurement research:</p>
+
+    <div class="method-grid reveal">
+      <div class="method-card">
+        <div class="m-badge">Classical</div>
+        <div class="m-name">Mantel-Haenszel</div>
+        <div class="m-stat">Statistic: χ² / ln(α)</div>
+        <div class="m-desc">No IRT model required. Matches students by observed total score. Best for detecting uniform DIF. Widely used and well-validated.</div>
+      </div>
+      <div class="method-card">
+        <div class="m-badge">IRT-Based</div>
+        <div class="m-name">Lord's Chi-Square</div>
+        <div class="m-stat">Statistic: χ²(df = 2)</div>
+        <div class="m-desc">Compares full item parameter vectors between groups. Sensitive to both uniform and non-uniform DIF. Requires fitting a separate IRT model per group.</div>
+      </div>
+      <div class="method-card">
+        <div class="m-badge">Regression</div>
+        <div class="m-name">Logistic Regression</div>
+        <div class="m-stat">Statistic: ΔR² / LRT</div>
+        <div class="m-desc">Models the interaction of ability and group membership. Flexibly detects both DIF types in a single model. Outputs effect sizes naturally.</div>
+      </div>
+    </div>
+
+    <p>In practice, researchers often run <strong>Mantel-Haenszel as a first screen</strong> for its simplicity and interpretability, then follow up with Lord's chi-square or logistic regression for items that are flagged or where non-uniform DIF is suspected.</p>
+
+    <h2>The DIF analysis workflow</h2>
+
+    <div class="wf-flow reveal">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div class="wf-title">Collect Response Data</div>
+        <div class="wf-sub">Item responses + group label for each examinee</div>
+      </div>
+      <div class="wf-arrow">&#8250;</div>
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div class="wf-title">Define Groups</div>
+        <div class="wf-sub">Reference vs focal group (gender, grade, region…)</div>
+      </div>
+      <div class="wf-arrow">&#8250;</div>
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div class="wf-title">Condition on Ability</div>
+        <div class="wf-sub">Total score (MH) or θ (IRT methods)</div>
+      </div>
+      <div class="wf-arrow">&#8250;</div>
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div class="wf-title">Test &amp; Classify</div>
+        <div class="wf-sub">Run MH or Lord's χ², apply ETS criteria</div>
+      </div>
+      <div class="wf-arrow">&#8250;</div>
+      <div class="wf-step">
+        <div class="wf-num">5</div>
+        <div class="wf-title">Interpret &amp; Revise</div>
+        <div class="wf-sub">Review flagged items, consult content experts</div>
+      </div>
+    </div>
+
+    <h2>Worked example: DIF analysis in R</h2>
+
+    <p>The following example demonstrates a complete DIF analysis in R, from data simulation to graphical inspection. The context is drawn from educational measurement research: an ecological awareness instrument administered to elementary school students, with gender as the grouping variable of interest.</p>
+
+    <div class="tip">
+      <div class="tip-label">Packages needed</div>
+      <p>This tutorial uses <code>difR</code> (DIF detection), <code>mirt</code> (IRT modelling and ICC plots), and <code>ggplot2</code> (visualization). All are available on CRAN.</p>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-label">Install and load packages</div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">R</span>
+        <span class="code-label">setup</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-r"># Run once to install
+install.packages(c("difR", "mirt", "ggplot2"))
+
+library(difR)
+library(mirt)
+library(ggplot2)</code></pre>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-label">Simulate an ecological awareness dataset</div>
+    </div>
+
+    <p>The simulation generates 300 examinees (150 male, 150 female) responding to 15 items. DIF is introduced into items 5 and 10 by shifting the difficulty parameter for the female group.</p>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">R</span>
+        <span class="code-label">simulate data</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-r">set.seed(2024)
+
+N      <- 300    # total students
+n_item <- 15     # number of items
+
+# group: 0 = male (reference), 1 = female (focal)
+group <- rep(0:1, each = N / 2)
+
+# simulate latent ability
+theta <- rnorm(N, mean = 0, sd = 1)
+
+# item parameters (same for both groups by default)
+a_ref <- runif(n_item, 0.8, 1.8)   # discrimination
+b_ref <- seq(-2, 2, length.out = n_item)  # difficulty
+
+# introduce DIF on items 5 and 10
+b_foc     <- b_ref
+b_foc[5]  <- b_ref[5]  - 0.9   # item 5: easier for females (uniform DIF)
+b_foc[10] <- b_ref[10] + 0.7   # item 10: harder for females (uniform DIF)
+
+# helper: simulate binary responses from 2PL model
+sim_item <- function(theta_vec, a, b) {
+  p <- 1 / (1 + exp(-a * (theta_vec - b)))
+  rbinom(length(theta_vec), 1, p)
+}
+
+resp_male   <- sapply(1:n_item, \(j) sim_item(theta[group == 0], a_ref[j], b_ref[j]))
+resp_female <- sapply(1:n_item, \(j) sim_item(theta[group == 1], a_ref[j], b_foc[j]))
+
+data_resp <- rbind(resp_male, resp_female)
+colnames(data_resp) <- paste0("Item", 1:n_item)
+
+# sanity check
+dim(data_resp)     # should be 300 x 15
+table(group)       # 150 male, 150 female</code></pre>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-label">Mantel-Haenszel DIF detection</div>
+    </div>
+
+    <p>The Mantel-Haenszel (MH) method is the traditional starting point. It matches students by their total score and then compares item performance between groups at each score level. The output includes a chi-square test and the MH odds ratio (α), which is then converted to the <strong>MH D-DIF</strong> scale for interpretation.</p>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">R</span>
+        <span class="code-label">Mantel-Haenszel</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-r">mh_result <- difMH(
+  Data       = data_resp,
+  group      = group,
+  focal.name = 1,       # 1 = female (focal group)
+  correct    = TRUE     # Yates' continuity correction
+)
+
+# Print item-level results
+print(mh_result)
+
+# Plot chi-square statistics across items
+# Items above the dashed line are flagged as DIF
+plot(mh_result, main = "Mantel-Haenszel DIF Statistics")</code></pre>
+    </div>
+
+    <p>The printed output shows the MH chi-square statistic, p-value, and the MH D-DIF value for each item. Items with significant chi-square and |D-DIF| exceeding a threshold are flagged. The sign of D-DIF tells you the direction: <strong>negative values favor the focal group</strong> (female), positive values favor the reference group (male).</p>
+
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div class="step-label">Lord's chi-square (IRT-based)</div>
+    </div>
+
+    <p>Lord's chi-square fits a separate IRT model for each group and compares the full item parameter vectors. Because it compares both the discrimination (a) and difficulty (b) parameters simultaneously, it is sensitive to <em>both</em> uniform and non-uniform DIF.</p>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">R</span>
+        <span class="code-label">Lord's chi-square</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-r">lord_result <- difLord(
+  Data       = data_resp,
+  group      = group,
+  focal.name = 1,
+  model      = "2PL"    # 2-parameter logistic
+)
+
+print(lord_result)
+plot(lord_result, main = "Lord's Chi-Square DIF Statistics")</code></pre>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">5</div>
+      <div class="step-label">Visualize ICC by group for flagged items</div>
+    </div>
+
+    <p>Statistical flagging alone is insufficient for diagnosis. Plotting the ICC separately for each group provides direct visual evidence of the nature and magnitude of DIF. Group-specific 2PL models are fitted using the <code>mirt</code> package, from which ICC probabilities are extracted for graphical comparison.</p>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">R</span>
+        <span class="code-label">ICC visualization</span>
+        <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      </div>
+      <pre><code class="language-r"># Fit separate 2PL models for each group
+mod_male   <- mirt(data_resp[group == 0, ], 1, itemtype = "2PL", verbose = FALSE)
+mod_female <- mirt(data_resp[group == 1, ], 1, itemtype = "2PL", verbose = FALSE)
+
+# Extract ICC probabilities for flagged Item 5
+theta_seq <- seq(-3, 3, by = 0.01)
+p_male    <- probtrace(extract.item(mod_male,   5), theta_seq)[, 2]
+p_female  <- probtrace(extract.item(mod_female, 5), theta_seq)[, 2]
+
+# Build tidy data frame
+df_icc <- data.frame(
+  theta = rep(theta_seq, 2),
+  prob  = c(p_male, p_female),
+  group = rep(c("Male (Reference)", "Female (Focal)"),
+              each = length(theta_seq))
+)
+
+# Plot
+ggplot(df_icc, aes(theta, prob, color = group)) +
+  geom_line(linewidth = 1.3) +
+  scale_color_manual(
+    values = c("Male (Reference)" = "#032454",
+               "Female (Focal)"   = "#fcc209")
+  ) +
+  labs(
+    title    = "ICC Comparison: Item 5",
+    subtitle = "Uniform DIF: female students have consistently higher P(correct)",
+    x        = expression("Ability " * theta),
+    y        = "P(Correct)",
+    color    = NULL
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "top")</code></pre>
+    </div>
+
+    <h2>Interpreting the results</h2>
+
+    <p>Statistical significance alone does not indicate practical importance. The most widely used classification system for contextualising DIF magnitude was developed by the Educational Testing Service (ETS) and operates on the MH D-DIF scale.</p>
+
+    <figure class="reveal">
+      <div class="viz-label">Reference Table</div>
+      <div class="viz-title">ETS DIF Classification System</div>
+      <table class="ets-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>MH D-DIF Criterion</th>
+            <th>Interpretation</th>
+            <th>Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ets-badge a">A</span></td>
+            <td><code>|D-DIF| &lt; 1.0</code></td>
+            <td>Negligible DIF. No practical concern.</td>
+            <td>Retain the item as-is</td>
+          </tr>
+          <tr>
+            <td><span class="ets-badge b">B</span></td>
+            <td><code>1.0 ≤ |D-DIF| &lt; 1.5</code></td>
+            <td>Moderate DIF. Warrants attention.</td>
+            <td>Flag for expert panel review; contextual judgement needed</td>
+          </tr>
+          <tr>
+            <td><span class="ets-badge c">C</span></td>
+            <td><code>|D-DIF| ≥ 1.5</code></td>
+            <td>Large DIF. Serious concern.</td>
+            <td>Revise, replace, or remove from the scoring key</td>
+          </tr>
+        </tbody>
+      </table>
+      <figcaption>The MH D-DIF is computed as −2.35 × ln(α<sub>MH</sub>), where α<sub>MH</sub> is the Mantel-Haenszel odds ratio. Positive values favor the reference group; negative values favor the focal group. For Lord's chi-square, use the critical value at the chosen α level (typically 0.05).</figcaption>
+    </figure>
+
+    <p>A statistically significant result alone does not justify item removal. Category C items should be subjected to <strong>substantive expert review</strong> to determine the source of differential functioning. In some cases the cause is identifiable from the item content (e.g., culturally or geographically specific references); in others it requires deeper investigation. The statistical flag initiates the review process; it does not conclude it.</p>
+
+    <div class="tip">
+      <div class="tip-label">Practical tip</div>
+      <p>Run DIF analysis iteratively with <code>purify = TRUE</code> in <code>difMH()</code>. This progressively removes flagged items from the ability-matching step, preventing contaminated anchor items from masking additional DIF, a frequent problem in the initial pass.</p>
+    </div>
+
+    <h2>Applied example: gender and grade DIF in an ecological awareness instrument</h2>
+
+    <p>Wiradika and Mahendra (2026) applied DIF analysis to an ecological awareness instrument administered to elementary school students. The study examined two grouping variables: <strong>gender</strong> (male vs. female) and <strong>grade level</strong>, providing a multidimensional assessment of measurement fairness within the same instrument.</p>
+
+    <p>The findings carry direct implications for instrument development. Items referencing specific ecological contexts, such as coastal ecosystems, may systematically advantage students whose lived experience aligns with those contexts. This form of structural bias is undetectable through inspection of aggregate scores alone; DIF analysis provides the methodological basis for identifying and addressing such disparities.</p>
+
+    <div class="cite-box reveal">
+      <div class="cite-label">Study this post is based on</div>
+      <div class="cite-text">
+        Wiradika, I. N. I., &amp; Mahendra, G. S. (2026). Gender and Grade DIF Analysis of Elementary School Students' Ecological Awareness Instrument. <em>Jurnal Evaluasi Dan Pembelajaran</em>, 8(1), 1–11.
+      </div>
+      <a class="cite-link" href="https://jepjurnal.stkipalitb.ac.id/index.php/hepi/article/view/493/97" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        https://doi.org/10.52647/jep.v8i1.493
+      </a>
+    </div>
+
+    <h2>Responding to DIF: practical recommendations</h2>
+
+    <p>Detection constitutes only the initial phase of DIF analysis. The appropriate response depends on the severity of the finding and the testing context:</p>
+
+    <ol>
+      <li><strong>Convene a content review panel.</strong> Subject matter experts from both the reference and focal groups should examine the flagged item and assess whether a substantive rationale exists for the observed differential performance, independent of the groups' true ability levels.</li>
+      <li><strong>Revise the item stem or context.</strong> Where DIF is attributable to a contextually specific reference (e.g., mangrove, irrigation channel, fishing practice), revision toward a more ecologically neutral stimulus is the preferred course of action. Parallel versions targeting different contexts may also be considered.</li>
+      <li><strong>Remove items only as a last resort.</strong> Item removal reduces instrument length and reliability; revision is ordinarily preferable. When removal is necessary, the item should be retired from the item bank rather than simply excluded from scoring, and replaced in subsequent test versions.</li>
+      <li><strong>Document and report.</strong> DIF findings constitute part of the validity evidence for an instrument. Published reports should specify which items were flagged, the magnitude and direction of DIF, and the remedial actions taken.</li>
+    </ol>
+
+    <blockquote>
+      A fair assessment does not assume group equivalence. It ensures that each item measures the intended construct consistently, for all examinees.
+    </blockquote>
+
+    <h2>Conclusion</h2>
+
+    <p>DIF analysis operates at the interface of psychometric rigour and measurement equity. The central question it addresses, whether an item measures the intended construct equivalently across groups, is methodologically tractable but substantively demanding. The Mantel-Haenszel procedure, Lord's chi-square, and logistic regression approach this question from different statistical vantage points; used in combination, they constitute a principled framework for equitable test development.</p>
+
+    <p>For researchers developing or validating educational assessments, regardless of domain, DIF analysis should be incorporated as a standard component of instrument evaluation. The <code>difR</code> package provides an accessible implementation in R. The more demanding task, however, is the substantive interpretation: identifying why an item exhibits differential functioning and determining the appropriate response.</p>
+
+    <div class="post-tags">
+      <span class="tag">Differential Item Functioning</span>
+      <span class="tag">IRT</span>
+      <span class="tag">R Tutorial</span>
+      <span class="tag">Item Bias</span>
+      <span class="tag">Educational Fairness</span>
+      <span class="tag">Psychometrics</span>
+      <span class="tag">Mantel-Haenszel</span>
+      <span class="tag">Ecological Awareness</span>
+    </div>
+
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="references">
+    <h2>References</h2>
+
+    <div class="ref-item">
+      <div class="num">[1]</div>
+      Wiradika, I. N. I., &amp; Mahendra, G. S. (2026). Gender and Grade DIF Analysis of Elementary School Students' Ecological Awareness Instrument. <em>Jurnal Evaluasi Dan Pembelajaran</em>, 8(1), 1–11. <a href="https://jepjurnal.stkipalitb.ac.id/index.php/hepi/article/view/493/97" target="_blank">https://doi.org/10.52647/jep.v8i1.493</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[2]</div>
+      Holland, P. W., &amp; Thayer, D. T. (1988). Differential item performance and the Mantel-Haenszel procedure. In H. Wainer &amp; H. I. Braun (Eds.), <em>Test Validity</em> (pp. 129–145). Lawrence Erlbaum Associates.
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[3]</div>
+      Lord, F. M. (1980). <em>Applications of item response theory to practical testing problems.</em> Lawrence Erlbaum Associates.
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[4]</div>
+      Magis, D., Béland, S., Tuerlinckx, F., &amp; De Boeck, P. (2010). A general framework and an R package for the detection of dichotomous differential item functioning. <em>Behavior Research Methods</em>, 42(3), 847–862. <a href="https://doi.org/10.3758/BRM.42.3.847" target="_blank">https://doi.org/10.3758/BRM.42.3.847</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[5]</div>
+      Chalmers, R. P. (2012). mirt: A multidimensional item response theory package for the R environment. <em>Journal of Statistical Software</em>, 48(6), 1–29. <a href="https://doi.org/10.18637/jss.v048.i06" target="_blank">https://doi.org/10.18637/jss.v048.i06</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[6]</div>
+      Penfield, R. D., &amp; Camilli, G. (2007). Differential item functioning and item bias. In C. R. Rao &amp; S. Sinharay (Eds.), <em>Handbook of Statistics: Vol. 26. Psychometrics</em> (pp. 125–167). Elsevier. <a href="https://doi.org/10.1016/S0169-7161(06)26005-X" target="_blank">https://doi.org/10.1016/S0169-7161(06)26005-X</a>
+    </div>
+
+    <div class="ref-item">
+      <div class="num">[7]</div>
+      Zwick, R., &amp; Ercikan, K. (1989). Analysis of differential item functioning in the NAEP history assessment. <em>Journal of Educational Measurement</em>, 26(1), 55–66. <a href="https://doi.org/10.1111/j.1745-3984.1989.tb00318.x" target="_blank">https://doi.org/10.1111/j.1745-3984.1989.tb00318.x</a>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <span>© 2026 I Nyoman Indhi Wiradika</span>
+  <span>Universitas Pendidikan Ganesha</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+<script>
+hljs.highlightAll();
+
+// ─── Reading progress ───────────────────────────────────
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// ─── Reveal on scroll ───────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ─── Copy code buttons ──────────────────────────────────
+function copyCode(btn) {
+  const pre  = btn.closest('.code-wrap').querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─── ICC canvas drawing ─────────────────────────────────
+function logistic(t, a, b) {
+  return 1 / (1 + Math.exp(-a * (t - b)));
+}
+
+function drawICC(canvasId, curves, options) {
+  options = options || {};
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const displayW = canvas.parentElement.clientWidth || 620;
+  const displayH = Math.round(displayW * 0.52);
+
+  canvas.width  = displayW * dpr;
+  canvas.height = displayH * dpr;
+  canvas.style.width  = displayW + 'px';
+  canvas.style.height = displayH + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const W = displayW, H = displayH;
+
+  const pad = { l: 62, r: 28, t: 28, b: 52 };
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  const tx = t => pad.l + (t + 3) / 6 * pw;
+  const ty = p => pad.t + ph * (1 - p);
+
+  // White background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#e7eaee';
+  ctx.lineWidth = 1;
+  [0.25, 0.5, 0.75, 1.0].forEach(p => {
+    ctx.beginPath();
+    ctx.moveTo(pad.l, ty(p));
+    ctx.lineTo(pad.l + pw, ty(p));
+    ctx.stroke();
+  });
+  [-2, -1, 0, 1, 2].forEach(t => {
+    ctx.beginPath();
+    ctx.moveTo(tx(t), pad.t);
+    ctx.lineTo(tx(t), pad.t + ph);
+    ctx.stroke();
+  });
+
+  // Shaded area between curves (uniform DIF only)
+  if (options.shade && curves.length >= 2) {
+    ctx.save();
+    ctx.globalAlpha = 0.13;
+    ctx.fillStyle = '#fcc209';
+    ctx.beginPath();
+    const N = 300;
+    for (let i = 0; i <= N; i++) {
+      const t = -3 + 6 * i / N;
+      const p = logistic(t, curves[0].a, curves[0].b);
+      i === 0 ? ctx.moveTo(tx(t), ty(p)) : ctx.lineTo(tx(t), ty(p));
+    }
+    for (let i = N; i >= 0; i--) {
+      const t = -3 + 6 * i / N;
+      const p = logistic(t, curves[1].a, curves[1].b);
+      ctx.lineTo(tx(t), ty(p));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Axes
+  ctx.strokeStyle = '#032454';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t);
+  ctx.lineTo(pad.l, pad.t + ph);
+  ctx.lineTo(pad.l + pw, pad.t + ph);
+  ctx.stroke();
+
+  // Y-axis labels and ticks
+  const yFont = Math.max(10, Math.round(W * 0.019));
+  ctx.fillStyle = '#4a5f7e';
+  ctx.font = `${yFont}px "JetBrains Mono", monospace`;
+  [[0, '0'], [0.25, '0.25'], [0.5, '0.50'], [0.75, '0.75'], [1.0, '1.00']].forEach(([p, label]) => {
+    ctx.textAlign = 'right';
+    ctx.fillText(label, pad.l - 8, ty(p) + 4);
+    ctx.strokeStyle = '#032454';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.l - 4, ty(p));
+    ctx.lineTo(pad.l, ty(p));
+    ctx.stroke();
+  });
+
+  // X-axis labels and ticks
+  ctx.textAlign = 'center';
+  [-3, -2, -1, 0, 1, 2, 3].forEach(t => {
+    ctx.fillStyle = '#4a5f7e';
+    ctx.fillText(t, tx(t), pad.t + ph + 18);
+    ctx.strokeStyle = '#032454';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(tx(t), pad.t + ph);
+    ctx.lineTo(tx(t), pad.t + ph + 4);
+    ctx.stroke();
+  });
+
+  // Axis titles
+  const axFont = Math.max(11, Math.round(W * 0.021));
+  ctx.fillStyle = '#032454';
+  ctx.font = `600 ${axFont}px Inter, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.fillText('Ability (θ)', pad.l + pw / 2, H - 8);
+
+  ctx.save();
+  ctx.translate(13, pad.t + ph / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('P(Correct)', 0, 0);
+  ctx.restore();
+
+  // DIF gap annotation
+  if (options.gapAt !== undefined && curves.length >= 2) {
+    const tG = options.gapAt;
+    const p0 = logistic(tG, curves[0].a, curves[0].b);
+    const p1 = logistic(tG, curves[1].a, curves[1].b);
+
+    ctx.strokeStyle = '#9aa5b8';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(tx(tG), pad.t);
+    ctx.lineTo(tx(tG), pad.t + ph);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const bx = tx(tG) + 14;
+    ctx.strokeStyle = '#032454';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(bx, ty(p0));
+    ctx.lineTo(bx, ty(p1));
+    ctx.stroke();
+
+    // small arrow tips
+    ctx.lineWidth = 1.5;
+    [[ty(p0), 1], [ty(p1), -1]].forEach(([y, dir]) => {
+      ctx.beginPath();
+      ctx.moveTo(bx - 4, y + dir * 7);
+      ctx.lineTo(bx, y);
+      ctx.lineTo(bx + 4, y + dir * 7);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = '#032454';
+    ctx.font = `bold ${axFont - 1}px Inter, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.fillText('DIF gap', bx + 7, ty((p0 + p1) / 2) + 4);
+  }
+
+  // Crossing point annotation
+  if (options.showCross && curves.length >= 2) {
+    let crossT = null;
+    const NC = 2000;
+    for (let i = 0; i < NC; i++) {
+      const t1 = -3 + 6 * i / NC;
+      const t2 = -3 + 6 * (i + 1) / NC;
+      const d1 = logistic(t1, curves[0].a, curves[0].b) - logistic(t1, curves[1].a, curves[1].b);
+      const d2 = logistic(t2, curves[0].a, curves[0].b) - logistic(t2, curves[1].a, curves[1].b);
+      if (d1 * d2 < 0) { crossT = (t1 + t2) / 2; break; }
+    }
+    if (crossT !== null) {
+      const crossP = logistic(crossT, curves[0].a, curves[0].b);
+      ctx.fillStyle = '#032454';
+      ctx.beginPath();
+      ctx.arc(tx(crossT), ty(crossP), 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(tx(crossT), ty(crossP), 6, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = '#032454';
+      ctx.font = `bold ${axFont - 1}px Inter, sans-serif`;
+      ctx.textAlign = 'left';
+      ctx.fillText('Crossing point', tx(crossT) + 10, ty(crossP) - 8);
+      ctx.fillStyle = '#4a5f7e';
+      ctx.font = `${axFont - 2}px "JetBrains Mono", monospace`;
+      ctx.fillText('θ ≈ ' + crossT.toFixed(1), tx(crossT) + 10, ty(crossP) + 8);
+    }
+  }
+
+  // Region labels for non-uniform
+  if (options.regionLabels && curves.length >= 2) {
+    ctx.font = `italic ${axFont - 1}px Inter, sans-serif`;
+    ctx.textAlign = 'center';
+    options.regionLabels.forEach(r => {
+      ctx.fillStyle = r.color || '#4a5f7e';
+      ctx.fillText(r.text, tx(r.tx), ty(r.ty));
+    });
+  }
+
+  // Draw curves
+  curves.forEach(curve => {
+    ctx.strokeStyle = curve.color;
+    ctx.lineWidth = 3.2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.setLineDash(curve.dash || []);
+    ctx.shadowColor = curve.color;
+    ctx.shadowBlur = 3;
+    ctx.beginPath();
+    const NC2 = 500;
+    for (let i = 0; i <= NC2; i++) {
+      const t = -3 + 6 * i / NC2;
+      const p = logistic(t, curve.a, curve.b);
+      const x = tx(t), y = ty(p);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.setLineDash([]);
+
+    // Curve label near right end
+    if (curve.label) {
+      const tL = 2.3;
+      const pL = logistic(tL, curve.a, curve.b);
+      ctx.fillStyle = curve.color;
+      ctx.font = `600 ${axFont}px Inter, sans-serif`;
+      ctx.textAlign = 'left';
+      ctx.fillText(curve.label, tx(tL) + 5, ty(pL) + (curve.labelOffset || 0));
+    }
+  });
+
+  // Legend box (top-left area)
+  if (options.legend) {
+    const lx = pad.l + 10, ly = pad.t + 12;
+    const lh = 20, lw = 130;
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.strokeStyle = '#dde1e8';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(lx - 8, ly - 14, lw + 16, curves.length * lh + 16, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    curves.forEach((curve, i) => {
+      const y = ly + i * lh;
+      ctx.strokeStyle = curve.color;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(lx, y); ctx.lineTo(lx + 22, y);
+      ctx.stroke();
+      ctx.fillStyle = '#032454';
+      ctx.font = `${axFont - 1}px Inter, sans-serif`;
+      ctx.textAlign = 'left';
+      ctx.fillText(curve.legendLabel || curve.label || '', lx + 28, y + 4);
+    });
+  }
+}
+
+// ─── Initialize canvases ────────────────────────────────
+function initCanvases() {
+  // Uniform DIF: same discrimination, different difficulty
+  drawICC('canvas-uniform', [
+    { a: 1.5, b: 0.0,  color: '#032454', label: 'Reference', legendLabel: 'Male (Reference)',  labelOffset:  5 },
+    { a: 1.5, b: -0.8, color: '#fcc209', label: 'Focal',     legendLabel: 'Female (Focal)',    labelOffset: -14 }
+  ], {
+    shade:  true,
+    gapAt:  0,
+    legend: true
+  });
+
+  // Non-uniform DIF: crossing curves
+  drawICC('canvas-nonuniform', [
+    { a: 2.0, b: 0.5,  color: '#032454', label: 'Reference', legendLabel: 'Male (Reference)',  labelOffset: -10 },
+    { a: 0.7, b: -0.5, color: '#fcc209', label: 'Focal',     legendLabel: 'Female (Focal)',    labelOffset:   5 }
+  ], {
+    showCross: true,
+    legend:    true,
+    regionLabels: [
+      { text: 'Focal advantage here',     tx: -1.8, ty: 0.78, color: '#b88800' },
+      { text: 'Reference advantage here', tx:  2.2, ty: 0.58, color: '#4a5f7e' }
+    ]
+  });
+}
+
+// Draw on load and on resize
+window.addEventListener('DOMContentLoaded', initCanvases);
+window.addEventListener('resize', () => {
+  clearTimeout(window._resizeTimer);
+  window._resizeTimer = setTimeout(initCanvases, 120);
+});
+</script>
+
+</body>
+</html>
