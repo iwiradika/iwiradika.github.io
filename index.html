@@ -38,6 +38,8 @@
 
   html { scroll-behavior: smooth; font-size: 16px; }
 
+  section[id] { scroll-margin-top: 70px; }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -50,7 +52,7 @@
   /* ─── NAV ─────────────────────────────────── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(248,247,245,0.92);
+    background: rgba(249,250,251,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
@@ -312,9 +314,17 @@
     .projects-grid { grid-template-columns: 1fr; }
     .exp-item { grid-template-columns: 1fr; gap: 0.2rem; }
     #contact .contact-block { grid-template-columns: 1fr; }
-    .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem; }
-    .nav-links.open { display: flex; }
+    .nav-links {
+      display: flex; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem;
+      opacity: 0; visibility: hidden; transform: translateY(-10px);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1), visibility 0.25s;
+    }
+    .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
     .nav-toggle { display: block; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 
@@ -326,7 +336,7 @@
     background: var(--bg);
     display: flex; align-items: center; justify-content: center;
     pointer-events: none;
-    transition: opacity 0.6s ease 0.1s;
+    transition: opacity 0.45s ease;
   }
   #page-intro.done { opacity: 0; }
   #page-intro svg { width: 64px; height: 48px; }
@@ -334,22 +344,26 @@
   /* Reading progress bar */
   #progress-bar {
     position: fixed; top: 0; left: 0; z-index: 200;
-    height: 2px; width: 0%;
+    height: 2px; width: 100%;
     background: var(--gold);
-    transition: width 0.1s linear;
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform;
   }
 
-  /* Hero entrance */
+  /* Hero entrance — delay menyesuaikan ada/tidaknya intro overlay */
   .photo-wrap {
-    animation: slideFromLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+    animation: slideFromLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
   }
+  body.intro-active .photo-wrap { animation-delay: 1.0s; }
   @keyframes slideFromLeft {
     from { opacity: 0; transform: translateX(-28px); }
     to   { opacity: 1; transform: translateX(0); }
   }
   .about-text {
-    animation: slideFromRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+    animation: slideFromRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
   }
+  body.intro-active .about-text { animation-delay: 1.15s; }
   @keyframes slideFromRight {
     from { opacity: 0; transform: translateX(24px); }
     to   { opacity: 1; transform: translateX(0); }
@@ -364,19 +378,21 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Reveal on scroll — fade up */
+  /* Reveal on scroll — morph: blur-to-sharp + scale */
   .reveal {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    opacity: 0; transform: translateY(24px) scale(0.985);
+    filter: blur(7px);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1), filter 0.65s cubic-bezier(0.22,1,0.36,1);
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 
-  /* Stagger children */
+  /* Stagger children — morph */
   .reveal-group > * {
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    opacity: 0; transform: translateY(18px) scale(0.985);
+    filter: blur(6px);
+    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), filter 0.55s cubic-bezier(0.22,1,0.36,1);
   }
-  .reveal-group.visible > * { opacity: 1; transform: translateY(0); }
+  .reveal-group.visible > * { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
   .reveal-group.visible > *:nth-child(1)  { transition-delay: 0.04s; }
   .reveal-group.visible > *:nth-child(2)  { transition-delay: 0.10s; }
   .reveal-group.visible > *:nth-child(3)  { transition-delay: 0.16s; }
@@ -421,12 +437,12 @@
     box-shadow: 0 12px 32px rgba(3,36,84,0.12);
   }
 
-  /* Tag pop */
+  /* Tag hover — warna saja, tanpa scale (bukan elemen klik) */
   .tag {
-    transition: background 0.18s, color 0.18s, transform 0.18s cubic-bezier(0.22,1,0.36,1);
+    transition: background 0.18s, color 0.18s;
     cursor: default;
   }
-  .tag:hover { background: var(--navy); color: var(--gold); transform: scale(1.06) translateY(-1px); }
+  .tag:hover { background: var(--navy); color: var(--gold); }
 
   /* Contact link underline */
   .contact-links a { position: relative; }
@@ -449,8 +465,26 @@
   /* Stat counter */
   .stat-num { transition: color 0.3s; }
 
+  /* Morphing blob di belakang foto */
+  .photo-wrap::before {
+    content: '';
+    position: absolute;
+    width: 208px; height: 208px;
+    top: -14px; left: -14px;
+    background: linear-gradient(135deg, rgba(252,194,9,0.30), rgba(3,36,84,0.10));
+    border-radius: 58% 42% 55% 45% / 50% 58% 42% 50%;
+    animation: blobMorph 9s ease-in-out infinite;
+    z-index: 0;
+  }
+  @keyframes blobMorph {
+    0%, 100% { border-radius: 58% 42% 55% 45% / 50% 58% 42% 50%; transform: rotate(0deg) scale(1); }
+    33%      { border-radius: 45% 55% 48% 52% / 58% 44% 56% 42%; transform: rotate(4deg) scale(1.03); }
+    66%      { border-radius: 52% 48% 42% 58% / 45% 55% 45% 55%; transform: rotate(-3deg) scale(0.98); }
+  }
+
   /* Photo hover */
   .photo-wrap img {
+    position: relative; z-index: 1;
     transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), border-radius 0.4s, box-shadow 0.35s;
   }
   .photo-wrap img:hover {
@@ -471,6 +505,20 @@
   }
   @keyframes drawCurve {
     to { stroke-dashoffset: 0; }
+  }
+
+  /* ─── REDUCED MOTION ──────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal, .reveal-group > * {
+      opacity: 1 !important; transform: none !important; filter: none !important;
+    }
+    #page-intro { display: none; }
   }
   .icc-dot {
     opacity: 0;
@@ -528,6 +576,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#presentation">Presentation</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -650,7 +699,7 @@
   <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.6rem;">Funded research and community service projects registered in SINTA.</p>
 
   <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fcc209;margin-bottom:0.8rem;">Research</div>
-  <div class="pub-list" style="margin-bottom:2.5rem;">
+  <div class="pub-list reveal-group" style="margin-bottom:2.5rem;">
 
     <div class="pub-item">
       <div>
@@ -721,7 +770,7 @@
   </div>
 
   <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fcc209;margin-bottom:0.8rem;">Community Service</div>
-  <div class="pub-list">
+  <div class="pub-list reveal-group">
 
     <div class="pub-item">
       <div>
@@ -756,6 +805,34 @@
       <div class="pub-year">2024 · Rp 10M</div>
     </div>
 
+  </div>
+</section>
+
+<!-- PRESENTATION -->
+<section id="presentation">
+  <div class="section-header js-line-header">
+    <h2>Presentation</h2>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.6rem;">Interactive research decks — open fullscreen for talks, defenses, or self-paced viewing.</p>
+
+  <div class="reveal-group" style="display:flex;flex-direction:column;gap:1rem;">
+    <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;align-items:stretch;background:var(--white);transition:border-color 0.2s, box-shadow 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)';" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none';">
+      <div style="flex:0 0 8px;background:linear-gradient(180deg,#032454,#fcc209);"></div>
+      <div style="flex:1;padding:1.4rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+        <div style="min-width:240px;">
+          <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fcc209;margin-bottom:0.4rem;">PELITA · Cognitive Diagnostic Research</div>
+          <div class="pub-title" style="font-size:0.98rem;">Profiling Digital Competency of Prospective Vocational IT Educators</div>
+          <div class="pub-meta" style="margin-top:0.3rem;">
+            <span>12 slides · G-DINA model, platform walkthrough &amp; results</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+          <a href="presentation/present.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;font-weight:600;color:#1a1300;background:var(--gold);padding:0.55rem 1.1rem;border-radius:999px;text-decoration:none;">&#9654; Present Fullscreen</a>
+          <a href="presentation/pelita-research-deck.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;font-weight:600;color:var(--accent);border:1px solid var(--border);padding:0.55rem 1.1rem;border-radius:999px;text-decoration:none;">Open in Tab</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -876,19 +953,35 @@
 </div>
 
 <script>
-  // ─── PAGE INTRO ────────────────────────────
-  window.addEventListener('load', () => {
+  // ─── PAGE INTRO (sekali per sesi, max ~0.9s) ──
+  (function () {
     const intro = document.getElementById('page-intro');
-    setTimeout(() => {
-      intro.classList.add('done');
-      setTimeout(() => intro.remove(), 700);
-    }, 1400);
-  });
+    if (sessionStorage.getItem('introSeen')) {
+      intro.remove();
+    } else {
+      sessionStorage.setItem('introSeen', '1');
+      document.body.classList.add('intro-active');
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          intro.classList.add('done');
+          setTimeout(() => intro.remove(), 500);
+        }, 900);
+      });
+    }
+  })();
 
   // ─── NAV toggle ────────────────────────────
   const toggle = document.getElementById('nav-toggle');
   const navLinks = document.getElementById('nav-links');
-  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+  // tutup menu saat link diklik
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    toggle.classList.remove('open');
+  }));
 
   // ─── NAV active on scroll ──────────────────
   const sections = document.querySelectorAll('section[id]');
@@ -901,15 +994,21 @@
         if (a) a.classList.add('active');
       }
     });
-  }, { threshold: 0.3 });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
   sections.forEach(s => navObs.observe(s));
 
-  // ─── READING PROGRESS ─────────────────────
+  // ─── READING PROGRESS (rAF + scaleX) ──────
   const bar = document.getElementById('progress-bar');
+  let barTick = false;
   window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
-    bar.style.width = pct + '%';
+    if (barTick) return;
+    barTick = true;
+    requestAnimationFrame(() => {
+      const h = document.documentElement;
+      const p = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      bar.style.transform = 'scaleX(' + Math.min(Math.max(p, 0), 1) + ')';
+      barTick = false;
+    });
   }, { passive: true });
 
   // ─── SCROLL REVEAL ─────────────────────────
@@ -1000,3 +1099,4 @@
   });
 </script>
 </body>
+</html>
