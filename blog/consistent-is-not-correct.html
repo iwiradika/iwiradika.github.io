@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="Four AIME-Con 2026 papers on LLM-generated Q-matrices, item difficulty, and rater rationales show why stability, agreement, and validity need separate checks.">
 <link rel="canonical" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html">
 <meta property="og:type" content="article">
@@ -21,9 +24,9 @@
 <meta name="twitter:image" content="https://iwiradika.github.io/assets/consistent-is-not-correct-og.png">
 <title>Consistent Is Not Correct · I Nyoman Indhi Wiradika</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#032454;--gold:#fcc209;--gold-dark:#a57b00;--silver:#e7eaee;--bg:#f9fafb;--paper:#fff;--text:#032454;--muted:#4a5f7e;--border:#dde1e8;--red:#b3261e;--heading:'Playfair Display',Georgia,serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+:root{--navy:#032454;--gold:#fcc209;--gold-dark:#a57b00;--silver:#e7eaee;--bg:#f9fafb;--paper:#fff;--text:#032454;--muted:#4a5f7e;--border:#dde1e8;--red:#b3261e;--heading:'Source Serif 4',Georgia,serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.72;-webkit-font-smoothing:antialiased}
 #progress{position:fixed;top:0;left:0;z-index:200;height:2px;width:0;background:var(--gold)}
 nav{position:fixed;inset:0 0 auto;z-index:100;background:rgba(249,250,251,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}.nav-inner{max-width:1100px;height:58px;margin:auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:.65rem;align-items:center;text-decoration:none;color:var(--navy);font:600 1.05rem var(--heading)}.back{font-size:.82rem;color:var(--muted);text-decoration:none}.back:hover,.prose a:hover{color:#9c7600}
@@ -57,12 +60,14 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 @media(max-width:640px){.chart-scroll .svg-chart{min-width:560px}.chart-scroll::after{content:'Swipe to see the full chart →';display:block;font-size:.66rem;color:var(--muted);margin-top:.4rem}article{padding:88px 1.15rem 60px}.nav-inner{padding:0 1.15rem}.prose h2::before{left:-.7rem}.stat-strip,.checks,.paradox,.mini-stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--border)}figure{padding:1.1rem}.paper{padding:0}.bar-row{grid-template-columns:1fr 40px;row-gap:.15rem}.bar-row>span:first-child{grid-column:1/-1}.r-row,.r-axis{grid-template-columns:1fr 44px}.r-row>div:first-child{grid-column:1/-1}.r-axis>span:first-child{display:none}.author{flex-wrap:wrap}.reading{width:100%}.callout{padding:1.4rem 1.3rem}}
 </style>
 <!--i18n:head--><style id="lang-switch-css">
-.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
-.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch{display:inline-flex;flex-shrink:0;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
 .lang-switch a:hover{color:#032454;background:#f3f5f8}
 .lang-switch a[aria-current="true"]{background:#032454;color:#fff}
 .lang-slot{display:flex;align-items:center;gap:1rem}
+.lang-slot>a{white-space:nowrap}
 @media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+@media(max-width:480px){.lang-slot>a{display:none}}
 </style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><!--/i18n:head-->
 </head>
 <body>

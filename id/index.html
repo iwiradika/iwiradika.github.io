@@ -5,15 +5,34 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>I Nyoman Indhi Wiradika · Peneliti Asesmen Pendidikan</title>
+<meta content="I Nyoman Indhi Wiradika adalah peneliti dan dosen di Universitas Pendidikan Ganesha yang menekuni asesmen pendidikan, analitik pembelajaran, model diagnostik kognitif, dan psikometri komputasional." name="description"/>
+<link href="https://iwiradika.github.io/id/" rel="canonical"/>
+<meta content="profile" property="og:type"/>
+<meta content="I Nyoman Indhi Wiradika" property="og:site_name"/>
+<meta content="I Nyoman Indhi Wiradika · Peneliti Asesmen Pendidikan" property="og:title"/>
+<meta content="Riset, publikasi, dan tulisan tentang asesmen pendidikan, analitik pembelajaran, dan psikometri komputasional." property="og:description"/>
+<meta content="https://iwiradika.github.io/id/" property="og:url"/>
+<meta content="https://iwiradika.github.io/assets/home-og.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="I Nyoman Indhi Wiradika, peneliti dan dosen di Universitas Pendidikan Ganesha" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="I Nyoman Indhi Wiradika · Peneliti Asesmen Pendidikan" name="twitter:title"/>
+<meta content="Riset, publikasi, dan tulisan tentang asesmen pendidikan, analitik pembelajaran, dan psikometri komputasional." name="twitter:description"/>
+<meta content="https://iwiradika.github.io/assets/home-og.png" name="twitter:image"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<meta content="#f9fafb" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <script id="tweaks-data" type="application/json">
 /*EDITMODE-BEGIN*/{
   "accentColor": "#032454",
   "accentGold": "#fcc209",
   "bgColor": "#f9fafb",
   "textColor": "#032454",
-  "fontHeading": "Playfair Display",
+  "fontHeading": "Source Serif 4",
   "photoShape": "circle"
 }/*EDITMODE-END*/
 </script>
@@ -21,15 +40,16 @@
   :root {
     --navy:   #032454;
     --gold:   #fcc209;
+    --gold-ink: #8a6a00; /* gold for text: 4.8:1 on --bg, --gold alone is 1.6:1 */
     --silver: #e7eaee;
     --accent: #032454;
     --accent-light: #e7eaee;
     --bg: #f9fafb;
-    --text: #032454;
-    --text-muted: #4a5f7e;
+    --text: #1d2430;   /* body copy: near-black reads easier than navy */
+    --text-muted: #556070;
     --border: #dde1e8;
     --white: #ffffff;
-    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-heading: 'Source Serif 4', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
   }
 
@@ -56,9 +76,9 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-inner {
-    max-width: 900px; margin: 0 auto;
+    max-width: 1080px; margin: 0 auto;
     padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; gap: 1.5rem;
     height: 58px;
   }
   .nav-logo {
@@ -66,21 +86,24 @@
     font-size: 1.1rem; font-weight: 600;
     color: var(--text); text-decoration: none;
     letter-spacing: -0.01em;
+    flex-shrink: 0; margin-right: auto;
   }
   .nav-links {
-    display: flex; gap: 2rem; list-style: none;
+    display: flex; gap: 1.5rem; list-style: none;
   }
   .nav-links a {
-    font-size: 0.82rem; font-weight: 500;
+    font-size: 0.8rem; font-weight: 500;
     color: var(--text-muted); text-decoration: none;
-    letter-spacing: 0.06em; text-transform: uppercase;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    white-space: nowrap;
     transition: color 0.2s;
   }
+  .lang-switch { flex-shrink: 0; }
   .nav-links a:hover { color: var(--navy); }
   .nav-links a.active { color: var(--navy); }
 
   /* hamburger */
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-left: -0.5rem; }
   .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.3s; }
 
   /* ─── HERO / ABOUT ────────────────────────── */
@@ -108,13 +131,13 @@
   .about-text h1 {
     font-family: var(--font-heading);
     font-size: 2.4rem; font-weight: 700;
-    line-height: 1.15; letter-spacing: -0.02em;
-    color: var(--text);
+    line-height: 1.15; letter-spacing: -0.015em;
+    color: var(--navy);
     margin-bottom: 0.3rem;
   }
   .about-text .role {
-    font-size: 0.9rem; font-weight: 500;
-    color: var(--accent);
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--gold-ink);
     letter-spacing: 0.05em; text-transform: uppercase;
     margin-bottom: 0.2rem;
   }
@@ -147,6 +170,7 @@
     font-family: var(--font-heading);
     font-size: 1.8rem; font-weight: 700;
     color: var(--accent); line-height: 1;
+    font-variant-numeric: lining-nums tabular-nums;
   }
   .stat-label {
     font-size: 0.72rem; color: var(--text-muted);
@@ -179,7 +203,7 @@
   .section-header h2 {
     font-family: var(--font-heading);
     font-size: 1.6rem; font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em; color: var(--navy);
   }
   .section-header .en {
     font-size: 0.78rem; color: var(--text-muted);
@@ -201,7 +225,7 @@
     line-height: 1.5; margin-bottom: 0.3rem;
     text-decoration: none;
   }
-  a.pub-title:hover { color: var(--accent); }
+  a.pub-title { color: var(--navy); }
   .pub-meta {
     font-size: 0.78rem; color: var(--text-muted);
     display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
@@ -213,9 +237,12 @@
   .q2 { background: #032454; color: #fcc209; }
   .q4 { background: #e7eaee; color: #032454; }
   .pub-year {
-    font-family: var(--font-heading);
     font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;
-    font-style: italic;
+    font-variant-numeric: tabular-nums;
+  }
+  .group-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold-ink); margin-bottom: 0.8rem;
   }
 
   /* ─── PROJECTS ────────────────────────────── */
@@ -250,7 +277,7 @@
   .exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; }
   .exp-period {
     font-size: 0.78rem; color: var(--text-muted);
-    font-style: italic; font-family: var(--font-heading);
+    font-variant-numeric: tabular-nums;
     padding-top: 0.15rem;
   }
   .exp-role { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
@@ -264,8 +291,8 @@
     display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
   }
   .blog-item:first-child { border-top: 1px solid var(--border); }
-  .blog-title { font-size: 0.93rem; font-weight: 500; color: var(--text); }
-  .blog-date { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; font-style: italic; font-family: var(--font-heading); }
+  .blog-title { font-size: 0.93rem; font-weight: 500; color: var(--navy); }
+  .blog-date { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
   /* ─── CONTACT ─────────────────────────────── */
   #contact .contact-block {
@@ -277,8 +304,7 @@
     margin-bottom: 0.9rem; font-size: 0.88rem;
   }
   .contact-item svg { flex-shrink: 0; width: 16px; height: 16px; color: var(--accent); }
-  .contact-item a { color: var(--text); text-decoration: none; }
-  .contact-item a:hover { color: var(--accent); }
+  .contact-item a { color: var(--navy); text-decoration: none; }
 
   /* ─── FOOTER ──────────────────────────────── */
   footer {
@@ -304,18 +330,12 @@
   .tweak-row input[type=color] { width: 100%; height: 30px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; padding: 1px; }
   .tweak-row select { width: 100%; padding: 0.3rem 0.5rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 4px; background: var(--white); font-family: var(--font-body); }
 
-  /* ─── MOBILE ──────────────────────────────── */
-  @media (max-width: 640px) {
-    #about { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 90px; }
-    .photo-wrap { position: static; text-align: center; }
-    .photo-wrap img { margin: 0 auto; }
-    .stats-row { gap: 1.2rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.2rem; }
-    #contact .contact-block { grid-template-columns: 1fr; }
+  /* ─── NAV COLLAPSE (7 links + switcher need ~1080px) ─ */
+  @media (max-width: 1080px) {
     .nav-links {
       display: flex; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0;
       background: var(--bg); border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem;
+      box-shadow: 0 12px 24px rgba(3,36,84,0.06);
       opacity: 0; visibility: hidden; transform: translateY(-10px);
       transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1), visibility 0.25s;
     }
@@ -324,243 +344,56 @@
     .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  /* Stats: hero text column gets narrow below 900px — keep each label on one line */
+  .stat-label { white-space: nowrap; }
+  @media (max-width: 900px) {
+    .stats-row { gap: 0.75rem; justify-content: space-between; }
+    .stat-label { font-size: 0.64rem; letter-spacing: 0.05em; }
+  }
+
+  /* ─── MOBILE ──────────────────────────────── */
+  @media (max-width: 640px) {
+    .nav-inner { padding: 0 1rem; gap: 1rem; }
+    .nav-links { padding: 1rem; }
+    #about { grid-template-columns: 1fr; gap: 1.5rem; padding: 90px 1rem 60px; }
+    section:not(#about) { padding: 48px 1rem; }
+    footer { padding: 2rem 1rem; }
+    .photo-wrap { position: relative; top: auto; width: 186px; margin: 0 auto; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.2rem; }
+    #contact .contact-block { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
-
-  /* ─── ANIMATIONS ──────────────────────────── */
-
-  /* Page intro overlay */
-  #page-intro {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    pointer-events: none;
-    transition: opacity 0.45s ease;
-  }
-  #page-intro.done { opacity: 0; }
-  #page-intro svg { width: 64px; height: 48px; }
-
-  /* Reading progress bar */
-  #progress-bar {
-    position: fixed; top: 0; left: 0; z-index: 200;
-    height: 2px; width: 100%;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    will-change: transform;
+  @media (max-width: 340px) {
+    .nav-logo span { display: none; }
   }
 
-  /* Hero entrance — delay menyesuaikan ada/tidaknya intro overlay */
-  .photo-wrap {
-    animation: slideFromLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-  }
-  body.intro-active .photo-wrap { animation-delay: 1.0s; }
-  @keyframes slideFromLeft {
-    from { opacity: 0; transform: translateX(-28px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  .about-text {
-    animation: slideFromRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
-  }
-  body.intro-active .about-text { animation-delay: 1.15s; }
-  @keyframes slideFromRight {
-    from { opacity: 0; transform: translateX(24px); }
-    to   { opacity: 1; transform: translateX(0); }
+  /* ─── INTERACTION — still by design ───────── */
+  .nav-links a.active { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+  a.pub-title:hover, a.blog-item:hover .blog-title,
+  .contact-links a:hover, .contact-item a:hover {
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
   }
 
-  /* Nav entrance */
-  nav {
-    animation: navDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-  }
-  @keyframes navDrop {
-    from { opacity: 0; transform: translateY(-100%); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Reveal on scroll — morph: blur-to-sharp + scale */
-  .reveal {
-    opacity: 0; transform: translateY(24px) scale(0.985);
-    filter: blur(7px);
-    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1), filter 0.65s cubic-bezier(0.22,1,0.36,1);
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-
-  /* Stagger children — morph */
-  .reveal-group > * {
-    opacity: 0; transform: translateY(18px) scale(0.985);
-    filter: blur(6px);
-    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), filter 0.55s cubic-bezier(0.22,1,0.36,1);
-  }
-  .reveal-group.visible > * { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-  .reveal-group.visible > *:nth-child(1)  { transition-delay: 0.04s; }
-  .reveal-group.visible > *:nth-child(2)  { transition-delay: 0.10s; }
-  .reveal-group.visible > *:nth-child(3)  { transition-delay: 0.16s; }
-  .reveal-group.visible > *:nth-child(4)  { transition-delay: 0.22s; }
-  .reveal-group.visible > *:nth-child(5)  { transition-delay: 0.28s; }
-  .reveal-group.visible > *:nth-child(6)  { transition-delay: 0.34s; }
-
-  /* Section header underline draw */
-  .section-header h2 { position: relative; display: inline-block; }
-  .section-header h2::after {
-    content: '';
-    position: absolute; bottom: -4px; left: 0;
-    height: 2px; width: 0;
-    background: var(--gold);
-    transition: width 0.55s cubic-bezier(0.22,1,0.36,1) 0.15s;
-    border-radius: 2px;
-  }
-  .section-header.line-drawn h2::after { width: 100%; }
-
-  /* Pub item hover bar */
-  .pub-item {
-    position: relative;
-    transition: padding-left 0.22s cubic-bezier(0.22,1,0.36,1);
-  }
-  .pub-item::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 0; background: var(--gold);
-    transition: width 0.22s cubic-bezier(0.22,1,0.36,1);
-    border-radius: 2px;
-  }
-  .pub-item:hover::before { width: 3px; }
-  .pub-item:hover { padding-left: 10px; }
-
-  /* Project card lift */
-  .project-card {
-    transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s cubic-bezier(0.22,1,0.36,1);
-  }
-  .project-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--navy);
-    box-shadow: 0 12px 32px rgba(3,36,84,0.12);
-  }
-
-  /* Tag hover — warna saja, tanpa scale (bukan elemen klik) */
-  .tag {
-    transition: background 0.18s, color 0.18s;
-    cursor: default;
-  }
-  .tag:hover { background: var(--navy); color: var(--gold); }
-
-  /* Contact link underline */
-  .contact-links a { position: relative; }
-  .contact-links a::after {
-    content: ''; position: absolute; bottom: -2px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.25s ease;
-  }
-  .contact-links a:hover::after { width: 100%; }
-
-  /* Nav underline */
-  .nav-links a { position: relative; }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 2px; background: var(--gold);
-    transition: width 0.22s ease; border-radius: 1px;
-  }
-  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-  /* Stat counter */
-  .stat-num { transition: color 0.3s; }
-
-  /* Morphing blob di belakang foto */
-  .photo-wrap::before {
-    content: '';
-    position: absolute;
-    width: 208px; height: 208px;
-    top: -14px; left: -14px;
-    background: linear-gradient(135deg, rgba(252,194,9,0.30), rgba(3,36,84,0.10));
-    border-radius: 58% 42% 55% 45% / 50% 58% 42% 50%;
-    animation: blobMorph 9s ease-in-out infinite;
-    z-index: 0;
-  }
-  @keyframes blobMorph {
-    0%, 100% { border-radius: 58% 42% 55% 45% / 50% 58% 42% 50%; transform: rotate(0deg) scale(1); }
-    33%      { border-radius: 45% 55% 48% 52% / 58% 44% 56% 42%; transform: rotate(4deg) scale(1.03); }
-    66%      { border-radius: 52% 48% 42% 58% / 45% 55% 45% 55%; transform: rotate(-3deg) scale(0.98); }
-  }
-
-  /* Photo hover */
-  .photo-wrap img {
-    position: relative; z-index: 1;
-    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), border-radius 0.4s, box-shadow 0.35s;
-  }
-  .photo-wrap img:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 32px rgba(252,194,9,0.25);
-  }
-
-  /* ICC logo curve draw on load */
-  .icc-curve {
-    stroke-dasharray: 80;
-    stroke-dashoffset: 80;
-    animation: drawCurve 1.2s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
-  }
-  .icc-axis {
-    stroke-dasharray: 40;
-    stroke-dashoffset: 40;
-    animation: drawCurve 0.6s ease 0.2s forwards;
-  }
-  @keyframes drawCurve {
-    to { stroke-dashoffset: 0; }
-  }
-
-  /* ─── REDUCED MOTION ──────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    .reveal, .reveal-group > * {
-      opacity: 1 !important; transform: none !important; filter: none !important;
-    }
-    #page-intro { display: none; }
-  }
-  .icc-dot {
-    opacity: 0;
-    animation: dotPop 0.3s cubic-bezier(0.22,1,0.36,1) 1.4s forwards;
-  }
-  @keyframes dotPop {
-    from { opacity: 0; transform: scale(0); transform-origin: 18px 14.5px; }
-    to   { opacity: 1; transform: scale(1); }
-  }
-  .icc-drop {
-    stroke-dasharray: 15;
-    stroke-dashoffset: 15;
-    animation: drawCurve 0.3s ease 1.5s forwards;
-  }
-  .icc-asymptote {
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: drawCurve 0.8s ease 0.3s forwards;
   }
 
 </style>
 <!--i18n:head--><style id="lang-switch-css">
-.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
-.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch{display:inline-flex;flex-shrink:0;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
 .lang-switch a:hover{color:#032454;background:#f3f5f8}
 .lang-switch a[aria-current="true"]{background:#032454;color:#fff}
 .lang-slot{display:flex;align-items:center;gap:1rem}
+.lang-slot>a{white-space:nowrap}
 @media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+@media(max-width:480px){.lang-slot>a{display:none}}
 </style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/"><!--/i18n:head-->
 </head>
 <body>
-<!-- PAGE INTRO -->
-<div id="page-intro">
-<svg fill="none" viewbox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
-<line stroke="#032454" stroke-linecap="round" stroke-width="1.4" style="stroke-dasharray:30;stroke-dashoffset:30;animation:drawCurve 0.4s ease 0s forwards" x1="6" x2="6" y1="1" y2="27"></line>
-<line stroke="#032454" stroke-linecap="round" stroke-width="1.4" style="stroke-dasharray:35;stroke-dashoffset:35;animation:drawCurve 0.4s ease 0.1s forwards" x1="6" x2="39" y1="27" y2="27"></line>
-<line stroke="#e7eaee" stroke-dasharray="2.5 2" stroke-width="1" style="stroke-dasharray:100;stroke-dashoffset:100;animation:drawCurve 0.5s ease 0.15s forwards" x1="6" x2="39" y1="4" y2="4"></line>
-<path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" fill="none" stroke="#fcc209" stroke-linecap="round" stroke-width="2.4" style="stroke-dasharray:80;stroke-dashoffset:80;animation:drawCurve 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s forwards"></path>
-<circle cx="18" cy="14.5" fill="#032454" r="2" style="opacity:0;animation:dotPop 0.25s ease 1s forwards"></circle>
-</svg>
-</div>
-<!-- PROGRESS BAR -->
-<div id="progress-bar"></div>
 <!-- NAV -->
 <nav id="main-nav">
 <div class="nav-inner">
@@ -573,13 +406,12 @@
 <circle class="icc-dot" cx="18" cy="14.5" fill="#032454" r="2"></circle>
 <line class="icc-drop" stroke="#032454" stroke-dasharray="2 1.5" stroke-width="0.9" x1="18" x2="18" y1="14.5" y2="27"></line>
 </svg>
-<span style="font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:600;color:#032454;letter-spacing:-0.01em;">Wiradika</span>
+<span style="font-family:'Source Serif 4',Georgia,serif;font-size:1.1rem;font-weight:600;color:#032454;letter-spacing:-0.01em;">Wiradika</span>
 </a>
 <ul class="nav-links" id="nav-links">
 <li><a href="#about">Tentang</a></li>
 <li><a href="#publications">Publikasi</a></li>
 <li><a href="#projects">Proyek</a></li>
-<li><a href="#presentation">Presentasi</a></li>
 <li><a href="#experience">Pengalaman</a></li>
 <li><a href="#blog">Blog</a></li>
 <li><a href="#contact">Kontak</a></li>
@@ -596,30 +428,30 @@
 <img alt="I Nyoman Indhi Wiradika" id="profile-photo" src="../uploads/photo-1776825797764.jpg"/>
 </div>
 <div class="about-text">
-<div class="role" style="color:#fcc209">Peneliti &amp; Dosen</div>
+<div class="role">Peneliti &amp; Dosen</div>
 <h1>I Nyoman Indhi Wiradika</h1>
 <div class="affil">Universitas Pendidikan Ganesha  ·  Pendidikan Informatika</div>
 <p>Wiradika adalah peneliti dan dosen di bidang <em>Asesmen &amp; Evaluasi Pendidikan</em>. Minat risetnya berada di pertemuan analitik pembelajaran dan psikometri komputasional, dengan menerapkan metode statistik dan berbasis data untuk meningkatkan mutu asesmen dan hasil belajar.</p>
-<div class="tags reveal-group"><span class="tag">Asesmen Pendidikan</span>
+<div class="tags"><span class="tag">Asesmen Pendidikan</span>
 <span class="tag">Analitik Pembelajaran</span>
 <span class="tag">Psikometri Komputasional</span>
 <span class="tag">Model Diagnostik Kognitif</span>
 <span class="tag">Pendidikan Informatika</span></div>
 <div class="stats-row" id="stats-row">
 <div class="stat-item">
-<div class="stat-num" style="color:#fcc209">303</div>
+<div class="stat-num">303</div>
 <div class="stat-label">Skor SINTA</div>
 </div>
 <div class="stat-item">
-<div class="stat-num" style="color:#fcc209">42</div>
+<div class="stat-num">42</div>
 <div class="stat-label">Publikasi</div>
 </div>
 <div class="stat-item">
-<div class="stat-num" style="color:#fcc209">100</div>
+<div class="stat-num">100</div>
 <div class="stat-label">Sitasi</div>
 </div>
 <div class="stat-item">
-<div class="stat-num" style="color:#fcc209">6</div>
+<div class="stat-num">6</div>
 <div class="stat-label">Indeks-H</div>
 </div>
 </div>
@@ -645,10 +477,10 @@
 </section>
 <!-- PUBLICATIONS -->
 <section id="publications">
-<div class="section-header js-line-header">
+<div class="section-header">
 <h2>Publikasi Pilihan</h2>
 </div>
-<div class="pub-list reveal-group">
+<div class="pub-list">
 <div class="pub-item">
 <div>
 <a class="pub-title" href="https://journal2.uad.ac.id/index.php/biste/article/view/15340/6321" target="_blank">
@@ -678,12 +510,12 @@
 </section>
 <!-- PROJECTS -->
 <section id="projects">
-<div class="section-header js-line-header">
+<div class="section-header">
 <h2>Proyek Riset</h2>
 </div>
 <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.6rem;">Proyek penelitian dan pengabdian kepada masyarakat yang didanai dan tercatat di SINTA.</p>
-<div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fcc209;margin-bottom:0.8rem;">Penelitian</div>
-<div class="pub-list reveal-group" style="margin-bottom:2.5rem;">
+<div class="group-label">Penelitian</div>
+<div class="pub-list" style="margin-bottom:2.5rem;">
 <div class="pub-item">
 <div>
 <div class="pub-title">Integrasi CDM dalam Asesmen Berbasis Web untuk Mengukur CT-PCK dengan Filosofi Tri Hita Karana</div>
@@ -733,8 +565,8 @@
 <div class="pub-year">2024 · Rp 7,5 juta</div>
 </div>
 </div>
-<div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fcc209;margin-bottom:0.8rem;">Pengabdian kepada Masyarakat</div>
-<div class="pub-list reveal-group">
+<div class="group-label">Pengabdian kepada Masyarakat</div>
+<div class="pub-list">
 <div class="pub-item">
 <div>
 <div class="pub-title">"SIBONAR" — Pertunjukan Seni Bondres untuk Pencegahan HIV/AIDS-Narkoba &amp; Penguatan Kapasitas Organisasi Pemuda</div>
@@ -761,33 +593,12 @@
 </div>
 </div>
 </section>
-<!-- PRESENTATION -->
-<section id="presentation">
-<div class="section-header js-line-header">
-<h2>Presentasi</h2>
-</div>
-<p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.6rem;">Dek riset interaktif — buka layar penuh untuk ceramah, ujian, atau dibaca mandiri.</p>
-<div class="reveal-group" style="display:flex;flex-direction:column;gap:1rem;">
-<div onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none';" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)';" style="border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;align-items:stretch;background:var(--white);transition:border-color 0.2s, box-shadow 0.2s;">
-<div style="flex:0 0 8px;background:linear-gradient(180deg,#032454,#fcc209);"></div>
-<div style="flex:1;padding:1.4rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
-<div style="min-width:240px;">
-<div style="font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fcc209;margin-bottom:0.4rem;">PELITA · Riset Diagnostik Kognitif</div>
-<div class="pub-title" style="font-size:0.98rem;">Profil Kompetensi Digital Calon Pendidik TI Vokasi</div>
-<div class="pub-meta" style="margin-top:0.3rem;"><span>12 slide · model G-DINA, penelusuran platform &amp; hasil</span></div>
-</div>
-<div style="display:flex;gap:0.6rem;flex-wrap:wrap;"><a href="../presentation/present.html" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;font-weight:600;color:#1a1300;background:var(--gold);padding:0.55rem 1.1rem;border-radius:999px;text-decoration:none;" target="_blank">▶ Tampilkan Layar Penuh</a>
-<a href="../presentation/pelita-research-deck.html" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.82rem;font-weight:600;color:var(--accent);border:1px solid var(--border);padding:0.55rem 1.1rem;border-radius:999px;text-decoration:none;" target="_blank">Buka di Tab Baru</a></div>
-</div>
-</div>
-</div>
-</section>
 <!-- EXPERIENCE -->
 <section id="experience">
-<div class="section-header js-line-header">
+<div class="section-header">
 <h2>Pengalaman</h2>
 </div>
-<div class="exp-list reveal-group">
+<div class="exp-list">
 <div class="exp-item">
 <div class="exp-period">2022 — Sekarang</div>
 <div>
@@ -811,10 +622,10 @@
 </section>
 <!-- BLOG -->
 <section id="blog">
-<div class="section-header js-line-header">
+<div class="section-header">
 <h2>Tulisan &amp; Catatan</h2>
 </div>
-<div class="blog-list reveal-group">
+<div class="blog-list">
 <a class="blog-item" href="blog/consistent-is-not-correct.html" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;"><span class="blog-title">Konsisten Belum Tentu Benar: Pelajaran AIME-Con 2026 tentang LLM sebagai Alat Ukur</span>
 <span class="blog-date">Okt 2026</span></a>
 <a class="blog-item" href="blog/behind-indonesias-pisa-2025-numbers.html" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;"><span class="blog-title">Di Balik Angka PISA 2025 Indonesia</span>
@@ -830,10 +641,10 @@
 </section>
 <!-- CONTACT -->
 <section id="contact">
-<div class="section-header js-line-header">
+<div class="section-header">
 <h2>Kontak</h2>
 </div>
-<div class="contact-block reveal">
+<div class="contact-block">
 <div>
 <p>Terbuka untuk kolaborasi riset, diskusi akademik, dan pertanyaan seputar asesmen dan evaluasi pendidikan.</p>
 </div>
@@ -886,127 +697,43 @@
 </div>
 </div>
 <script>
-  // ─── PAGE INTRO (sekali per sesi, max ~0.9s) ──
-  (function () {
-    const intro = document.getElementById('page-intro');
-    if (sessionStorage.getItem('introSeen')) {
-      intro.remove();
-    } else {
-      sessionStorage.setItem('introSeen', '1');
-      document.body.classList.add('intro-active');
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          intro.classList.add('done');
-          setTimeout(() => intro.remove(), 500);
-        }, 900);
-      });
-    }
-  })();
-
   // ─── NAV toggle ────────────────────────────
   const toggle = document.getElementById('nav-toggle');
   const navLinks = document.getElementById('nav-links');
+  toggle.setAttribute('aria-expanded', 'false');
   toggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    toggle.classList.toggle('open');
+    const open = navLinks.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
   });
   // tutup menu saat link diklik
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
   }));
 
   // ─── NAV active on scroll ──────────────────
-  const sections = document.querySelectorAll('section[id]');
+  // Active section = the last one whose top has passed 40% of the viewport,
+  // so exactly one link is ever highlighted, and Contact lights up at the very bottom.
+  const sections = [...document.querySelectorAll('section[id]')];
   const links = document.querySelectorAll('.nav-links a');
-  const navObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const a = document.querySelector('.nav-links a[href="#' + e.target.id + '"]');
-        if (a) a.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-  sections.forEach(s => navObs.observe(s));
-
-  // ─── READING PROGRESS (rAF + scaleX) ──────
-  const bar = document.getElementById('progress-bar');
-  let barTick = false;
+  let scrollTick = false;
+  function onScroll() {
+    const h = document.documentElement;
+    let current = sections[0];
+    if (h.scrollTop >= h.scrollHeight - h.clientHeight - 2) current = sections[sections.length - 1];
+    else for (const s of sections) if (s.getBoundingClientRect().top <= innerHeight * 0.4) current = s;
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current.id));
+    scrollTick = false;
+  }
   window.addEventListener('scroll', () => {
-    if (barTick) return;
-    barTick = true;
-    requestAnimationFrame(() => {
-      const h = document.documentElement;
-      const p = h.scrollTop / (h.scrollHeight - h.clientHeight);
-      bar.style.transform = 'scaleX(' + Math.min(Math.max(p, 0), 1) + ')';
-      barTick = false;
-    });
+    if (scrollTick) return;
+    scrollTick = true;
+    requestAnimationFrame(onScroll);
   }, { passive: true });
+  onScroll();
 
-  // ─── SCROLL REVEAL ─────────────────────────
-  const revealEls = document.querySelectorAll('.reveal, .reveal-group');
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach(el => revealObs.observe(el));
-
-  // ─── SECTION H2 UNDERLINE DRAW ─────────────
-  const lineHeaders = document.querySelectorAll('.js-line-header');
-  const lineObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('line-drawn');
-        lineObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  lineHeaders.forEach(h => lineObs.observe(h));
-
-  // ─── COUNTER ANIMATION ─────────────────────
-  function animateCounter(el, target, duration) {
-    duration = duration || 1400;
-    let start = null;
-    const step = ts => {
-      if (!start) start = ts;
-      const p = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(eased * target);
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target;
-    };
-    requestAnimationFrame(step);
-  }
-
-  const statsRow = document.getElementById('stats-row');
-  let statsAnimated = false;
-  const statsObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !statsAnimated) {
-        statsAnimated = true;
-        document.querySelectorAll('.stat-num').forEach(el => {
-          const target = parseInt(el.textContent, 10);
-          el.textContent = '0';
-          animateCounter(el, target);
-        });
-        statsObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  if (statsRow) statsObs.observe(statsRow);
-
-  // ─── ICC LOGO hover scale ──────────────────
-  const logoSvg = document.querySelector('.nav-logo svg');
-  if (logoSvg) {
-    logoSvg.style.transition = 'transform 0.3s cubic-bezier(0.22,1,0.36,1)';
-    logoSvg.addEventListener('mouseenter', () => logoSvg.style.transform = 'scale(1.1)');
-    logoSvg.addEventListener('mouseleave', () => logoSvg.style.transform = 'scale(1)');
-  }
 
   // ─── TWEAKS ───────────────────────────────
   const panel = document.getElementById('tweaks-panel');

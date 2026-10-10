@@ -3,9 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Understanding Cognitive Diagnostic Models · Dr. I Nyoman Indhi Wiradika</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -19,7 +22,7 @@
     --text: #032454;
     --text-muted: #4a5f7e;
     --border: #dde1e8;
-    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-heading: 'Source Serif 4', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
@@ -452,12 +455,14 @@
   }
 </style>
 <!--i18n:head--><style id="lang-switch-css">
-.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
-.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch{display:inline-flex;flex-shrink:0;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
 .lang-switch a:hover{color:#032454;background:#f3f5f8}
 .lang-switch a[aria-current="true"]{background:#032454;color:#fff}
 .lang-slot{display:flex;align-items:center;gap:1rem}
+.lang-slot>a{white-space:nowrap}
 @media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+@media(max-width:480px){.lang-slot>a{display:none}}
 </style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/blog/understanding-cdm.html"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/blog/understanding-cdm.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/blog/understanding-cdm.html"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/blog/understanding-cdm.html"><!--/i18n:head-->
 </head>
 <body>
@@ -547,7 +552,7 @@
         <text x="60" y="20" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4a5f7e">Items ↓ / Attributes →</text>
 
         <!-- Attribute headers -->
-        <g font-family="Playfair Display,serif" font-size="13" font-weight="600" fill="#032454" text-anchor="middle">
+        <g font-family="'Source Serif 4',serif" font-size="13" font-weight="600" fill="#032454" text-anchor="middle">
           <text x="220" y="50">A1</text>
           <text x="290" y="50">A2</text>
           <text x="360" y="50">A3</text>
@@ -807,7 +812,7 @@
         </g>
 
         <path d="M 320 240 Q 290 250, 270 245" stroke="#4a5f7e" stroke-width="1" fill="none" marker-end="url(#arrowhead)"/>
-        <text x="270" y="260" font-family="Playfair Display,serif" font-size="11" font-style="italic" fill="#4a5f7e" text-anchor="end">third-semester decline</text>
+        <text x="270" y="260" font-family="'Source Serif 4',serif" font-size="11" font-style="italic" fill="#4a5f7e" text-anchor="end">third-semester decline</text>
 
         <defs>
           <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">

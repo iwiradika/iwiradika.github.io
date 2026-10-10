@@ -122,12 +122,14 @@ def extract():
 
 # ---------- switcher ----------
 SWITCH_CSS = """<style id="lang-switch-css">
-.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
-.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch{display:inline-flex;flex-shrink:0;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
 .lang-switch a:hover{color:#032454;background:#f3f5f8}
 .lang-switch a[aria-current="true"]{background:#032454;color:#fff}
 .lang-slot{display:flex;align-items:center;gap:1rem}
+.lang-slot>a{white-space:nowrap}
 @media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+@media(max-width:480px){.lang-slot>a{display:none}}
 </style>"""
 
 
