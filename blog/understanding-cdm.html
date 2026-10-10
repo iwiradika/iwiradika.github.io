@@ -451,6 +451,14 @@
     .post-author { flex-wrap: wrap; }
   }
 </style>
+<!--i18n:head--><style id="lang-switch-css">
+.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch a:hover{color:#032454;background:#f3f5f8}
+.lang-switch a[aria-current="true"]{background:#032454;color:#fff}
+.lang-slot{display:flex;align-items:center;gap:1rem}
+@media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+</style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/blog/understanding-cdm.html"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/blog/understanding-cdm.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/blog/understanding-cdm.html"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/blog/understanding-cdm.html"><!--/i18n:head-->
 </head>
 <body>
 
@@ -469,8 +477,7 @@
       </svg>
       <span>Wiradika</span>
     </a>
-    <a href="../index.html" class="nav-back">← Back to home</a>
-  </div>
+    <!--i18n:sw0--><div class="lang-slot"><div class="lang-switch" role="navigation" aria-label="Language"><a href="../blog/understanding-cdm.html" hreflang="en" lang="en" title="English" aria-current="true" data-lang="en">EN</a><a href="../id/blog/understanding-cdm.html" hreflang="id" lang="id" title="Bahasa Indonesia" data-lang="id">ID</a><a href="../zh/blog/understanding-cdm.html" hreflang="zh-Hans" lang="zh-Hans" title="中文" data-lang="zh">中文</a></div><!--/i18n:sw0--><a href="../index.html" class="nav-back">← Back to home</a><!--i18n:sw1--></div><!--/i18n:sw1-->  </div>
 </nav>
 
 <article>
@@ -928,5 +935,6 @@
   trajectoryFig.forEach(p => pathObs.observe(p));
 </script>
 
+<!--i18n:js--><script>document.querySelectorAll('.lang-switch a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('site-lang',a.dataset.lang)}catch(e){}})});</script><!--/i18n:js-->
 </body>
 </html>

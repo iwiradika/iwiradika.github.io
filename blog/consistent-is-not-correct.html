@@ -56,10 +56,18 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar-fill,.r-fill{transform:scaleX(1);transition:none}}
 @media(max-width:640px){.chart-scroll .svg-chart{min-width:560px}.chart-scroll::after{content:'Swipe to see the full chart →';display:block;font-size:.66rem;color:var(--muted);margin-top:.4rem}article{padding:88px 1.15rem 60px}.nav-inner{padding:0 1.15rem}.prose h2::before{left:-.7rem}.stat-strip,.checks,.paradox,.mini-stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--border)}figure{padding:1.1rem}.paper{padding:0}.bar-row{grid-template-columns:1fr 40px;row-gap:.15rem}.bar-row>span:first-child{grid-column:1/-1}.r-row,.r-axis{grid-template-columns:1fr 44px}.r-row>div:first-child{grid-column:1/-1}.r-axis>span:first-child{display:none}.author{flex-wrap:wrap}.reading{width:100%}.callout{padding:1.4rem 1.3rem}}
 </style>
+<!--i18n:head--><style id="lang-switch-css">
+.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch a:hover{color:#032454;background:#f3f5f8}
+.lang-switch a[aria-current="true"]{background:#032454;color:#fff}
+.lang-slot{display:flex;align-items:center;gap:1rem}
+@media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+</style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><!--/i18n:head-->
 </head>
 <body>
 <div id="progress"></div>
-<nav><div class="nav-inner"><a class="brand" href="../index.html"><svg width="40" height="30" viewBox="0 0 40 30" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="27" stroke="#032454" stroke-width="1.4"/><line x1="6" y1="27" x2="39" y2="27" stroke="#032454" stroke-width="1.4"/><path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" stroke="#fcc209" stroke-width="2.4" fill="none"/><circle cx="18" cy="14.5" r="2" fill="#032454"/></svg><span>Wiradika</span></a><a class="back" href="../index.html">← Back to home</a></div></nav>
+<nav><div class="nav-inner"><a class="brand" href="../index.html"><svg width="40" height="30" viewBox="0 0 40 30" aria-hidden="true"><line x1="6" y1="1" x2="6" y2="27" stroke="#032454" stroke-width="1.4"/><line x1="6" y1="27" x2="39" y2="27" stroke="#032454" stroke-width="1.4"/><path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" stroke="#fcc209" stroke-width="2.4" fill="none"/><circle cx="18" cy="14.5" r="2" fill="#032454"/></svg><span>Wiradika</span></a><!--i18n:sw0--><div class="lang-slot"><div class="lang-switch" role="navigation" aria-label="Language"><a href="../blog/consistent-is-not-correct.html" hreflang="en" lang="en" title="English" aria-current="true" data-lang="en">EN</a><a href="../id/blog/consistent-is-not-correct.html" hreflang="id" lang="id" title="Bahasa Indonesia" data-lang="id">ID</a><a href="../zh/blog/consistent-is-not-correct.html" hreflang="zh-Hans" lang="zh-Hans" title="中文" data-lang="zh">中文</a></div><!--/i18n:sw0--><a class="back" href="../index.html">← Back to home</a><!--i18n:sw1--></div><!--/i18n:sw1--></div></nav>
 <article>
 <div class="meta">AIME-Con 2026 · AI in Measurement · Research Notes</div>
 <h1>Consistent Is Not Correct</h1>
@@ -214,4 +222,5 @@ mk('circle',{cx:x(a),cy:y,r:7.5,fill:'#032454'});
 mk('text',{x:x(r)-12,y:y+4,'text-anchor':'end','font-size':10.5,fill:'#4a5f7e','font-family':'JetBrains Mono,monospace'}).textContent=r.toFixed(2).replace(/^0/,'');
 });
 </script>
+<!--i18n:js--><script>document.querySelectorAll('.lang-switch a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('site-lang',a.dataset.lang)}catch(e){}})});</script><!--/i18n:js-->
 </body></html>

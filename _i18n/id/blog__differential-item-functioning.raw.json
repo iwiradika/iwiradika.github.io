@@ -1,0 +1,22 @@
+{
+ "textContent = 'copied!'": "textContent = 'tersalin!'",
+ "textContent = 'copy'": "textContent = 'salin'",
+ "'DIF gap'": "'Selisih DIF'",
+ "'Crossing point'": "'Titik potong'",
+ "dir = 'None'": "dir = 'Tidak ada'",
+ "'Favors Focal'": "'Menguntungkan Fokal'",
+ "'Favors Reference'": "'Menguntungkan Referensi'",
+ "label: 'Reference'": "label: 'Referensi'",
+ "label: 'Focal'": "label: 'Fokal'",
+ "'Reference Group'": "'Kelompok Referensi'",
+ "'Focal Group'": "'Kelompok Fokal'",
+ "textContent  = 'Focal'": "textContent  = 'Fokal'",
+ "textContent  = 'Reference'": "textContent  = 'Referensi'",
+ "textContent = 'Reference'": "textContent = 'Referensi'",
+ "textContent = 'Focal'": "textContent = 'Fokal'",
+ "atMid ? 'Focal' : 'Reference'": "atMid ? 'Fokal' : 'Referensi'",
+ "'Non-uniform'": "'Non-uniform'",
+ "textContent = 'Uniform'": "textContent = 'Uniform'",
+ "crossEl.textContent = 'None'": "crossEl.textContent = 'Tidak ada'",
+ "fillText('Ability (θ)'": "fillText('Kemampuan (θ)'"
+}

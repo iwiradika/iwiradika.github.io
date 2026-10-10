@@ -30,3 +30,16 @@ The featured article, **"Understanding Cognitive Diagnostic Models,"** explores 
 
 ---
 © 2026 Dr. I Nyoman Indhi Wiradika
+
+## 🌐 Languages
+
+The site is available in English (default, site root), Bahasa Indonesia (`/id/`) and Chinese (`/zh/`). Every page has an EN · ID · 中文 switcher and `hreflang` links.
+
+English pages are the source. Translations live in `_i18n/<lang>/<page>.json` (same order as `_i18n/src/<page>.json`; `"="` keeps the English text). Literal replacements inside scripts or CSS go in `<page>.raw.json`.
+
+```bash
+python3 _i18n/i18n.py extract   # refresh the list of strings after editing an English page
+python3 _i18n/i18n.py build     # add the switcher to English pages and regenerate /id and /zh
+```
+
+After `extract`, add the new or changed strings to both translation files before running `build`.

@@ -1,0 +1,22 @@
+{
+ "textContent = 'copied!'": "textContent = '已复制！'",
+ "textContent = 'copy'": "textContent = '复制'",
+ "'DIF gap'": "'DIF 差距'",
+ "'Crossing point'": "'交叉点'",
+ "dir = 'None'": "dir = '无'",
+ "'Favors Focal'": "'有利于焦点组'",
+ "'Favors Reference'": "'有利于参照组'",
+ "label: 'Reference'": "label: '参照组'",
+ "label: 'Focal'": "label: '焦点组'",
+ "'Reference Group'": "'参照组'",
+ "'Focal Group'": "'焦点组'",
+ "textContent  = 'Focal'": "textContent  = '焦点组'",
+ "textContent  = 'Reference'": "textContent  = '参照组'",
+ "textContent = 'Reference'": "textContent = '参照组'",
+ "textContent = 'Focal'": "textContent = '焦点组'",
+ "atMid ? 'Focal' : 'Reference'": "atMid ? '焦点组' : '参照组'",
+ "'Non-uniform'": "'非一致性'",
+ "textContent = 'Uniform'": "textContent = '一致性'",
+ "crossEl.textContent = 'None'": "crossEl.textContent = '无'",
+ "fillText('Ability (θ)'": "fillText('能力 (θ)'"
+}

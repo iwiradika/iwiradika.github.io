@@ -540,6 +540,14 @@
   }
 
 </style>
+<!--i18n:head--><style id="lang-switch-css">
+.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch a:hover{color:#032454;background:#f3f5f8}
+.lang-switch a[aria-current="true"]{background:#032454;color:#fff}
+.lang-slot{display:flex;align-items:center;gap:1rem}
+@media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+</style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/"><!--/i18n:head-->
 </head>
 <body>
 
@@ -581,7 +589,8 @@
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <!--i18n:sw--><div class="lang-switch" role="navigation" aria-label="Language"><a href="index.html" hreflang="en" lang="en" title="English" aria-current="true" data-lang="en">EN</a><a href="id/index.html" hreflang="id" lang="id" title="Bahasa Indonesia" data-lang="id">ID</a><a href="zh/index.html" hreflang="zh-Hans" lang="zh-Hans" title="中文" data-lang="zh">中文</a></div><!--/i18n:sw-->
+<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -1106,5 +1115,6 @@
     window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { photoShape: e.target.value } }, '*');
   });
 </script>
+<!--i18n:js--><script>document.querySelectorAll('.lang-switch a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('site-lang',a.dataset.lang)}catch(e){}})});</script><!--/i18n:js-->
 </body>
 </html>

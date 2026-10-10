@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AIME-Con 2026 的四篇论文研究了由大语言模型生成的 Q 矩阵、题目难度和评分理由，说明了为什么稳定性、一致性和效度需要分别检验。" name="description"/>
+<link href="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="I Nyoman Indhi Wiradika" property="og:site_name"/>
+<meta content="一致不等于正确：大语言模型作为测量工具" property="og:title"/>
+<meta content="AIME-Con 2026 关于大语言模型生成 Q 矩阵、题目难度和评分理由的启示。" property="og:description"/>
+<meta content="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html" property="og:url"/>
+<meta content="https://iwiradika.github.io/assets/consistent-is-not-correct-og.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="图表：在七个数据集中比较七个大语言模型之间的一致性与其和 IRT 题目难度的吻合程度" property="og:image:alt"/>
+<meta content="2026-10-10" property="article:published_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="一致不等于正确：大语言模型作为测量工具" name="twitter:title"/>
+<meta content="AIME-Con 2026 关于大语言模型生成 Q 矩阵、题目难度和评分理由的启示。" name="twitter:description"/>
+<meta content="https://iwiradika.github.io/assets/consistent-is-not-correct-og.png" name="twitter:image"/>
+<title>一致不等于正确 · I Nyoman Indhi Wiradika</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#032454;--gold:#fcc209;--gold-dark:#a57b00;--silver:#e7eaee;--bg:#f9fafb;--paper:#fff;--text:#032454;--muted:#4a5f7e;--border:#dde1e8;--red:#b3261e;--heading:'Playfair Display',Georgia,serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.72;-webkit-font-smoothing:antialiased}
+#progress{position:fixed;top:0;left:0;z-index:200;height:2px;width:0;background:var(--gold)}
+nav{position:fixed;inset:0 0 auto;z-index:100;background:rgba(249,250,251,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}.nav-inner{max-width:1100px;height:58px;margin:auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:.65rem;align-items:center;text-decoration:none;color:var(--navy);font:600 1.05rem var(--heading)}.back{font-size:.82rem;color:var(--muted);text-decoration:none}.back:hover,.prose a:hover{color:#9c7600}
+article{max-width:760px;margin:auto;padding:108px 2rem 80px}.meta{font-size:.75rem;color:#9c7600;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}h1{font:700 clamp(2.2rem,5vw,3.55rem)/1.08 var(--heading);letter-spacing:-.025em;text-wrap:balance;margin-bottom:1.1rem}.subtitle{font-size:1.15rem;color:var(--muted);line-height:1.55;text-wrap:pretty;margin-bottom:2.2rem}
+.author{display:flex;align-items:center;gap:1rem;padding:1.15rem 0;border-block:1px solid var(--border);margin-bottom:2.8rem}.author img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--gold)}.author .info{flex:1}.author .name{font-size:.92rem;font-weight:600}.author .date,.reading{font-size:.78rem;color:var(--muted)}.reading{font-family:var(--heading);font-style:italic}
+.prose p{font-size:1.04rem;margin-bottom:1.25rem;text-wrap:pretty}.prose h2{font:600 1.75rem var(--heading);letter-spacing:-.02em;margin:3rem 0 1rem;position:relative;text-wrap:balance}.prose h2::before{content:'';position:absolute;left:-1rem;top:.45rem;width:4px;height:1.6rem;background:var(--gold);border-radius:2px}.prose strong{font-weight:600}.prose a{color:var(--navy);text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}.prose em{font-style:italic}
+.lead:first-letter{float:left;font:700 4rem/.78 var(--heading);color:var(--gold-dark);padding:.12rem .45rem 0 0}
+.callout{margin:2.2rem 0;padding:1.8rem 2rem;background:linear-gradient(135deg,var(--navy),#051a3d);color:#fff;border-radius:10px;border-right:4px solid var(--gold)}.callout .label{color:var(--gold);font-size:.68rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;margin-bottom:.55rem}.callout p{margin:0;color:#fff}
+.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:2rem 0;background:#fff}.stat{padding:1.3rem;border-right:1px solid var(--border)}.stat:last-child{border:0}.stat b{display:block;font:700 1.7rem var(--heading);color:var(--gold-dark)}.stat span{font-size:.74rem;color:var(--muted)}
+figure{margin:2.35rem 0;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.65rem;box-shadow:0 1px 3px rgba(3,36,84,.04)}.viz-label{font-size:.68rem;color:#9c7600;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem}.viz-title{font:600 1.08rem var(--heading);margin-bottom:1.1rem;text-wrap:balance}figcaption{font:.84rem/1.55 var(--heading);font-style:italic;color:var(--muted);margin-top:1rem}
+/* paper screenshot */
+.paper{padding:0;overflow:hidden}.paper img{display:block;width:100%;height:auto;border-bottom:1px solid var(--border)}.paper .paper-meta{padding:1rem 1.4rem 1.2rem;display:flex;justify-content:space-between;gap:1rem;align-items:baseline;flex-wrap:wrap}.paper .paper-meta span{font-size:.78rem;color:var(--muted)}.paper .paper-meta a{font:600 .76rem var(--body);color:var(--navy);text-decoration:none;border:1px solid var(--border);border-radius:999px;padding:.35rem .8rem;white-space:nowrap}.paper .paper-meta a:hover{border-color:var(--gold);background:#fffbea}
+/* three checks */
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;position:relative}.check{border:1px solid var(--border);border-radius:9px;padding:1.1rem 1rem;background:var(--bg);position:relative}.check .n{font:600 .66rem var(--mono);color:#9c7600;letter-spacing:.06em}.check b{display:block;font:700 1.18rem var(--heading);margin:.2rem 0 .35rem}.check p{font-size:.8rem!important;color:var(--muted);line-height:1.5;margin:0 0 .7rem!important}.check .q{font-size:.8rem;color:var(--navy);font-style:italic;font-family:var(--heading);margin-bottom:.7rem}.check .who{font:.66rem var(--mono);color:var(--muted);border-top:1px dashed var(--border);padding-top:.55rem}.check.validity{background:var(--navy);color:#fff;border-color:var(--navy)}.check.validity .q,.check.validity b{color:#fff}.check.validity p,.check.validity .who{color:#c9d3e3}.check.validity .n{color:var(--gold)}.check.validity .who{border-color:rgba(255,255,255,.2)}
+/* bars */
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.72rem;color:var(--muted);margin-bottom:1rem}.key::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:.4rem;vertical-align:-1px;background:var(--navy)}.key.k-gold::before{background:var(--gold)}.key.k-silver::before{background:#9aa8bd}.key.k-line::before{background:transparent;border:2px solid var(--navy);border-radius:50%}
+.model-group{display:grid;gap:.32rem;margin-bottom:1.15rem}.model-group:last-child{margin-bottom:0}.model-name{font:600 .8rem var(--body)}.bar-row{display:grid;grid-template-columns:150px 1fr 46px;gap:.65rem;align-items:center;font-size:.74rem;color:var(--muted)}.bar-track{height:12px;background:var(--silver);border-radius:10px;overflow:hidden;position:relative}.bar-fill{height:100%;border-radius:10px;background:var(--navy);transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}.visible .bar-fill{transform:scaleX(1)}.bar-fill.gold{background:var(--gold)}.bar-fill.silver{background:#9aa8bd}.value{font:500 .74rem var(--mono);text-align:right;color:var(--navy)}.zero{font:500 .7rem var(--mono);color:var(--muted);position:absolute;left:6px;top:-2px}
+/* paradox */
+.paradox{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.px{border:1px solid var(--border);border-radius:9px;padding:1rem;text-align:center}.px .m{font:600 .78rem var(--body);margin-bottom:.7rem}.ring{width:96px;height:96px;margin:0 auto .3rem;display:block}.px .cap{font-size:.7rem;color:var(--muted);line-height:1.35}.px .vs{display:flex;justify-content:center;gap:1.1rem;margin-top:.6rem}.px .vs div b{display:block;font:700 1.35rem var(--heading)}.px .vs div:first-child b{color:var(--navy)}.px .vs div:last-child b{color:var(--red)}.px .vs span{font-size:.64rem;color:var(--muted);display:block;line-height:1.3;max-width:80px}
+/* svg charts */
+.chart-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.svg-chart{width:100%;height:auto;display:block;overflow:visible}.svg-chart text{font-family:var(--body)}
+/* scale band */
+.scale-wrap{margin:.3rem 0 1.4rem}.r-bars{display:grid;gap:.55rem}.r-row{display:grid;grid-template-columns:190px 1fr 52px;gap:.65rem;align-items:center;font-size:.76rem}.r-row small{display:block;color:var(--muted);font-size:.68rem}.r-track{position:relative;height:14px;background:var(--silver);border-radius:4px}.r-track::after{content:'';position:absolute;left:20%;top:-4px;bottom:-4px;width:1px;background:var(--muted)}.r-fill{position:absolute;top:0;bottom:0;left:20%;background:var(--navy);border-radius:0 4px 4px 0;transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}.r-fill.neg{background:var(--red);border-radius:4px 0 0 4px;transform-origin:right;left:auto}.visible .r-fill{transform:scaleX(1)}.r-axis{display:grid;grid-template-columns:190px 1fr 52px;gap:.65rem;font:.64rem var(--mono);color:var(--muted)}.r-axis div{display:flex;justify-content:space-between}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1.3rem}.mini-stats div{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem}.mini-stats b{font:700 1.3rem var(--heading);color:var(--gold-dark);display:block}.mini-stats span{font-size:.7rem;color:var(--muted);line-height:1.35;display:block}
+.principles{counter-reset:item;list-style:none;margin:1.2rem 0}.principles li{counter-increment:item;display:grid;grid-template-columns:34px 1fr;gap:.8rem;margin-bottom:1rem}.principles li::before{content:counter(item);display:grid;place-items:center;width:28px;height:28px;background:var(--gold);border-radius:50%;font:600 .75rem var(--mono)}.principles b{display:block;margin-bottom:.15rem}.principles span{font-size:.94rem;color:var(--muted)}
+.refs{margin-top:3.5rem;padding-top:1.8rem;border-top:2px solid var(--border)}.refs h2{font:600 1.3rem var(--heading);margin-bottom:1rem}.ref{font-size:.82rem;color:var(--muted);margin-bottom:.8rem;padding-left:1.4rem;text-indent:-1.4rem}.note{font-size:.78rem!important;color:var(--muted);padding-left:0!important;text-indent:0!important}
+.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem}.tag{padding:.3rem .75rem;border-radius:99px;background:var(--silver);font-size:.75rem}
+footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(18px);transition:.65s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar-fill,.r-fill{transform:scaleX(1);transition:none}}
+@media(max-width:640px){.chart-scroll .svg-chart{min-width:560px}.chart-scroll::after{content:'左右滑动查看完整图表 →';display:block;font-size:.66rem;color:var(--muted);margin-top:.4rem}article{padding:88px 1.15rem 60px}.nav-inner{padding:0 1.15rem}.prose h2::before{left:-.7rem}.stat-strip,.checks,.paradox,.mini-stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--border)}figure{padding:1.1rem}.paper{padding:0}.bar-row{grid-template-columns:1fr 40px;row-gap:.15rem}.bar-row>span:first-child{grid-column:1/-1}.r-row,.r-axis{grid-template-columns:1fr 44px}.r-row>div:first-child{grid-column:1/-1}.r-axis>span:first-child{display:none}.author{flex-wrap:wrap}.reading{width:100%}.callout{padding:1.4rem 1.3rem}}
+</style>
+<!--i18n:head--><style id="lang-switch-css">
+.lang-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
+.lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em}
+.lang-switch a:hover{color:#032454;background:#f3f5f8}
+.lang-switch a[aria-current="true"]{background:#032454;color:#fff}
+.lang-slot{display:flex;align-items:center;gap:1rem}
+@media(max-width:640px){.lang-switch a{padding:.36rem .5rem}}
+</style><link rel="alternate" hreflang="en" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="id" href="https://iwiradika.github.io/id/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html"><link rel="alternate" hreflang="x-default" href="https://iwiradika.github.io/blog/consistent-is-not-correct.html"><!--/i18n:head-->
+</head>
+<body>
+<div id="progress"></div>
+<nav><div class="nav-inner"><a class="brand" href="../index.html"><svg aria-hidden="true" height="30" viewbox="0 0 40 30" width="40"><line stroke="#032454" stroke-width="1.4" x1="6" x2="6" y1="1" y2="27"></line><line stroke="#032454" stroke-width="1.4" x1="6" x2="39" y1="27" y2="27"></line><path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" fill="none" stroke="#fcc209" stroke-width="2.4"></path><circle cx="18" cy="14.5" fill="#032454" r="2"></circle></svg><span>Wiradika</span></a><!--i18n:sw0--><div class="lang-slot"><div class="lang-switch" role="navigation" aria-label="Language"><a href="../../blog/consistent-is-not-correct.html" hreflang="en" lang="en" title="English" data-lang="en">EN</a><a href="../../id/blog/consistent-is-not-correct.html" hreflang="id" lang="id" title="Bahasa Indonesia" data-lang="id">ID</a><a href="../../zh/blog/consistent-is-not-correct.html" hreflang="zh-Hans" lang="zh-Hans" title="中文" aria-current="true" data-lang="zh">中文</a></div><!--/i18n:sw0--><a class="back" href="../index.html">← 返回首页</a><!--i18n:sw1--></div><!--/i18n:sw1--></div></nav>
+<article>
+<div class="meta">AIME-Con 2026 · 测量中的人工智能 · 研究笔记</div>
+<h1>一致不等于正确</h1>
+<p class="subtitle">NCME 人工智能与教育测量会议（AIME-Con）上的四篇论文，分别检验了大语言模型在 Q 矩阵、题目难度和评分理由上的表现。放在一起读，它们揭示了三个容易混淆的性质：稳定性、一致性和效度。</p>
+<div class="author"><img alt="I Nyoman Indhi Wiradika" src="../../uploads/photo-1776825797764.jpg"/><div class="info"><div class="name">I Nyoman Indhi Wiradika</div><div class="date">发布于 2026 年 10 月 10 日</div></div><div class="reading">阅读约 9 分钟</div></div>
+<div class="prose">
+<p class="lead">美国国家教育测量委员会（NCME）于 2026 年 10 月 5–7 日在匹兹堡举办了第二届人工智能与教育测量会议（AIME-Con）。会议论文集已在 ACL Anthology 公开，包括 77 篇完整论文和 60 篇在研论文。其中许多研究让语言模型生成某种内容，再把它放进测量模型，例如题目与技能的对应表、难度估计，或附带理由的评分。</p>
+<p>这种用法首先引出一个测量问题，它比速度或成本更优先。如果大语言模型的输出成为心理测量模型的输入，那么这个输出就是测量工具的一部分，需要接受与专家小组或人工评分员同等严格的审查。</p>
+<div class="stat-strip reveal"><div class="stat"><b>61–88%</b><span>同一模型重新生成同一份 Q 矩阵后，分类发生变化的学生比例</span></div><div class="stat"><b>0.83–0.92</b><span>七个大语言模型在题目难度判断上的一致性</span></div><div class="stat"><b>0.25–0.59</b><span>它们的合并排序与 IRT 难度的相关</span></div></div>
+<h2>三项检验，回答三个不同的问题</h2>
+<p>把三个性质分开，这些论文就容易读懂了。一个程序如果重复执行能得到相同结果，它就是<strong>稳定</strong>的；如果不同模型或不同运行得出相同答案，它就表现出<strong>一致性</strong>；如果结果与我们信任的外部标准相吻合（例如专家 Q 矩阵、已校准的题目参数或人工评分员的推理），它才对我们的目的而言是<strong>有效</strong>的。前一项检验通过，后一项仍可能失败。</p>
+<figure class="reveal"><div class="viz-label">图示 01 · 框架</div><div class="viz-title">通过一项检验，不代表通过下一项</div>
+<div class="checks">
+<div class="check"><div class="n">检验 1</div><b>稳定性</b><div class="q">同一模型、同一提示词，再运行一次，结果相同吗？</div><p>取决于解码设置，以及是否报告了不止一次运行。</p><div class="who">Kim (2026)</div></div>
+<div class="check"><div class="n">检验 2</div><b>一致性</b><div class="q">不同模型或不同运行，结果会趋同吗？</div><p>模型可能有相同的盲点，所以趋同并不是准确的证据。</p><div class="who">Chrzan &amp; Domingue (2026)</div></div>
+<div class="check validity"><div class="n">检验 3</div><b>效度</b><div class="q">结果是否符合我们信任的标准？</div><p>需要以作答数据、已校准的锚题或人工判断作为参照。</p><div class="who">全部四篇论文</div></div>
+</div>
+<figcaption>这是我对四篇论文的综合。稳定性和一致性是程序可用的前提，但两者都不能说明输出测量的正是我们想测的东西。</figcaption></figure>
+<h2>1. 同一模型重新生成 Q 矩阵，大多数学生的分类随之改变</h2>
+<figure class="paper reveal"><img alt="Kim (2026) 论文标题部分：How Reproducible Are LLM-Generated Q-Matrices? Evidence from Downstream Classification" height="320" loading="lazy" src="../../assets/llm-measurement/kim-2026-title.png" width="1615"/><div class="paper-meta"><span>Kim (2026) · AIME-Con 完整论文，第 649–655 页</span><a href="https://aclanthology.org/2026.aimecon-main.73.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
+<p>Q 矩阵规定了每道题需要哪些技能。在认知诊断中，它决定作答如何转化为每个学生的掌握模式。近期有几项研究让大语言模型根据题目文本起草这个矩阵，然后只报告一次运行的结果，或多次运行的多数投票结果。</p>
+<p>Minkwon Kim（哥伦比亚大学师范学院）使用了 TIMSS 2011 八年级数学的 23 道公开题、一份已发表的七属性专家 Q 矩阵，以及 741 名美国学生的真实作答。三个开放权重模型（Qwen2.5-7B、Mistral-7B、Phi-3-medium）分别在采样解码下重新生成完整矩阵十次，在贪心解码下再生成十次。每份矩阵都用 DINA 模型拟合，然后比较得到的学生分类。</p>
+<figure class="reveal"><div class="viz-label">图示 02 · 稳定性与效度</div><div class="viz-title">掌握模式发生变化的学生比例</div>
+<div class="legend"><span class="key">同一模型的两次采样运行</span><span class="key k-silver">同一模型的两次贪心运行</span><span class="key k-gold">贪心运行与专家 Q 矩阵比较</span></div>
+<div class="model-group"><div class="model-name">Qwen2.5-7B</div>
+<div class="bar-row"><span>采样：运行之间</span><div class="bar-track"><div class="bar-fill" style="width:67.7%"></div></div><span class="value">68%</span></div>
+<div class="bar-row"><span>贪心：运行之间</span><div class="bar-track"><span class="zero">运行结果完全相同</span></div><span class="value">0%</span></div>
+<div class="bar-row"><span>贪心 vs 专家</span><div class="bar-track"><div class="bar-fill gold" style="width:75.8%"></div></div><span class="value">76%</span></div></div>
+<div class="model-group"><div class="model-name">Mistral-7B</div>
+<div class="bar-row"><span>采样：运行之间</span><div class="bar-track"><div class="bar-fill" style="width:60.9%"></div></div><span class="value">61%</span></div>
+<div class="bar-row"><span>贪心：运行之间</span><div class="bar-track"><span class="zero">运行结果完全相同</span></div><span class="value">0%</span></div>
+<div class="bar-row"><span>贪心 vs 专家</span><div class="bar-track"><div class="bar-fill gold" style="width:63.3%"></div></div><span class="value">63%</span></div></div>
+<div class="model-group"><div class="model-name">Phi-3-medium</div>
+<div class="bar-row"><span>采样：运行之间</span><div class="bar-track"><div class="bar-fill" style="width:88.1%"></div></div><span class="value">88%</span></div>
+<div class="bar-row"><span>贪心：运行之间</span><div class="bar-track"><span class="zero">运行结果完全相同</span></div><span class="value">0%</span></div>
+<div class="bar-row"><span>贪心 vs 专家</span><div class="bar-track"><div class="bar-fill gold" style="width:73.1%"></div></div><span class="value">73%</span></div></div>
+<figcaption>Kim (2026)，表 1–2 及第 4.4 节。七个属性中任何一个改变，即视为掌握模式改变。贪心解码消除了运行之间的差异，但大多数掌握模式仍与专家 Q 矩阵得出的结果不同。</figcaption></figure>
+<p>同一模型在相同提示词和温度下的两次采样运行，给 61% 到 88% 的学生分配了不同的掌握模式。贪心解码让每次运行逐字节完全相同，说明这种不稳定来自采样。但它没有解决与专家矩阵的分歧：仍有 63% 到 76% 的掌握模式不同。</p>
+<p>常用的补救方法——跨运行多数投票——反而给出了最清楚的反例。投票得到的矩阵几乎每个单元格都与贪心矩阵相同，但那少数不同的单元格改变了一半甚至更多学生的诊断结果。</p>
+<figure class="reveal"><div class="viz-label">图示 03 · 多数投票悖论</div><div class="viz-title">矩阵几乎相同，诊断却不同</div>
+<div class="paradox">
+<div class="px"><div class="m">Qwen2.5-7B</div><svg aria-hidden="true" class="ring" viewbox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="40" stroke="#e7eaee" stroke-width="12"></circle><circle cx="50" cy="50" fill="none" r="40" stroke="#032454" stroke-dasharray="248.8 251.3" stroke-width="12" transform="rotate(-90 50 50)"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#f3d9d7" stroke-width="10"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#b3261e" stroke-dasharray="72.4 150.8" stroke-width="10" transform="rotate(-90 50 50)"></circle></svg><div class="vs"><div><b>99%</b><span>单元格与贪心矩阵相同</span></div><div><b>48%</b><span>学生分类改变</span></div></div></div>
+<div class="px"><div class="m">Mistral-7B</div><svg aria-hidden="true" class="ring" viewbox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="40" stroke="#e7eaee" stroke-width="12"></circle><circle cx="50" cy="50" fill="none" r="40" stroke="#032454" stroke-dasharray="233.7 251.3" stroke-width="12" transform="rotate(-90 50 50)"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#f3d9d7" stroke-width="10"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#b3261e" stroke-dasharray="84.4 150.8" stroke-width="10" transform="rotate(-90 50 50)"></circle></svg><div class="vs"><div><b>93%</b><span>单元格与贪心矩阵相同</span></div><div><b>56%</b><span>学生分类改变</span></div></div></div>
+<div class="px"><div class="m">Phi-3-medium</div><svg aria-hidden="true" class="ring" viewbox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="40" stroke="#e7eaee" stroke-width="12"></circle><circle cx="50" cy="50" fill="none" r="40" stroke="#032454" stroke-dasharray="223.7 251.3" stroke-width="12" transform="rotate(-90 50 50)"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#f3d9d7" stroke-width="10"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#b3261e" stroke-dasharray="134.2 150.8" stroke-width="10" transform="rotate(-90 50 50)"></circle></svg><div class="vs"><div><b>89%</b><span>单元格与贪心矩阵相同</span></div><div><b>89%</b><span>学生分类改变</span></div></div></div>
+</div>
+<figcaption>Kim (2026)，表 2。外环：161 个题目–属性单元格中，多数投票矩阵与贪心矩阵相同的比例。内环：两份矩阵之间掌握模式不同的学生比例。</figcaption></figure>
+<p>Kim 也指出了一个合理的限制：专家 Q 矩阵并非绝对真值，独立的统计验证已经对其中一些单元格提出质疑。模型在这些有争议题目上的分歧略高（每题 0.847 对 0.659），但置换检验没有达到常规显著水平（<em>p</em> = .060）。更有建设性的解读是：重新生成可以作为筛查信号，让模型不稳定的题目值得专家复查。</p>
+<h2>2. 七个模型彼此之间的一致，高于它们与数据的一致</h2>
+<figure class="paper reveal"><img alt="Chrzan 与 Domingue (2026) 论文标题部分：Consensus without Accuracy" height="359" loading="lazy" src="../../assets/llm-measurement/chrzan-domingue-2026-title.png" width="1615"/><div class="paper-meta"><span>Chrzan &amp; Domingue (2026) · AIME-Con 在研论文，第 24–36 页</span><a href="https://aclanthology.org/2026.aimecon-wip.4.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
+<p>让大语言模型直接给出绝对难度分数，效果一向不佳。成对比较的问题更简单：这两道题哪一道更难？Michael Chrzan（马里兰大学）和 Benjamin Domingue（斯坦福大学）让来自 OpenAI 和 Google 的七个前沿模型，对 Item Response Warehouse 中七个数据集的 179 道题进行成对比较，这些题都有基于作答数据校准的 1PL 难度。研究用分层贝叶斯 Bradley–Terry 模型汇总判断，同时估计每个模型的区分度及其偏向先呈现题目的倾向。</p>
+<p>这些模型内部是一致的。大多数模型的三元传递性超过 95%，七个模型之间的一致性在每个数据集中都很高（Krippendorff’s α 为 0.834 至 0.917）。但合并后的排序与 IRT 难度只有中等程度的吻合（总体 Spearman ρ = 0.400），各数据集在 0.250 至 0.591 之间。</p>
+<figure class="reveal"><div class="viz-label">图示 04 · 共识与准确</div><div class="viz-title">模型之间高度一致，与 IRT 难度中度吻合</div>
+<div class="legend"><span class="key">七个大语言模型之间的一致性（Krippendorff’s α）</span><span class="key k-gold">与 1PL 难度的吻合（Spearman ρ）</span></div>
+<div class="chart-scroll"><svg aria-label="哑铃图。在七个数据集中，模型间一致性为 0.83 至 0.92，而与 IRT 难度的相关为 0.25 至 0.59。" class="svg-chart" role="img" viewbox="0 0 640 330">
+<g fill="#4a5f7e" font-size="11"><line stroke="#dde1e8" x1="140" x2="620" y1="292" y2="292"></line>
+<text text-anchor="middle" x="140" y="312">0</text><text text-anchor="middle" x="260" y="312">0.25</text><text text-anchor="middle" x="380" y="312">0.50</text><text text-anchor="middle" x="500" y="312">0.75</text><text text-anchor="middle" x="620" y="312">1.00</text>
+<line stroke="#f0f2f5" x1="260" x2="260" y1="12" y2="292"></line><line stroke="#f0f2f5" x1="380" x2="380" y1="12" y2="292"></line><line stroke="#f0f2f5" x1="500" x2="500" y1="12" y2="292"></line></g>
+<g font-size="12" id="dumbbells"></g>
+</svg></div>
+<figcaption>Chrzan &amp; Domingue (2026)，表 1。frac20 是分数测验，另外六个数据集是读写测评。方括号内为题目数。gilbert_meta_2 和仅含九道题的 gilbert_meta_104 的相关在统计上与零无显著差异。</figcaption></figure>
+<p>作者直接说明了原因：模型可能都抓住了显眼的文本特征、课程内容或解题复杂度，却忽略了真正让题目对作答者变难的因素。增加更多相似的评判者，只会让共同的排序更清晰，却无法纠正共同的构念偏差。评判者参数同样重要：各模型的区分度差异很大，有几个模型的位置偏差大到 94% 区间不包含零。作者的建议是给大语言模型的排序一个有限的角色：用于题目审查或粗略组卷的临时排序，而不是最终的校准参数。</p>
+<h2>3. 锚题有帮助，但只在其范围之内</h2>
+<figure class="paper reveal"><img alt="Bezirhan 与 von Davier (2026) 论文标题部分：Anchored Bradley-Terry Calibration Using LLM Comparative Judgments" height="283" loading="lazy" src="../../assets/llm-measurement/bezirhan-von-davier-2026-title.png" width="1615"/><div class="paper-meta"><span>Bezirhan &amp; von Davier (2026) · AIME-Con 完整论文，第 365–371 页</span><a href="https://aclanthology.org/2026.aimecon-main.40.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
+<p>Ummugul Bezirhan 和 Matthias von Davier（波士顿学院 TIMSS &amp; PIRLS 国际研究中心）采取了其他研究所建议的设计。他们不只让新题彼此比较，而是让每道新题与已校准的锚题比较，并在 Bradley–Terry 模型中固定锚题的已知难度，从而把新题放到既有量尺上。</p>
+<p>他们以 80 道 TIMSS 四年级数学趋势题作为锚题，以 101 道 TIMSS 2023 新题作为目标，并把 2023 年的正式难度留作验证、不参与估计。一个小型开放模型（Qwen3-8B，确定性解码）以三种不同提示词充当三位评判者，共产生 11,607 次成对判断。在全部 101 道题上，估计值与正式难度的相关为 r = .484。作者提醒这个数字被高估了，分组结果说明了原因。</p>
+<figure class="reveal"><div class="viz-label">图示 05 · 内插与外推</div><div class="viz-title">新题相对于锚题的位置</div>
+<div class="scale-wrap"><div class="chart-scroll"><svg aria-label="难度量尺。锚题覆盖 −1.25 至 1.59 logit；新题范围为 −2.98 至 1.80，因此有 31 道新题低于锚题范围。" class="svg-chart" role="img" viewbox="0 0 640 128">
+<g fill="#4a5f7e" font-size="11"><line stroke="#032454" x1="40" x2="620" y1="96" y2="96"></line>
+<text text-anchor="middle" x="40" y="116">−3</text><text text-anchor="middle" x="136.7" y="116">−2</text><text text-anchor="middle" x="233.3" y="116">−1</text><text text-anchor="middle" x="330" y="116">0</text><text text-anchor="middle" x="426.7" y="116">1</text><text text-anchor="middle" x="523.3" y="116">2</text><text text-anchor="middle" x="620" y="116">3</text></g>
+<rect fill="#032454" height="32" rx="5" width="274.5" x="209.4" y="18"></rect><text fill="#fff" font-size="12" font-weight="600" text-anchor="middle" x="346.6" y="38.5">80 道锚题：−1.25 至 1.59</text>
+<rect fill="#fcc209" height="22" opacity=".9" rx="5" width="461.7" x="42" y="58"></rect><text fill="#032454" font-size="11.5" font-weight="600" text-anchor="middle" x="125" y="73">31 道低于范围</text><text fill="#032454" font-size="11.5" font-weight="600" text-anchor="middle" x="346.6" y="73">69 道在范围内</text>
+<line stroke="#032454" stroke-dasharray="3 3" x1="209.4" x2="209.4" y1="50" y2="96"></line><line stroke="#032454" stroke-dasharray="3 3" x1="483.9" x2="483.9" y1="50" y2="96"></line>
+<text fill="#4a5f7e" font-size="10.5" x="510" y="73">1 道高于</text>
+</svg></div></div>
+<div class="viz-title" style="margin-top:.2rem">与留出的正式难度的相关（Pearson r）</div>
+<div class="r-bars">
+<div class="r-row"><div>全部 101 道新题<small>包含组间分离的效应</small></div><div class="r-track"><div class="r-fill" style="width:38.7%"></div></div><span class="value">.484</span></div>
+<div class="r-row"><div>锚题范围内的 69 道题<small>内插</small></div><div class="r-track"><div class="r-fill" style="width:29.8%"></div></div><span class="value">.372</span></div>
+<div class="r-row"><div>低于锚题范围的 31 道题<small>外推</small></div><div class="r-track"><div class="r-fill neg" style="right:80%;width:3.28%"></div></div><span class="value">−.041</span></div>
+</div>
+<div class="r-axis"><span></span><div><span>−0.25</span><span>0</span><span>0.25</span><span>0.50</span><span>0.75</span><span>1.0</span></div><span></span></div>
+<div class="mini-stats"><div><b>54.5%</b><span>题目被分入正确的难度三分位（随机水平：33%）</span></div><div><b>90.1%</b><span>题目被分入正确或相邻的三分位</span></div><div><b>66.8%</b><span>题目对的顺序判断正确</span></div></div>
+<figcaption>Bezirhan &amp; von Davier (2026)，方法、结果及表 1。难度范围采用作者报告的 TIMSS logit 量尺。量尺示意图是我根据这些范围绘制的。</figcaption></figure>
+<p>在锚题范围内，相关为中等（r = .372）；低于该范围时，几乎没有恢复出任何信息。作者的结论是：该方法能内插但不能外推，而且比较网络的结构可能与评判模型的选择同样重要。另有两个细节值得注意：模型自报的置信度几乎每次都是 0.85，因此不含信息；它给出的“轻微”或“中等”差异标签反映的是它自己的确定程度，而不是真实难度差距的大小（r = −.02）。</p>
+<h2>4. 措辞相似不等于判断相同</h2>
+<figure class="paper reveal"><img alt="Jung、Lu、Darici 与 Brüegge (2026) 论文标题部分：Semantic Similarity is Not Enough for Comparing LLM and Human Rater Rationales" height="311" loading="lazy" src="../../assets/llm-measurement/jung-et-al-2026-title.png" width="1615"/><div class="paper-meta"><span>Jung, Lu, Darici &amp; Brüegge (2026) · AIME-Con 完整论文，第 466–471 页</span><a href="https://aclanthology.org/2026.aimecon-main.52.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
+<p>在形成性评价中，分数背后的理由就是反馈。一些研究用基于嵌入向量的余弦相似度来比较大语言模型与人工的评分理由。Julie Jung 及其同事（哈佛大学教育研究生院，与德国的临床合作伙伴）检验了这个数字是否反映了真正重要的东西：大语言模型的理由是否保留了人工评分员的核心判断？</p>
+<p>数据来自一项临床推理测评：21 名医学生、由 AI 模拟的病人问诊、一位人工评分员，以及 27 种 ChatGPT-5.4 配置（模型规模、推理强度和提示词类型），共得到 5,790 对评分理由。一个经过校准的编码流程把每一对标注为完全一致、部分一致或不一致，并把部分一致再细分为三种子类型。</p>
+<figure class="reveal"><div class="viz-label">图示 06 · 相似度与含义</div><div class="viz-title">按一致性编码分组的平均余弦相似度</div>
+<div class="chart-scroll"><svg aria-label="平均相似度点图。完全一致 0.532，部分一致 0.525，不一致 0.456。部分一致内部：遗漏核心观点 0.534，方向相反的限定 0.512，扩展核心观点 0.505。" class="svg-chart" role="img" viewbox="0 0 640 300">
+<g fill="#4a5f7e" font-size="11"><line stroke="#dde1e8" x1="250" x2="620" y1="262" y2="262"></line>
+<text text-anchor="middle" x="250" y="282">0.44</text><text text-anchor="middle" x="342.5" y="282">0.47</text><text text-anchor="middle" x="435" y="282">0.50</text><text text-anchor="middle" x="527.5" y="282">0.53</text><text text-anchor="middle" x="620" y="282">0.56</text>
+<line stroke="#f0f2f5" x1="342.5" x2="342.5" y1="10" y2="262"></line><line stroke="#f0f2f5" x1="435" x2="435" y1="10" y2="262"></line><line stroke="#f0f2f5" x1="527.5" x2="527.5" y1="10" y2="262"></line></g>
+<text fill="#9c7600" font-size="10.5" font-weight="600" letter-spacing=".08em" x="0" y="20">第一阶段编码</text>
+<g fill="#032454" font-size="12.5">
+<text x="0" y="48">完全一致（n = 1,642）</text><line stroke="#e7eaee" stroke-width="2" x1="250" x2="533.7" y1="44" y2="44"></line><circle cx="533.7" cy="44" fill="#032454" r="7"></circle><text font-family="JetBrains Mono,monospace" font-size="11" x="548" y="48">.532</text>
+<text x="0" y="78">部分一致（n = 3,319）</text><line stroke="#e7eaee" stroke-width="2" x1="250" x2="512.1" y1="74" y2="74"></line><circle cx="512.1" cy="74" fill="#032454" r="7"></circle><text font-family="JetBrains Mono,monospace" font-size="11" x="526" y="78">.525</text>
+<text x="0" y="108">不一致（n = 828）</text><line stroke="#e7eaee" stroke-width="2" x1="250" x2="299.3" y1="104" y2="104"></line><circle cx="299.3" cy="104" fill="#9aa8bd" r="7"></circle><text font-family="JetBrains Mono,monospace" font-size="11" x="314" y="108">.456</text>
+</g>
+<text fill="#9c7600" font-size="10.5" font-weight="600" letter-spacing=".08em" x="0" y="150">“部分一致”内部</text>
+<g fill="#032454" font-size="12.5">
+<text fill="#b3261e" font-weight="600" x="0" y="178">遗漏核心观点（2,017）</text><line stroke="#f3d9d7" stroke-width="2" x1="250" x2="539.8" y1="174" y2="174"></line><circle cx="539.8" cy="174" fill="#b3261e" r="7.5"></circle><text fill="#b3261e" font-family="JetBrains Mono,monospace" font-size="11" x="554" y="178">.534</text>
+<text x="0" y="208">方向相反的限定（950）</text><line stroke="#e7eaee" stroke-width="2" x1="250" x2="472.0" y1="204" y2="204"></line><circle cx="472.0" cy="204" fill="#fcc209" r="7" stroke="#a57b00" stroke-width="1.5"></circle><text font-family="JetBrains Mono,monospace" font-size="11" x="487" y="208">.512</text>
+<text x="0" y="238">保留并扩展观点（352）</text><line stroke="#e7eaee" stroke-width="2" x1="250" x2="450.4" y1="234" y2="234"></line><circle cx="450.4" cy="234" fill="#fcc209" r="7" stroke="#a57b00" stroke-width="1.5"></circle><text font-family="JetBrains Mono,monospace" font-size="11" x="465" y="238">.505</text>
+</g>
+</svg></div>
+<figcaption>Jung et al. (2026)，第 5 节及表 3；坐标轴经过截断以显示差异。调整后，完全一致与部分一致的配对没有差异（p = .576），三种子类型之间也没有差异。遗漏了人工评分员核心观点的理由，平均相似度反而最高。</figcaption></figure>
+<p>相似度能把明显不一致的配对与其他配对区分开，但也仅此而已。它无法区分完全一致和部分一致。在部分一致的配对中，遗漏人工核心观点的理由与保留核心观点的理由得分一样高。文本长度也有干扰：89% 的配对中大语言模型的理由更长，长度差越大，相似度越低，与含义无关。用德语写的理由比英语理由低约 0.12。作者也谨慎地指出，他们的编码同样不是绝对真值。他们的观点更为具体：仅凭相似度，不能支持“大语言模型的理由可以替代人工理由”这一说法。</p>
+<div class="callout reveal"><div class="label">共同的线索</div><p>每项研究都发现了一种看似质量证据、实则不是的性质：完全相同的运行、模型之间的一致、较高的总体相关、较高的相似度分数。在每种情况下，真正关键的检验都是与外部标准的比较，而且每次都需要作者有意识地设计这种比较。</p></div>
+<h2>大语言模型辅助测量的报告清单</h2>
+<p>以下建议来自这四篇论文。我把它们归纳在一起，方便在审稿或设计研究时使用。</p>
+<ol class="principles">
+<li><div><b>完整报告生成设置。</b><span>模型及版本、温度、top-p、top-k 和随机种子。Kim 发现，他的运行中实际生效的 top-k 是模型自带的默认值 20，而不是读者通常以为的库默认值 50。</span></div></li>
+<li><div><b>报告下游结果的分布。</b><span>重复生成，并报告分类或参数在不同运行之间如何变化。单次运行或多数投票都会掩盖这种变化。</span></div></li>
+<li><div><b>分别检验稳定性、一致性和效度。</b><span>传递性、模型间一致性以及与作答数据的吻合是不同的性质，三者都要报告。</span></div></li>
+<li><div><b>把判断与已校准的锚题联系起来，并说明其范围。</b><span>锚题让大语言模型的判断可以在既有量尺上解释，但锚题范围之外的估计需要单独提示。</span></div></li>
+<li><div><b>以作答数据和人工判断为标准。</b><span>可以用大语言模型的输出标记需要复查的题目，或为草稿题库排序。支撑分数解释的参数，仍应由现场试测和专家审查来确定。</span></div></li>
+</ol>
+<h2>对印度尼西亚测评工作的意义</h2>
+<p>在印度尼西亚建设题库和诊断测验的团队，面临着与这些论文相同的压力：新题多、预测数据少、专家时间有限。大语言模型可以减轻这部分负担，而这些研究指出了它适合发挥作用的地方：标记技能对应不明确的题目，在锚定充分的范围内给出临时的难度排序，以及起草评分理由、再由人工检查其核心判断。它不应取代专家 Q 矩阵、现场试测或人工评分员作为参照点。四项研究使用的都是英文题目，或英文和德文的评分理由，因此用于印尼语题目时需要另行取得证据。</p>
+<div class="tags"><span class="tag">AIME-Con 2026</span><span class="tag">大语言模型</span><span class="tag">Q 矩阵</span><span class="tag">题目难度</span><span class="tag">自动评分</span><span class="tag">效度</span></div>
+<section class="refs"><h2>参考文献</h2>
+<p class="ref">Bezirhan, U., &amp; von Davier, M. (2026). Anchored Bradley-Terry calibration using LLM comparative judgments. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 365–371). NCME. <a href="https://aclanthology.org/2026.aimecon-main.40/" rel="noopener" target="_blank">aclanthology.org/2026.aimecon-main.40</a></p>
+<p class="ref">Chrzan, M. L., &amp; Domingue, B. W. (2026). Consensus without accuracy: Investigating LLM’s ability to recover item difficulty using paired comparisons. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Works in Progress</em> (pp. 24–36). NCME. <a href="https://aclanthology.org/2026.aimecon-wip.4/" rel="noopener" target="_blank">aclanthology.org/2026.aimecon-wip.4</a></p>
+<p class="ref">Jung, J., Lu, M., Darici, D., &amp; Brüegge, E. (2026). Semantic similarity is not enough for comparing LLM and human rater rationales. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 466–471). NCME. <a href="https://aclanthology.org/2026.aimecon-main.52/" rel="noopener" target="_blank">aclanthology.org/2026.aimecon-main.52</a></p>
+<p class="ref">Kim, M. (2026). How reproducible are LLM-generated Q-matrices? Evidence from downstream classification. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 649–655). NCME. <a href="https://aclanthology.org/2026.aimecon-main.73/" rel="noopener" target="_blank">aclanthology.org/2026.aimecon-main.73</a></p>
+<p class="ref note">论文标题图片截取自各篇已发表 PDF 的第一页，仅用于识别与评述。图示中的所有数字均取自论文正文和表格；图表由我本人绘制。</p>
+</section>
+</div></article>
+<footer><span>© 2026 I Nyoman Indhi Wiradika</span><span>教育测评与心理测量</span></footer>
+<script>
+const progress=document.getElementById('progress');addEventListener('scroll',()=>{const d=document.documentElement;progress.style.width=(100*d.scrollTop/(d.scrollHeight-d.clientHeight))+'%'});
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));
+// Chrzan & Domingue (2026), Table 1
+const rows=[['frac20 [20]',.839,.591],['gilbert_meta_2 [20]',.899,.337],['gilbert_meta_7 [36]',.864,.398],['gilbert_meta_8 [29]',.902,.423],['gilbert_meta_102 [36]',.850,.449],['gilbert_meta_103 [29]',.917,.414],['gilbert_meta_104 [9]',.834,.250]];
+const g=document.getElementById('dumbbells'),ns='http://www.w3.org/2000/svg',x=v=>140+480*v;
+rows.forEach(([n,a,r],i)=>{const y=30+i*38;const mk=(t,at)=>{const e=document.createElementNS(ns,t);for(const k in at)e.setAttribute(k,at[k]);g.appendChild(e);return e};
+mk('text',{x:0,y:y+4,fill:'#032454'}).textContent=n;
+mk('line',{x1:x(r),x2:x(a),y1:y,y2:y,stroke:'#e7eaee','stroke-width':6,'stroke-linecap':'round'});
+mk('circle',{cx:x(r),cy:y,r:7.5,fill:'#fcc209',stroke:'#a57b00','stroke-width':1.5});
+mk('circle',{cx:x(a),cy:y,r:7.5,fill:'#032454'});
+mk('text',{x:x(r)-12,y:y+4,'text-anchor':'end','font-size':10.5,fill:'#4a5f7e','font-family':'JetBrains Mono,monospace'}).textContent=r.toFixed(2).replace(/^0/,'');
+});
+</script>
+<!--i18n:js--><script>document.querySelectorAll('.lang-switch a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('site-lang',a.dataset.lang)}catch(e){}})});</script><!--/i18n:js-->
+</body></html>
