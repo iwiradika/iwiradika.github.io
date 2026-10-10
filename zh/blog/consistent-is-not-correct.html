@@ -9,7 +9,7 @@
 <meta content="article" property="og:type"/>
 <meta content="I Nyoman Indhi Wiradika" property="og:site_name"/>
 <meta content="一致不等于正确：大语言模型作为测量工具" property="og:title"/>
-<meta content="AIME-Con 2026 关于大语言模型生成 Q 矩阵、题目难度和评分理由的启示。" property="og:description"/>
+<meta content="AIME-Con 2026 的四篇论文，以及为什么大语言模型稳定的答案看起来很像正确的答案。" property="og:description"/>
 <meta content="https://iwiradika.github.io/zh/blog/consistent-is-not-correct.html" property="og:url"/>
 <meta content="https://iwiradika.github.io/assets/consistent-is-not-correct-og.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
@@ -18,7 +18,7 @@
 <meta content="2026-10-10" property="article:published_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="一致不等于正确：大语言模型作为测量工具" name="twitter:title"/>
-<meta content="AIME-Con 2026 关于大语言模型生成 Q 矩阵、题目难度和评分理由的启示。" name="twitter:description"/>
+<meta content="AIME-Con 2026 的四篇论文，以及为什么大语言模型稳定的答案看起来很像正确的答案。" name="twitter:description"/>
 <meta content="https://iwiradika.github.io/assets/consistent-is-not-correct-og.png" name="twitter:image"/>
 <title>一致不等于正确 · I Nyoman Indhi Wiradika</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -72,24 +72,24 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 <article>
 <div class="meta">AIME-Con 2026 · 测量中的人工智能 · 研究笔记</div>
 <h1>一致不等于正确</h1>
-<p class="subtitle">NCME 人工智能与教育测量会议（AIME-Con）上的四篇论文，分别检验了大语言模型在 Q 矩阵、题目难度和评分理由上的表现。放在一起读，它们揭示了三个容易混淆的性质：稳定性、一致性和效度。</p>
-<div class="author"><img alt="I Nyoman Indhi Wiradika" src="../../uploads/photo-1776825797764.jpg"/><div class="info"><div class="name">I Nyoman Indhi Wiradika</div><div class="date">发布于 2026 年 10 月 10 日</div></div><div class="reading">阅读约 9 分钟</div></div>
+<p class="subtitle">我读了 AIME-Con 2026 的四篇论文，它们让大语言模型去做 Q 矩阵、题目难度和评分理由。读完后有一个想法挥之不去：一个稳定的答案，看起来可能很像一个正确的答案。</p>
+<div class="author"><img alt="I Nyoman Indhi Wiradika" src="../../uploads/photo-1776825797764.jpg"/><div class="info"><div class="name">I Nyoman Indhi Wiradika</div><div class="date">发布于 2026 年 10 月 10 日</div></div><div class="reading">阅读约 10 分钟</div></div>
 <div class="prose">
-<p class="lead">美国国家教育测量委员会（NCME）于 2026 年 10 月 5–7 日在匹兹堡举办了第二届人工智能与教育测量会议（AIME-Con）。会议论文集已在 ACL Anthology 公开，包括 77 篇完整论文和 60 篇在研论文。其中许多研究让语言模型生成某种内容，再把它放进测量模型，例如题目与技能的对应表、难度估计，或附带理由的评分。</p>
-<p>这种用法首先引出一个测量问题，它比速度或成本更优先。如果大语言模型的输出成为心理测量模型的输入，那么这个输出就是测量工具的一部分，需要接受与专家小组或人工评分员同等严格的审查。</p>
+<p class="lead">LinkedIn 上的一条动态把我带到了 NCME 第二届人工智能与教育测量会议（AIME-Con）的论文集。会议于 2026 年 10 月 5–7 日在匹兹堡举行，共有 77 篇完整论文和 60 篇在研论文，全部在 ACL Anthology 公开。其中很多研究让语言模型生成某样东西，再把它放进测量模型：每道题的技能对应、难度估计，或者带理由的评分。</p>
+<p>我是以编制测验的人的身份读这些论文的，所以我首先关心的不是速度或成本。如果大语言模型的输出成为心理测量模型的输入，那它就是测量工具的一部分。我不会不经检查就接受专家小组给出的 Q 矩阵，对模型给出的 Q 矩阵也应如此。</p>
 <div class="stat-strip reveal"><div class="stat"><b>61–88%</b><span>同一模型重新生成同一份 Q 矩阵后，分类发生变化的学生比例</span></div><div class="stat"><b>0.83–0.92</b><span>七个大语言模型在题目难度判断上的一致性</span></div><div class="stat"><b>0.25–0.59</b><span>它们的合并排序与 IRT 难度的相关</span></div></div>
-<h2>三项检验，回答三个不同的问题</h2>
-<p>把三个性质分开，这些论文就容易读懂了。一个程序如果重复执行能得到相同结果，它就是<strong>稳定</strong>的；如果不同模型或不同运行得出相同答案，它就表现出<strong>一致性</strong>；如果结果与我们信任的外部标准相吻合（例如专家 Q 矩阵、已校准的题目参数或人工评分员的推理），它才对我们的目的而言是<strong>有效</strong>的。前一项检验通过，后一项仍可能失败。</p>
+<h2>我现在会分开看的三项检验</h2>
+<p>把四篇论文放在一起读时，我好几次把三种不同的说法混在一起，于是把它们写了下来。一个程序如果再运行一次能得到相同结果，它就是<strong>稳定</strong>的；如果不同模型或不同运行得出同样的答案，它就表现出<strong>一致性</strong>；只有当结果与模型之外、我本来就信任的东西相吻合时——专家 Q 矩阵、已校准的题目参数、人工评分员的推理——它对我的目的而言才是<strong>有效</strong>的。陷阱在于，前两项感觉像是第三项的证据。其实不是。</p>
 <figure class="reveal"><div class="viz-label">图示 01 · 框架</div><div class="viz-title">通过一项检验，不代表通过下一项</div>
 <div class="checks">
 <div class="check"><div class="n">检验 1</div><b>稳定性</b><div class="q">同一模型、同一提示词，再运行一次，结果相同吗？</div><p>取决于解码设置，以及是否报告了不止一次运行。</p><div class="who">Kim (2026)</div></div>
 <div class="check"><div class="n">检验 2</div><b>一致性</b><div class="q">不同模型或不同运行，结果会趋同吗？</div><p>模型可能有相同的盲点，所以趋同并不是准确的证据。</p><div class="who">Chrzan &amp; Domingue (2026)</div></div>
 <div class="check validity"><div class="n">检验 3</div><b>效度</b><div class="q">结果是否符合我们信任的标准？</div><p>需要以作答数据、已校准的锚题或人工判断作为参照。</p><div class="who">全部四篇论文</div></div>
 </div>
-<figcaption>这是我对四篇论文的综合。稳定性和一致性是程序可用的前提，但两者都不能说明输出测量的正是我们想测的东西。</figcaption></figure>
-<h2>1. 同一模型重新生成 Q 矩阵，大多数学生的分类随之改变</h2>
+<figcaption>这是我对四篇论文的小结。一个程序要先通过前两项检验才可用，但只有第三项能告诉我，它测的是否是我想测的东西。</figcaption></figure>
+<h2>1. 同一个模型，同一个提示词，不同的学生</h2>
 <figure class="paper reveal"><img alt="Kim (2026) 论文标题部分：How Reproducible Are LLM-Generated Q-Matrices? Evidence from Downstream Classification" height="320" loading="lazy" src="../../assets/llm-measurement/kim-2026-title.png" width="1615"/><div class="paper-meta"><span>Kim (2026) · AIME-Con 完整论文，第 649–655 页</span><a href="https://aclanthology.org/2026.aimecon-main.73.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
-<p>Q 矩阵规定了每道题需要哪些技能。在认知诊断中，它决定作答如何转化为每个学生的掌握模式。近期有几项研究让大语言模型根据题目文本起草这个矩阵，然后只报告一次运行的结果，或多次运行的多数投票结果。</p>
+<p>如果只能给学生推荐其中一篇，我会选这一篇。Q 矩阵规定了每道题需要哪些技能；在认知诊断中，它决定学生的作答如何变成掌握模式。把它做对既慢又充满争论，所以近期有几项研究让大语言模型根据题目文本起草 Q 矩阵，也就不足为奇了。其中大多数只报告一次运行，或多次运行的多数投票结果。</p>
 <p>Minkwon Kim（哥伦比亚大学师范学院）使用了 TIMSS 2011 八年级数学的 23 道公开题、一份已发表的七属性专家 Q 矩阵，以及 741 名美国学生的真实作答。三个开放权重模型（Qwen2.5-7B、Mistral-7B、Phi-3-medium）分别在采样解码下重新生成完整矩阵十次，在贪心解码下再生成十次。每份矩阵都用 DINA 模型拟合，然后比较得到的学生分类。</p>
 <figure class="reveal"><div class="viz-label">图示 02 · 稳定性与效度</div><div class="viz-title">掌握模式发生变化的学生比例</div>
 <div class="legend"><span class="key">同一模型的两次采样运行</span><span class="key k-silver">同一模型的两次贪心运行</span><span class="key k-gold">贪心运行与专家 Q 矩阵比较</span></div>
@@ -106,8 +106,8 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 <div class="bar-row"><span>贪心：运行之间</span><div class="bar-track"><span class="zero">运行结果完全相同</span></div><span class="value">0%</span></div>
 <div class="bar-row"><span>贪心 vs 专家</span><div class="bar-track"><div class="bar-fill gold" style="width:73.1%"></div></div><span class="value">73%</span></div></div>
 <figcaption>Kim (2026)，表 1–2 及第 4.4 节。七个属性中任何一个改变，即视为掌握模式改变。贪心解码消除了运行之间的差异，但大多数掌握模式仍与专家 Q 矩阵得出的结果不同。</figcaption></figure>
-<p>同一模型在相同提示词和温度下的两次采样运行，给 61% 到 88% 的学生分配了不同的掌握模式。贪心解码让每次运行逐字节完全相同，说明这种不稳定来自采样。但它没有解决与专家矩阵的分歧：仍有 63% 到 76% 的掌握模式不同。</p>
-<p>常用的补救方法——跨运行多数投票——反而给出了最清楚的反例。投票得到的矩阵几乎每个单元格都与贪心矩阵相同，但那少数不同的单元格改变了一半甚至更多学生的诊断结果。</p>
+<p>同一模型在相同提示词和相同温度下的两次采样运行，给 61% 到 88% 的学生分配了不同的掌握模式，而学生本身没有任何变化。贪心解码让每次运行逐字节完全相同，说明这种不稳定来自采样。但稳定的答案仍然不是专家的答案：63% 到 76% 的掌握模式与基于专家 Q 矩阵的结果不同。</p>
+<p>我反复想起的是多数投票的结果。投票是应对不稳定运行的常用办法，投票得到的矩阵几乎每个单元格都与贪心矩阵相同。可那少数不同的单元格，改变了一半甚至更多学生的诊断。纸面上，两份矩阵看起来一样；对于拿到诊断结果的学生来说，并不一样。</p>
 <figure class="reveal"><div class="viz-label">图示 03 · 多数投票悖论</div><div class="viz-title">矩阵几乎相同，诊断却不同</div>
 <div class="paradox">
 <div class="px"><div class="m">Qwen2.5-7B</div><svg aria-hidden="true" class="ring" viewbox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="40" stroke="#e7eaee" stroke-width="12"></circle><circle cx="50" cy="50" fill="none" r="40" stroke="#032454" stroke-dasharray="248.8 251.3" stroke-width="12" transform="rotate(-90 50 50)"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#f3d9d7" stroke-width="10"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#b3261e" stroke-dasharray="72.4 150.8" stroke-width="10" transform="rotate(-90 50 50)"></circle></svg><div class="vs"><div><b>99%</b><span>单元格与贪心矩阵相同</span></div><div><b>48%</b><span>学生分类改变</span></div></div></div>
@@ -115,11 +115,11 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 <div class="px"><div class="m">Phi-3-medium</div><svg aria-hidden="true" class="ring" viewbox="0 0 100 100"><circle cx="50" cy="50" fill="none" r="40" stroke="#e7eaee" stroke-width="12"></circle><circle cx="50" cy="50" fill="none" r="40" stroke="#032454" stroke-dasharray="223.7 251.3" stroke-width="12" transform="rotate(-90 50 50)"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#f3d9d7" stroke-width="10"></circle><circle cx="50" cy="50" fill="none" r="24" stroke="#b3261e" stroke-dasharray="134.2 150.8" stroke-width="10" transform="rotate(-90 50 50)"></circle></svg><div class="vs"><div><b>89%</b><span>单元格与贪心矩阵相同</span></div><div><b>89%</b><span>学生分类改变</span></div></div></div>
 </div>
 <figcaption>Kim (2026)，表 2。外环：161 个题目–属性单元格中，多数投票矩阵与贪心矩阵相同的比例。内环：两份矩阵之间掌握模式不同的学生比例。</figcaption></figure>
-<p>Kim 也指出了一个合理的限制：专家 Q 矩阵并非绝对真值，独立的统计验证已经对其中一些单元格提出质疑。模型在这些有争议题目上的分歧略高（每题 0.847 对 0.659），但置换检验没有达到常规显著水平（<em>p</em> = .060）。更有建设性的解读是：重新生成可以作为筛查信号，让模型不稳定的题目值得专家复查。</p>
-<h2>2. 七个模型彼此之间的一致，高于它们与数据的一致</h2>
+<p>公平地说，Kim 在这一点上很谨慎。专家 Q 矩阵本身也不是绝对真值，此前的统计验证已经对其中一些单元格提出质疑。模型在这些有争议题目上的分歧略高（每题 0.847 对 0.659），但置换检验没有达到常规显著水平（<em>p</em> = .060）。我认为这是论文中最有用的部分：多次重新生成矩阵可以充当警示灯——当模型对某道题拿不定主意时，就该请专家看一看。</p>
+<h2>2. 七个模型达成了一致，主要是彼此之间</h2>
 <figure class="paper reveal"><img alt="Chrzan 与 Domingue (2026) 论文标题部分：Consensus without Accuracy" height="359" loading="lazy" src="../../assets/llm-measurement/chrzan-domingue-2026-title.png" width="1615"/><div class="paper-meta"><span>Chrzan &amp; Domingue (2026) · AIME-Con 在研论文，第 24–36 页</span><a href="https://aclanthology.org/2026.aimecon-wip.4.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
-<p>让大语言模型直接给出绝对难度分数，效果一向不佳。成对比较的问题更简单：这两道题哪一道更难？Michael Chrzan（马里兰大学）和 Benjamin Domingue（斯坦福大学）让来自 OpenAI 和 Google 的七个前沿模型，对 Item Response Warehouse 中七个数据集的 179 道题进行成对比较，这些题都有基于作答数据校准的 1PL 难度。研究用分层贝叶斯 Bradley–Terry 模型汇总判断，同时估计每个模型的区分度及其偏向先呈现题目的倾向。</p>
-<p>这些模型内部是一致的。大多数模型的三元传递性超过 95%，七个模型之间的一致性在每个数据集中都很高（Krippendorff’s α 为 0.834 至 0.917）。但合并后的排序与 IRT 难度只有中等程度的吻合（总体 Spearman ρ = 0.400），各数据集在 0.250 至 0.591 之间。</p>
+<p>这篇论文的标题比我说得更好。让大语言模型直接给出绝对难度分数，效果一向不佳，所以 Michael Chrzan（马里兰大学）和 Benjamin Domingue（斯坦福大学）问了一个更简单的问题：这两道题哪一道更难？来自 OpenAI 和 Google 的七个前沿模型，比较了 Item Response Warehouse 中七个数据集的题目，共 179 道，每道题都已有基于真实作答校准的难度。分层贝叶斯 Bradley–Terry 模型汇总了这些判断，并估计每个模型区分题目的敏锐程度，以及它偏向先出现题目的程度。</p>
+<p>从所有内部指标看，这些模型都显得可信。大多数模型的三元传递性超过 95%，七个模型之间的一致性在每个数据集中都很高（Krippendorff’s α 为 0.834 至 0.917）。但它们的合并排序与 IRT 难度只有中等程度的吻合（总体 Spearman ρ = 0.400），各数据集在 0.250 至 0.591 之间。</p>
 <figure class="reveal"><div class="viz-label">图示 04 · 共识与准确</div><div class="viz-title">模型之间高度一致，与 IRT 难度中度吻合</div>
 <div class="legend"><span class="key">七个大语言模型之间的一致性（Krippendorff’s α）</span><span class="key k-gold">与 1PL 难度的吻合（Spearman ρ）</span></div>
 <div class="chart-scroll"><svg aria-label="哑铃图。在七个数据集中，模型间一致性为 0.83 至 0.92，而与 IRT 难度的相关为 0.25 至 0.59。" class="svg-chart" role="img" viewbox="0 0 640 330">
@@ -129,11 +129,11 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 <g font-size="12" id="dumbbells"></g>
 </svg></div>
 <figcaption>Chrzan &amp; Domingue (2026)，表 1。frac20 是分数测验，另外六个数据集是读写测评。方括号内为题目数。gilbert_meta_2 和仅含九道题的 gilbert_meta_104 的相关在统计上与零无显著差异。</figcaption></figure>
-<p>作者直接说明了原因：模型可能都抓住了显眼的文本特征、课程内容或解题复杂度，却忽略了真正让题目对作答者变难的因素。增加更多相似的评判者，只会让共同的排序更清晰，却无法纠正共同的构念偏差。评判者参数同样重要：各模型的区分度差异很大，有几个模型的位置偏差大到 94% 区间不包含零。作者的建议是给大语言模型的排序一个有限的角色：用于题目审查或粗略组卷的临时排序，而不是最终的校准参数。</p>
-<h2>3. 锚题有帮助，但只在其范围之内</h2>
+<p>这让我觉得很熟悉。把五位受过相同训练的评审放进一个房间，他们会彼此同意，却仍可能忽略一道题对真实课堂里一个十五岁学生来说难在哪里。作者对模型的看法大致相同：模型可能都抓住了文本中显眼的特征、课程主题或解题步骤数，却忽略了真正让作答者出错的东西。再加入第六位相似的评审，只会让共同的排序更清晰，却无法弥补共同的盲点。评判者参数同样重要：各模型的区分度差异很大，有几个模型的位置偏差大到 94% 区间不包含零。作者给大语言模型排序的定位很朴素：用于题目审查或粗略组卷的临时顺序，而不是最终的校准参数。我认为这个定位是对的。</p>
+<h2>3. 锚题有帮助，直到锚题用完</h2>
 <figure class="paper reveal"><img alt="Bezirhan 与 von Davier (2026) 论文标题部分：Anchored Bradley-Terry Calibration Using LLM Comparative Judgments" height="283" loading="lazy" src="../../assets/llm-measurement/bezirhan-von-davier-2026-title.png" width="1615"/><div class="paper-meta"><span>Bezirhan &amp; von Davier (2026) · AIME-Con 完整论文，第 365–371 页</span><a href="https://aclanthology.org/2026.aimecon-main.40.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
-<p>Ummugul Bezirhan 和 Matthias von Davier（波士顿学院 TIMSS &amp; PIRLS 国际研究中心）采取了其他研究所建议的设计。他们不只让新题彼此比较，而是让每道新题与已校准的锚题比较，并在 Bradley–Terry 模型中固定锚题的已知难度，从而把新题放到既有量尺上。</p>
-<p>他们以 80 道 TIMSS 四年级数学趋势题作为锚题，以 101 道 TIMSS 2023 新题作为目标，并把 2023 年的正式难度留作验证、不参与估计。一个小型开放模型（Qwen3-8B，确定性解码）以三种不同提示词充当三位评判者，共产生 11,607 次成对判断。在全部 101 道题上，估计值与正式难度的相关为 r = .484。作者提醒这个数字被高估了，分组结果说明了原因。</p>
+<p>这是四篇中最让人看到希望的一篇，也是最让我学会如何读相关系数的一篇。Ummugul Bezirhan 和 Matthias von Davier（波士顿学院 TIMSS &amp; PIRLS 国际研究中心）做了其他论文所建议的事：不只让新题彼此比较，而是让每道新题与已校准的锚题比较，并在 Bradley–Terry 模型中固定锚题的已知难度。新题因此被放到了一个既有的量尺上。</p>
+<p>锚题是 80 道 TIMSS 四年级数学趋势题，目标是 101 道 TIMSS 2023 新题，其正式难度被留作验证。一个小型开放模型（Qwen3-8B，确定性解码）以三种不同提示词扮演三位评判者，共做出 11,607 次成对判断。在全部 101 道题上，估计值与正式难度的相关为 r = .484。换作我，可能就此打住，称之为中等。作者没有，分组结果说明了原因。</p>
 <figure class="reveal"><div class="viz-label">图示 05 · 内插与外推</div><div class="viz-title">新题相对于锚题的位置</div>
 <div class="scale-wrap"><div class="chart-scroll"><svg aria-label="难度量尺。锚题覆盖 −1.25 至 1.59 logit；新题范围为 −2.98 至 1.80，因此有 31 道新题低于锚题范围。" class="svg-chart" role="img" viewbox="0 0 640 128">
 <g fill="#4a5f7e" font-size="11"><line stroke="#032454" x1="40" x2="620" y1="96" y2="96"></line>
@@ -152,10 +152,10 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 <div class="r-axis"><span></span><div><span>−0.25</span><span>0</span><span>0.25</span><span>0.50</span><span>0.75</span><span>1.0</span></div><span></span></div>
 <div class="mini-stats"><div><b>54.5%</b><span>题目被分入正确的难度三分位（随机水平：33%）</span></div><div><b>90.1%</b><span>题目被分入正确或相邻的三分位</span></div><div><b>66.8%</b><span>题目对的顺序判断正确</span></div></div>
 <figcaption>Bezirhan &amp; von Davier (2026)，方法、结果及表 1。难度范围采用作者报告的 TIMSS logit 量尺。量尺示意图是我根据这些范围绘制的。</figcaption></figure>
-<p>在锚题范围内，相关为中等（r = .372）；低于该范围时，几乎没有恢复出任何信息。作者的结论是：该方法能内插但不能外推，而且比较网络的结构可能与评判模型的选择同样重要。另有两个细节值得注意：模型自报的置信度几乎每次都是 0.85，因此不含信息；它给出的“轻微”或“中等”差异标签反映的是它自己的确定程度，而不是真实难度差距的大小（r = −.02）。</p>
-<h2>4. 措辞相似不等于判断相同</h2>
+<p>在锚题范围内，相关为 r = .372；低于该范围时，该方法几乎什么也没有恢复出来。总体的 .484 部分来自两组之间的距离，而不是各组内部的精确度。作者的结论是：该方法能内插但不能外推，而且比较网络的设计可能与评判模型的选择同样重要。我喜欢这个结果，因为它坦白地说明了方法的边界。在一个新题库里，我最担心的往往正是特别容易和特别难的题，而那恰恰是锚题用完的地方。还有两个小细节让我印象深刻：模型几乎每次都报告 0.85 的置信度，所以它的置信度没有提供任何信息；它给出的“轻微”或“中等”差异标签跟随的是它自己的确定程度，而不是真实的难度差距（r = −.02）。</p>
+<h2>4. 措辞相似，判断不同</h2>
 <figure class="paper reveal"><img alt="Jung、Lu、Darici 与 Brüegge (2026) 论文标题部分：Semantic Similarity is Not Enough for Comparing LLM and Human Rater Rationales" height="311" loading="lazy" src="../../assets/llm-measurement/jung-et-al-2026-title.png" width="1615"/><div class="paper-meta"><span>Jung, Lu, Darici &amp; Brüegge (2026) · AIME-Con 完整论文，第 466–471 页</span><a href="https://aclanthology.org/2026.aimecon-main.52.pdf" rel="noopener" target="_blank">阅读论文 ↗</a></div></figure>
-<p>在形成性评价中，分数背后的理由就是反馈。一些研究用基于嵌入向量的余弦相似度来比较大语言模型与人工的评分理由。Julie Jung 及其同事（哈佛大学教育研究生院，与德国的临床合作伙伴）检验了这个数字是否反映了真正重要的东西：大语言模型的理由是否保留了人工评分员的核心判断？</p>
+<p>作为老师，这一篇离我的日常最近。在形成性评价中，分数背后的理由就是学生读到的反馈。一些研究用基于嵌入向量的余弦相似度来比较大语言模型与人工的评分理由。Julie Jung 及其同事（哈佛大学教育研究生院，与德国的临床合作伙伴）追问：这个数字是否抓住了学生真正在意的东西——大语言模型的理由是否保留了人工评分员的核心观点？</p>
 <p>数据来自一项临床推理测评：21 名医学生、由 AI 模拟的病人问诊、一位人工评分员，以及 27 种 ChatGPT-5.4 配置（模型规模、推理强度和提示词类型），共得到 5,790 对评分理由。一个经过校准的编码流程把每一对标注为完全一致、部分一致或不一致，并把部分一致再细分为三种子类型。</p>
 <figure class="reveal"><div class="viz-label">图示 06 · 相似度与含义</div><div class="viz-title">按一致性编码分组的平均余弦相似度</div>
 <div class="chart-scroll"><svg aria-label="平均相似度点图。完全一致 0.532，部分一致 0.525，不一致 0.456。部分一致内部：遗漏核心观点 0.534，方向相反的限定 0.512，扩展核心观点 0.505。" class="svg-chart" role="img" viewbox="0 0 640 300">
@@ -176,19 +176,20 @@ footer{max-width:1100px;margin:auto;padding:2rem;border-top:1px solid var(--bord
 </g>
 </svg></div>
 <figcaption>Jung et al. (2026)，第 5 节及表 3；坐标轴经过截断以显示差异。调整后，完全一致与部分一致的配对没有差异（p = .576），三种子类型之间也没有差异。遗漏了人工评分员核心观点的理由，平均相似度反而最高。</figcaption></figure>
-<p>相似度能把明显不一致的配对与其他配对区分开，但也仅此而已。它无法区分完全一致和部分一致。在部分一致的配对中，遗漏人工核心观点的理由与保留核心观点的理由得分一样高。文本长度也有干扰：89% 的配对中大语言模型的理由更长，长度差越大，相似度越低，与含义无关。用德语写的理由比英语理由低约 0.12。作者也谨慎地指出，他们的编码同样不是绝对真值。他们的观点更为具体：仅凭相似度，不能支持“大语言模型的理由可以替代人工理由”这一说法。</p>
-<div class="callout reveal"><div class="label">共同的线索</div><p>每项研究都发现了一种看似质量证据、实则不是的性质：完全相同的运行、模型之间的一致、较高的总体相关、较高的相似度分数。在每种情况下，真正关键的检验都是与外部标准的比较，而且每次都需要作者有意识地设计这种比较。</p></div>
-<h2>大语言模型辅助测量的报告清单</h2>
-<p>以下建议来自这四篇论文。我把它们归纳在一起，方便在审稿或设计研究时使用。</p>
+<p>相似度只能挑出明显不一致的配对，仅此而已。它无法区分完全一致和部分一致。在部分一致的配对中，遗漏了人工核心观点的理由，与保留核心观点的理由得分一样高——而这恰恰是学生最需要的部分。文本长度也有干扰：89% 的配对中大语言模型的理由更长，长度差越大，相似度越低，与含义无关。用德语写的理由比英语理由低约 0.12，这让我想知道印尼语会怎样。作者自己也承认，他们的编码不是绝对真值。他们的结论更为具体，我也同意：仅凭相似度，无法说明大语言模型的理由可以代替人工的理由。</p>
+<div class="callout reveal"><div class="label">我带走的东西</div><p>在每篇论文里，都有某样看起来像质量的东西，结果并不是：完全相同的运行、模型之间的一致、较高的总体相关、较高的相似度分数。每一次，真正关键的检验都是把模型与它之外的东西相比较，而且需要有人有意地设计这种比较。这本是普通的测量工作。AI 让它更容易被跳过，所以我认为它在今天更加重要。</p></div>
+<h2>相信大语言模型输出之前，我会问的五个问题</h2>
+<p>我审稿，也指导学生的课题。这些论文改变了我在两种场合遇到大语言模型输出时会问的问题。问题来自四篇论文，措辞是我自己的。</p>
 <ol class="principles">
-<li><div><b>完整报告生成设置。</b><span>模型及版本、温度、top-p、top-k 和随机种子。Kim 发现，他的运行中实际生效的 top-k 是模型自带的默认值 20，而不是读者通常以为的库默认值 50。</span></div></li>
-<li><div><b>报告下游结果的分布。</b><span>重复生成，并报告分类或参数在不同运行之间如何变化。单次运行或多数投票都会掩盖这种变化。</span></div></li>
-<li><div><b>分别检验稳定性、一致性和效度。</b><span>传递性、模型间一致性以及与作答数据的吻合是不同的性质，三者都要报告。</span></div></li>
-<li><div><b>把判断与已校准的锚题联系起来，并说明其范围。</b><span>锚题让大语言模型的判断可以在既有量尺上解释，但锚题范围之外的估计需要单独提示。</span></div></li>
-<li><div><b>以作答数据和人工判断为标准。</b><span>可以用大语言模型的输出标记需要复查的题目，或为草稿题库排序。支撑分数解释的参数，仍应由现场试测和专家审查来确定。</span></div></li>
+<li><div><b>能看到完整的生成设置吗？</b><span>模型及版本、温度、top-p、top-k、随机种子。Kim 发现，实际生效的 top-k 是模型自带的默认值 20，而不是读者通常以为的库默认值 50。这类小设置很容易被忽略，也很难复现。</span></div></li>
+<li><div><b>第二次运行会怎样？</b><span>我想看到分类或参数在多次运行之间如何变化，而不是一次运行或一个掩盖了离散程度的多数投票结果。</span></div></li>
+<li><div><b>三项检验中，实际做了哪几项？</b><span>传递性、模型间一致性和与作答数据的吻合是不同的东西。只报告前两项的研究，还没有证明效度。</span></div></li>
+<li><div><b>锚题在哪里，范围到哪里为止？</b><span>锚题让我能在可解释的量尺上理解大语言模型的判断。锚题范围之外的估计需要单独提示。</span></div></li>
+<li><div><b>标准是什么？</b><span>作答数据和人工判断应当仍是参照。我愿意用大语言模型的输出来标记题目或给草稿题库排序，但支撑分数解释的参数，仍应由现场试测和专家审查来确定。</span></div></li>
 </ol>
-<h2>对印度尼西亚测评工作的意义</h2>
-<p>在印度尼西亚建设题库和诊断测验的团队，面临着与这些论文相同的压力：新题多、预测数据少、专家时间有限。大语言模型可以减轻这部分负担，而这些研究指出了它适合发挥作用的地方：标记技能对应不明确的题目，在锚定充分的范围内给出临时的难度排序，以及起草评分理由、再由人工检查其核心判断。它不应取代专家 Q 矩阵、现场试测或人工评分员作为参照点。四项研究使用的都是英文题目，或英文和德文的评分理由，因此用于印尼语题目时需要另行取得证据。</p>
+<h2>这对我们在印尼的工作意味着什么</h2>
+<p>在印尼建设题库和诊断测验的我们，都熟悉这些论文描述的压力：新题很多，预测数据很少，专家时间永远不够。我理解大语言模型为什么诱人，也认为它们能帮上忙。读完这四篇论文，我自己的界线相当清楚：我会用大语言模型来标记技能对应看起来模糊的题目，在锚定充分的范围内给出临时的难度顺序，并起草评分理由、再由人检查其核心观点；但我不会让它取代专家 Q 矩阵、现场试测或人工评分员作为参照。四项研究使用的都是英文题目，或英文和德文的评分理由。在把这些方法用于印尼语题目之前，我们需要自己的证据。我希望看到有人在印尼做这项研究——也许应该由我们来做。</p>
+<p>一致是一个好的开始，但一致不等于正确。</p>
 <div class="tags"><span class="tag">AIME-Con 2026</span><span class="tag">大语言模型</span><span class="tag">Q 矩阵</span><span class="tag">题目难度</span><span class="tag">自动评分</span><span class="tag">效度</span></div>
 <section class="refs"><h2>参考文献</h2>
 <p class="ref">Bezirhan, U., &amp; von Davier, M. (2026). Anchored Bradley-Terry calibration using LLM comparative judgments. In <em>Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Full Papers</em> (pp. 365–371). NCME. <a href="https://aclanthology.org/2026.aimecon-main.40/" rel="noopener" target="_blank">aclanthology.org/2026.aimecon-main.40</a></p>
