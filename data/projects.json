@@ -1,0 +1,15 @@
+{
+  "research": [
+    { "year": 2025, "title": "CDM Integration in Web-Based Assessment for Measuring CT-PCK with Tri Hita Karana Philosophy", "role": "Principal Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 5M" },
+    { "year": 2024, "title": "Development of Online Digital Literacy Instrument for Informatics Education Students", "role": "Principal Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 7.5M" },
+    { "year": 2025, "title": "Backward Chaining-Based Digital Test Database for Critical Thinking in Differentiated Learning", "role": "Co-Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 17.5M" },
+    { "year": 2025, "title": "Android Decision Support System for Digital Bank Recommendations using MAGIQ-MARCOS Method", "role": "Co-Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 5M" },
+    { "year": 2025, "title": "LLM-Based Early Detection System for Children's Scientific Reading and Writing Ability", "role": "Co-Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 5M" },
+    { "year": 2024, "title": "Android Tourism Destination DSS for Bali using MAGIQ-ARAS Method", "role": "Co-Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 7.5M" }
+  ],
+  "community": [
+    { "year": 2026, "title": "\"SIBONAR\" — Bondres Art Performance for HIV/AIDS-Drug Prevention & Youth Organization Capacity Building", "role": "Principal Investigator", "scheme": "National Competitive PKM · BIMA Source", "funding": "" },
+    { "year": 2025, "title": "Optimization of Maritime Tourism Village toward Safe Community Tourism based on Tri Hita Karana via Digital Media", "role": "Co-Investigator", "scheme": "National Competitive PKM · BIMA Source", "funding": "Rp 41.2M" },
+    { "year": 2024, "title": "Differentiated Learning Planning Assistance Based on Literacy & Numeracy Assessment Results in Panji Anom and Selat Villages", "role": "Principal Investigator", "scheme": "DIPA Institutional · Internal Source", "funding": "Rp 10M" }
+  ]
+}

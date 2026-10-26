@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Nyoman Indhi Wiradika · Educational Assessment Researcher</title>
 <meta name="description" content="I Nyoman Indhi Wiradika is a researcher and lecturer at Universitas Pendidikan Ganesha working on educational assessment, learning analytics, cognitive diagnostic models and computational psychometrics.">
+<meta name="author" content="I Nyoman Indhi Wiradika">
 <link rel="canonical" href="https://iwiradika.github.io/">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="I Nyoman Indhi Wiradika">
@@ -22,367 +23,40 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#f9fafb">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0f2240">
 
-<script type="application/json" id="tweaks-data">
-/*EDITMODE-BEGIN*/{
-  "accentColor": "#032454",
-  "accentGold": "#fcc209",
-  "bgColor": "#f9fafb",
-  "textColor": "#032454",
-  "fontHeading": "Source Serif 4",
-  "photoShape": "circle"
-}/*EDITMODE-END*/
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "I Nyoman Indhi Wiradika",
+  "url": "https://iwiradika.github.io/",
+  "image": "https://iwiradika.github.io/uploads/photo-1776825797764.jpg",
+  "jobTitle": "Lecturer",
+  "email": "mailto:iwiradika@undiksha.ac.id",
+  "worksFor": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universitas Pendidikan Ganesha",
+    "department": { "@type": "Organization", "name": "Informatics Education" }
+  },
+  "knowsAbout": ["Educational assessment", "Learning analytics", "Computational psychometrics", "Cognitive diagnostic models", "Informatics education"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=54Ggga0AAAAJ",
+    "https://sinta.kemdiktisaintek.go.id/authors/profile/6806385",
+    "https://github.com/indhiwiradika-edu",
+    "https://assevlabs.web.app"
+  ]
+}
 </script>
 
-<style>
-  :root {
-    --navy:   #032454;
-    --gold:   #fcc209;
-    --gold-ink: #8a6a00; /* gold for text: 4.8:1 on --bg, --gold alone is 1.6:1 */
-    --silver: #e7eaee;
-    --accent: #032454;
-    --accent-light: #e7eaee;
-    --bg: #f9fafb;
-    --text: #1d2430;   /* body copy: near-black reads easier than navy */
-    --text-muted: #556070;
-    --border: #dde1e8;
-    --white: #ffffff;
-    --font-heading: 'Source Serif 4', Georgia, serif;
-    --font-body: 'Inter', system-ui, sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; font-size: 16px; }
-
-  section[id] { scroll-margin-top: 70px; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-weight: 400;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ─── NAV ─────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(249,250,251,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner {
-    max-width: 1080px; margin: 0 auto;
-    padding: 0 2rem;
-    display: flex; align-items: center; gap: 1.5rem;
-    height: 58px;
-  }
-  .nav-logo {
-    font-family: var(--font-heading);
-    font-size: 1.1rem; font-weight: 600;
-    color: var(--text); text-decoration: none;
-    letter-spacing: -0.01em;
-    flex-shrink: 0; margin-right: auto;
-  }
-  .nav-links {
-    display: flex; gap: 1.5rem; list-style: none;
-  }
-  .nav-links a {
-    font-size: 0.8rem; font-weight: 500;
-    color: var(--text-muted); text-decoration: none;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    white-space: nowrap;
-    transition: color 0.2s;
-  }
-  .lang-switch { flex-shrink: 0; }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-links a.active { color: var(--navy); }
-
-  /* hamburger */
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-left: -0.5rem; }
-  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.3s; }
-
-  /* ─── HERO / ABOUT ────────────────────────── */
-  #about {
-    max-width: 900px; margin: 0 auto;
-    padding: 120px 2rem 80px;
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 4rem; align-items: start;
-  }
-
-  .photo-wrap {
-    position: sticky; top: 80px;
-  }
-  .photo-wrap img {
-    width: 180px; height: 180px;
-    object-fit: cover; object-position: center top;
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    display: block;
-    transition: border-radius 0.4s;
-  }
-  .photo-wrap img.square { border-radius: 8px; }
-
-  .about-text h1 {
-    font-family: var(--font-heading);
-    font-size: 2.4rem; font-weight: 700;
-    line-height: 1.15; letter-spacing: -0.015em;
-    color: var(--navy);
-    margin-bottom: 0.3rem;
-  }
-  .about-text .role {
-    font-size: 0.9rem; font-weight: 600;
-    color: var(--gold-ink);
-    letter-spacing: 0.05em; text-transform: uppercase;
-    margin-bottom: 0.2rem;
-  }
-  .about-text .affil {
-    font-size: 0.88rem; color: var(--text-muted);
-    margin-bottom: 1.6rem;
-  }
-  .about-text p {
-    font-size: 0.97rem; color: var(--text);
-    margin-bottom: 1rem;
-    text-wrap: pretty;
-  }
-
-  .tags {
-    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem;
-  }
-  .tag {
-    background: var(--accent-light); color: var(--accent);
-    font-size: 0.78rem; font-weight: 500;
-    padding: 0.28rem 0.75rem; border-radius: 100px;
-    letter-spacing: 0.02em;
-  }
-
-  .stats-row {
-    display: flex; gap: 2rem; margin-top: 1.8rem;
-    padding-top: 1.6rem; border-top: 1px solid var(--border);
-  }
-  .stat-item { text-align: left; }
-  .stat-num {
-    font-family: var(--font-heading);
-    font-size: 1.8rem; font-weight: 700;
-    color: var(--accent); line-height: 1;
-    font-variant-numeric: lining-nums tabular-nums;
-  }
-  .stat-label {
-    font-size: 0.72rem; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.07em;
-    margin-top: 0.2rem;
-  }
-
-  .contact-links {
-    display: flex; gap: 1rem; margin-top: 1.4rem; flex-wrap: wrap;
-  }
-  .contact-links a {
-    font-size: 0.82rem; font-weight: 500; color: var(--text-muted);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem;
-    transition: color 0.2s;
-  }
-  .contact-links a:hover { color: var(--accent); }
-  .contact-links svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-  /* ─── SECTION SHARED ──────────────────────── */
-  section:not(#about) {
-    max-width: 900px; margin: 0 auto;
-    padding: 60px 2rem;
-    border-top: 1px solid var(--border);
-  }
-  .section-header {
-    display: flex; align-items: baseline; gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .section-header h2 {
-    font-family: var(--font-heading);
-    font-size: 1.6rem; font-weight: 600;
-    letter-spacing: -0.01em; color: var(--navy);
-  }
-  .section-header .en {
-    font-size: 0.78rem; color: var(--text-muted);
-    font-style: italic; font-family: var(--font-heading);
-  }
-
-  /* ─── PUBLICATIONS ────────────────────────── */
-  .pub-list { display: flex; flex-direction: column; gap: 0; }
-  .pub-item {
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--border);
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 1rem; align-items: start;
-    transition: background 0.15s;
-  }
-  .pub-item:first-child { border-top: 1px solid var(--border); }
-  .pub-title {
-    font-size: 0.93rem; font-weight: 500; color: var(--text);
-    line-height: 1.5; margin-bottom: 0.3rem;
-    text-decoration: none;
-  }
-  a.pub-title { color: var(--navy); }
-  .pub-meta {
-    font-size: 0.78rem; color: var(--text-muted);
-    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
-  }
-  .pub-badge {
-    padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem;
-    font-weight: 600; letter-spacing: 0.04em;
-  }
-  .q2 { background: #032454; color: #fcc209; }
-  .q4 { background: #e7eaee; color: #032454; }
-  .pub-year {
-    font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .group-label {
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--gold-ink); margin-bottom: 0.8rem;
-  }
-
-  /* ─── PROJECTS ────────────────────────────── */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem;
-  }
-  .project-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 8px; padding: 1.4rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    cursor: default;
-  }
-  .project-card:hover {
-    border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  }
-  .project-tag {
-    font-size: 0.7rem; font-weight: 600;
-    color: var(--accent); letter-spacing: 0.07em;
-    text-transform: uppercase; margin-bottom: 0.5rem;
-  }
-  .project-title {
-    font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-  .project-desc {
-    font-size: 0.82rem; color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* ─── EXPERIENCE ──────────────────────────── */
-  .exp-list { display: flex; flex-direction: column; gap: 1.8rem; }
-  .exp-item { display: grid; grid-template-columns: 120px 1fr; gap: 2rem; }
-  .exp-period {
-    font-size: 0.78rem; color: var(--text-muted);
-    font-variant-numeric: tabular-nums;
-    padding-top: 0.15rem;
-  }
-  .exp-role { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
-  .exp-place { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.4rem; }
-  .exp-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
-
-  /* ─── BLOG ────────────────────────────────── */
-  .blog-list { display: flex; flex-direction: column; gap: 0; }
-  .blog-item {
-    padding: 1.1rem 0; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-  }
-  .blog-item:first-child { border-top: 1px solid var(--border); }
-  .blog-title { font-size: 0.93rem; font-weight: 500; color: var(--navy); }
-  .blog-date { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-
-  /* ─── CONTACT ─────────────────────────────── */
-  #contact .contact-block {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-  }
-  #contact p { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
-  .contact-item {
-    display: flex; gap: 0.75rem; align-items: center;
-    margin-bottom: 0.9rem; font-size: 0.88rem;
-  }
-  .contact-item svg { flex-shrink: 0; width: 16px; height: 16px; color: var(--accent); }
-  .contact-item a { color: var(--navy); text-decoration: none; }
-
-  /* ─── FOOTER ──────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--border);
-    max-width: 900px; margin: 0 auto;
-    padding: 2rem;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.78rem; color: var(--text-muted);
-  }
-
-  /* ─── TWEAKS PANEL ────────────────────────── */
-  #tweaks-panel {
-    display: none; position: fixed; bottom: 24px; right: 24px; z-index: 999;
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.2rem 1.4rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12); width: 240px;
-    font-family: var(--font-body);
-  }
-  #tweaks-panel.visible { display: block; }
-  #tweaks-panel h3 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; color: var(--text); }
-  .tweak-row { margin-bottom: 0.9rem; }
-  .tweak-row label { font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem; }
-  .tweak-row input[type=color] { width: 100%; height: 30px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; padding: 1px; }
-  .tweak-row select { width: 100%; padding: 0.3rem 0.5rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: 4px; background: var(--white); font-family: var(--font-body); }
-
-  /* ─── NAV COLLAPSE (7 links + switcher need ~1080px) ─ */
-  @media (max-width: 1080px) {
-    .nav-links {
-      display: flex; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0;
-      background: var(--bg); border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem;
-      box-shadow: 0 12px 24px rgba(3,36,84,0.06);
-      opacity: 0; visibility: hidden; transform: translateY(-10px);
-      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1), visibility 0.25s;
-    }
-    .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
-    .nav-toggle { display: block; }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  }
-
-  /* Stats: hero text column gets narrow below 900px — keep each label on one line */
-  .stat-label { white-space: nowrap; }
-  @media (max-width: 900px) {
-    .stats-row { gap: 0.75rem; justify-content: space-between; }
-    .stat-label { font-size: 0.64rem; letter-spacing: 0.05em; }
-  }
-
-  /* ─── MOBILE ──────────────────────────────── */
-  @media (max-width: 640px) {
-    .nav-inner { padding: 0 1rem; gap: 1rem; }
-    .nav-links { padding: 1rem; }
-    #about { grid-template-columns: 1fr; gap: 1.5rem; padding: 90px 1rem 60px; }
-    section:not(#about) { padding: 48px 1rem; }
-    footer { padding: 2rem 1rem; }
-    .photo-wrap { position: relative; top: auto; width: 186px; margin: 0 auto; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.2rem; }
-    #contact .contact-block { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-  @media (max-width: 340px) {
-    .nav-logo span { display: none; }
-  }
-
-  /* ─── INTERACTION — still by design ───────── */
-  .nav-links a.active { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
-  a.pub-title:hover, a.blog-item:hover .blog-title,
-  .contact-links a:hover, .contact-item a:hover {
-    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
-
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script>
+  document.documentElement.classList.add('js');
+  try { if (localStorage.getItem('site-contrast') === 'high') document.documentElement.dataset.contrast = 'high'; } catch (e) {}
+</script>
 <!--i18n:head--><style id="lang-switch-css">
 .lang-switch{display:inline-flex;flex-shrink:0;align-items:center;gap:2px;border:1px solid #dde1e8;border-radius:999px;padding:2px;background:#fff;font:600 .72rem 'Inter',system-ui,sans-serif;line-height:1}
 .lang-switch a{display:block;padding:.38rem .6rem;border-radius:999px;color:#4a5f7e;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
@@ -396,443 +70,434 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav">
-  <div class="nav-inner">
-    <a href="#about" class="nav-logo" style="display:flex;align-items:center;gap:0.65rem;text-decoration:none;">
-    <svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line class="icc-axis" x1="6" y1="1" x2="6" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
-      <line class="icc-axis" x1="6" y1="27" x2="39" y2="27" stroke="#032454" stroke-width="1.4" stroke-linecap="round"/>
-      <line class="icc-asymptote" x1="6" y1="4" x2="39" y2="4" stroke="#e7eaee" stroke-width="1" stroke-dasharray="2.5 2"/>
-      <path class="icc-curve" d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4"
-            stroke="#fcc209" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle class="icc-dot" cx="18" cy="14.5" r="2" fill="#032454"/>
-      <line class="icc-drop" x1="18" y1="14.5" x2="18" y2="27" stroke="#032454" stroke-width="0.9" stroke-dasharray="2 1.5"/>
-    </svg>
-    <span style="font-family:'Source Serif 4',Georgia,serif;font-size:1.1rem;font-weight:600;color:#032454;letter-spacing:-0.01em;">Wiradika</span>
-  </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ═══ SIDEBAR ═══════════════════════════════════════ -->
+<aside class="side" id="side">
+  <div class="side__top">
+    <a href="#about" class="brand" aria-label="Wiradika, back to top">
+      <svg class="brand__mark" width="40" height="30" viewBox="0 0 40 30" fill="none" aria-hidden="true">
+        <line x1="6" y1="1" x2="6" y2="27" stroke="currentColor" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="27" x2="39" y2="27" stroke="currentColor" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="6" y1="4" x2="39" y2="4" stroke="currentColor" stroke-opacity=".25" stroke-width="1" stroke-dasharray="2.5 2"/>
+        <path d="M6 25 C12 25 14 22 18 17 C22 12 24 5 30 4 C33 4 36 4 39 4" stroke="var(--brass)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="14.5" r="2" fill="currentColor"/>
+        <line x1="18" y1="14.5" x2="18" y2="27" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 1.5"/>
+      </svg>
+      <span class="brand__text">
+        <span class="brand__name">Wiradika</span>
+        <span class="brand__role">Educational Assessment</span>
+      </span>
+    </a>
     <!--i18n:sw--><div class="lang-switch" role="navigation" aria-label="Language"><a href="index.html" hreflang="en" lang="en" title="English" aria-current="true" data-lang="en">EN</a><a href="id/index.html" hreflang="id" lang="id" title="Bahasa Indonesia" data-lang="id">ID</a><a href="zh/index.html" hreflang="zh-Hans" lang="zh-Hans" title="中文" data-lang="zh">中文</a></div><!--/i18n:sw-->
-<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+<button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-controls="side-panel" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
-</nav>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="photo-wrap">
-    <img src="uploads/photo-1776825797764.jpg" id="profile-photo" alt="I Nyoman Indhi Wiradika">
+  <div class="side__panel" id="side-panel">
+    <nav class="side__nav" aria-label="Sections">
+      <ul>
+        <li><a href="#about">Home</a></li>
+        <li><a href="#bio">Bio</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#lab">Lab</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="side__foot">
+      <div class="side__icons">
+        <a href="mailto:iwiradika@undiksha.ac.id" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z"/></svg>
+        </a>
+        <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank" rel="noopener" aria-label="SINTA Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </a>
+        <a href="https://github.com/indhiwiradika-edu" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        </a>
+      </div>
+      <button class="contrast-toggle" id="contrast-toggle" type="button" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+        <span>High contrast</span>
+      </button>
+    </div>
   </div>
-  <div class="about-text">
-    <div class="role">Researcher &amp; Lecturer</div>
+</aside>
+
+<main id="main">
+
+<!-- ═══ HOME ══════════════════════════════════════════ -->
+<section id="about" class="hero">
+  <figure class="hero__photo">
+    <img src="uploads/photo-1776825797764.jpg" alt="I Nyoman Indhi Wiradika" width="512" height="512">
+  </figure>
+  <div class="hero__text">
+    <p class="eyebrow">Researcher &amp; Lecturer</p>
     <h1>I Nyoman Indhi Wiradika</h1>
-    <div class="affil">Universitas Pendidikan Ganesha &nbsp;·&nbsp; Informatics Education</div>
-
-    <p>Wiradika is a researcher and lecturer specializing in <em>Educational Assessment &amp; Evaluation</em>. His research interests lie at the intersection of learning analytics and computational psychometrics, applying data-driven and statistical methods to improve assessment quality and learning outcomes.</p>
-
-    <div class="tags">
-      <span class="tag">Educational Assessment</span>
-      <span class="tag">Learning Analytics</span>
-      <span class="tag">Computational Psychometrics</span>
-      <span class="tag">Cognitive Diagnostic Models</span>
-      <span class="tag">Informatics Education</span>
-    </div>
-
-    <div class="stats-row" id="stats-row">
-      <div class="stat-item">
-        <div class="stat-num">303</div>
-        <div class="stat-label">SINTA Score</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">42</div>
-        <div class="stat-label">Publications</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100</div>
-        <div class="stat-label">Citations</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">6</div>
-        <div class="stat-label">H-Index</div>
-      </div>
-    </div>
-
-    <div class="contact-links">
-      <a href="mailto:iwiradika@undiksha.ac.id">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        iwiradika@undiksha.ac.id
-      </a>
-      <a href="https://github.com/indhiwiradika-edu" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        indhiwiradika-edu
-      </a>
-      <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        SINTA Profile
-      </a>
-      <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z"/></svg>
-        Google Scholar
-      </a>
+    <p class="hero__affil">Universitas Pendidikan Ganesha &nbsp;·&nbsp; Informatics Education</p>
+    <p class="hero__lead">Wiradika is a researcher and lecturer specializing in <em>Educational Assessment &amp; Evaluation</em>. His research interests lie at the intersection of learning analytics and computational psychometrics, applying data-driven and statistical methods to improve assessment quality and learning outcomes.</p>
+    <ul class="tags">
+      <li>Educational Assessment</li>
+      <li>Learning Analytics</li>
+      <li>Computational Psychometrics</li>
+      <li>Cognitive Diagnostic Models</li>
+      <li>Informatics Education</li>
+    </ul>
+    <div class="actions">
+      <a class="btn btn--solid" href="#research">Research</a>
+      <a class="btn" href="#publications">Publications</a>
+      <a class="btn" href="#lab">AssevLabs</a>
     </div>
   </div>
 </section>
 
-<!-- PUBLICATIONS -->
-<section id="publications">
-  <div class="section-header">
+<!-- ═══ BIO ═══════════════════════════════════════════ -->
+<section id="bio" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">01</span>
+    <h2>Bio</h2>
+  </header>
+
+  <dl class="stats">
+    <div><dt>SINTA Score</dt><dd>303</dd></div>
+    <div><dt>Publications</dt><dd>42</dd></div>
+    <div><dt>Citations</dt><dd>100</dd></div>
+    <div><dt>H-Index</dt><dd>6</dd></div>
+  </dl>
+
+  <h3 class="subhead">Experience</h3>
+  <!--data:experience-->
+  <ol class="timeline">
+    <li class="timeline__item">
+      <div class="timeline__period">2022 — Present</div>
+      <div>
+        <h4 class="timeline__role">Lecturer</h4>
+        <div class="timeline__place">Universitas Pendidikan Ganesha, Singaraja · Informatics Education</div>
+        <p class="timeline__desc">Teaching courses in educational assessment, statistics, and programming. Active researcher in learning evaluation and computational psychometrics.</p>
+      </div>
+    </li>
+    <li class="timeline__item">
+      <div class="timeline__period">Research</div>
+      <div>
+        <h4 class="timeline__role">Educational Assessment &amp; Evaluation</h4>
+        <div class="timeline__place">Learning Analytics · Cognitive Diagnostic Models · Program Evaluation</div>
+        <p class="timeline__desc">Developing computational methods and measurement tools to improve assessment quality in vocational and general higher education contexts.</p>
+      </div>
+    </li>
+  </ol>
+  <!--/data:experience-->
+
+  <p class="more"><a href="mailto:iwiradika@undiksha.ac.id">Request full CV by email →</a></p>
+</section>
+
+<!-- ═══ RESEARCH ══════════════════════════════════════ -->
+<section id="research" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">02</span>
+    <h2>Research</h2>
+  </header>
+
+  <p class="section__intro">The common thread is measurement that teachers and policymakers can act on: tests that say what a student can and cannot do yet, that treat groups of students fairly, and that hold up when new tools such as language models enter the process.</p>
+
+  <div class="themes">
+    <article class="theme">
+      <h3>Cognitive diagnostic models</h3>
+      <p>Reporting which skills a student has mastered, not only a total score. Current work applies the G-DINA model to the digital competency of future vocational IT teachers.</p>
+      <a class="theme__link" href="blog/understanding-cdm.html">Read: Understanding CDMs →</a>
+    </article>
+    <article class="theme">
+      <h3>Test fairness</h3>
+      <p>Checking whether items work the same way for groups of students with equal ability, using differential item functioning.</p>
+      <a class="theme__link" href="blog/differential-item-functioning.html">Read: Is this test fair? →</a>
+    </article>
+    <article class="theme">
+      <h3>LLMs as measurement tools</h3>
+      <p>Asking when scores produced by a language model can be trusted, and why a consistent model is not automatically a correct one.</p>
+      <a class="theme__link" href="blog/consistent-is-not-correct.html">Read: Consistent is not correct →</a>
+    </article>
+    <article class="theme">
+      <h3>Large-scale assessment</h3>
+      <p>Reading international results such as PISA for what they say about Indonesian students and classrooms.</p>
+      <a class="theme__link" href="blog/behind-indonesias-pisa-2025-numbers.html">Read: Behind the PISA numbers →</a>
+    </article>
+  </div>
+
+  <h3 class="subhead">Funded research</h3>
+  <p class="note">Funded research and community service projects registered in SINTA.</p>
+  <!--data:projects-research-->
+  <ol class="entries">
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">CDM Integration in Web-Based Assessment for Measuring CT-PCK with Tri Hita Karana Philosophy</div>
+        <div class="entry__meta"><span class="badge badge--lead">Principal Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2025 · Rp 5M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Backward Chaining-Based Digital Test Database for Critical Thinking in Differentiated Learning</div>
+        <div class="entry__meta"><span class="badge">Co-Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2025 · Rp 17.5M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Android Decision Support System for Digital Bank Recommendations using MAGIQ-MARCOS Method</div>
+        <div class="entry__meta"><span class="badge">Co-Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2025 · Rp 5M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">LLM-Based Early Detection System for Children's Scientific Reading and Writing Ability</div>
+        <div class="entry__meta"><span class="badge">Co-Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2025 · Rp 5M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Development of Online Digital Literacy Instrument for Informatics Education Students</div>
+        <div class="entry__meta"><span class="badge badge--lead">Principal Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2024 · Rp 7.5M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Android Tourism Destination DSS for Bali using MAGIQ-ARAS Method</div>
+        <div class="entry__meta"><span class="badge">Co-Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2024 · Rp 7.5M</div>
+    </li>
+  </ol>
+  <!--/data:projects-research-->
+
+  <h3 class="subhead">Community service</h3>
+  <!--data:projects-community-->
+  <ol class="entries">
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">"SIBONAR" — Bondres Art Performance for HIV/AIDS-Drug Prevention &amp; Youth Organization Capacity Building</div>
+        <div class="entry__meta"><span class="badge badge--lead">Principal Investigator</span><span>National Competitive PKM · BIMA Source</span></div>
+      </div>
+      <div class="entry__aside">2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Optimization of Maritime Tourism Village toward Safe Community Tourism based on Tri Hita Karana via Digital Media</div>
+        <div class="entry__meta"><span class="badge">Co-Investigator</span><span>National Competitive PKM · BIMA Source</span></div>
+      </div>
+      <div class="entry__aside">2025 · Rp 41.2M</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title">Differentiated Learning Planning Assistance Based on Literacy &amp; Numeracy Assessment Results in Panji Anom and Selat Villages</div>
+        <div class="entry__meta"><span class="badge badge--lead">Principal Investigator</span><span>DIPA Institutional · Internal Source</span></div>
+      </div>
+      <div class="entry__aside">2024 · Rp 10M</div>
+    </li>
+  </ol>
+  <!--/data:projects-community-->
+</section>
+
+<!-- ═══ LAB ═══════════════════════════════════════════ -->
+<section id="lab" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">03</span>
+    <h2>Lab</h2>
+  </header>
+
+  <div class="lab">
+    <div class="lab__intro">
+      <a class="lab__logo" href="https://assevlabs.web.app" target="_blank" rel="noopener">
+        <img src="img/logos/assevlabs.png" alt="AssevLabs" width="546" height="158">
+      </a>
+      <div>
+        <p class="lab__tagline">Assessment built on evidence, not assumptions.</p>
+        <p><strong>AssevLabs</strong> is Wiradika’s research-based assessment lab. It moves measurement methods from research into tools that schools, researchers and organizations use to design instruments, run assessments and report results they can trace and defend.</p>
+      </div>
+    </div>
+
+    <ul class="capabilities">
+      <li>
+        <h4>Instrument design</h4>
+        <p>Items, competencies, attributes and Q-matrices, with expert review of content, language and quality.</p>
+      </li>
+      <li>
+        <h4>Item banks</h4>
+        <p>Item banks and assessment packages for schools, research projects and competency evaluation in organizations.</p>
+      </li>
+      <li>
+        <h4>Expert review</h4>
+        <p>A traceable record of how each instrument was reviewed and improved.</p>
+      </li>
+      <li>
+        <h4>Measurement analysis</h4>
+        <p>Scoring and analysis with classical test theory, item response theory and cognitive diagnostic models.</p>
+      </li>
+    </ul>
+
+    <ol class="steps" aria-label="How a method reaches the platform">
+      <li>Research</li>
+      <li>Specification</li>
+      <li>Implementation</li>
+      <li>Validation</li>
+    </ol>
+
+    <div class="actions">
+      <a class="btn btn--solid" href="https://assevlabs.web.app" target="_blank" rel="noopener">Visit AssevLabs ↗</a>
+      <a class="btn" href="https://pelita-assessment.web.app" target="_blank" rel="noopener">Open the platform ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ══════════════════════════════════ -->
+<section id="publications" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">04</span>
     <h2>Selected Publications</h2>
-  </div>
-  <div class="pub-list">
-
-    <div class="pub-item">
-      <div>
-        <a href="https://journal2.uad.ac.id/index.php/biste/article/view/15340/6321" target="_blank" class="pub-title">
-          Profiling Digital Competency of Prospective Vocational IT Educators Using Generalized DINA Model: A Cognitive Diagnostic Approach
-        </a>
-        <div class="pub-meta">
-          <span class="pub-badge q4">Q4 · Scopus</span>
-          <span>Buletin Ilmiah Sarjana Teknik Elektro</span>
-          <span>Wiradika I.N.I. et al.</span>
-        </div>
+  </header>
+  <!--data:publications-->
+  <ol class="entries">
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="https://journal2.uad.ac.id/index.php/biste/article/view/15340/6321" target="_blank" rel="noopener">Profiling Digital Competency of Prospective Vocational IT Educators Using Generalized DINA Model: A Cognitive Diagnostic Approach</a>
+        <div class="entry__meta"><span class="badge">Q4 · Scopus</span><span>Buletin Ilmiah Sarjana Teknik Elektro</span><span>Wiradika I.N.I. et al.</span></div>
       </div>
-      <div class="pub-year">2026</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <a href="https://www.scopus.com/record/display.uri?eid=2-s2.0-105015071730" target="_blank" class="pub-title">
-          From Training to Teaching: How Effective Are Teaching Practicum Programs in Preparing Professional Teachers?
-        </a>
-        <div class="pub-meta">
-          <span class="pub-badge q2">Q2 · Scopus</span>
-          <span>Education and Urban Society</span>
-          <span>Purwasih D. et al.</span>
-        </div>
+      <div class="entry__aside">2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="https://www.scopus.com/record/display.uri?eid=2-s2.0-105015071730" target="_blank" rel="noopener">From Training to Teaching: How Effective Are Teaching Practicum Programs in Preparing Professional Teachers?</a>
+        <div class="entry__meta"><span class="badge">Q2 · Scopus</span><span>Education and Urban Society</span><span>Purwasih D. et al.</span></div>
       </div>
-      <div class="pub-year">2025</div>
-    </div>
-  </div>
-
-  <p style="margin-top:1.4rem; font-size:0.82rem; color:var(--text-muted);">
-    Full list available at
-    <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank" style="color:var(--accent);">SINTA</a> ·
-    <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank" style="color:var(--accent);">Google Scholar</a>
-  </p>
+      <div class="entry__aside">2025</div>
+    </li>
+  </ol>
+  <!--/data:publications-->
+  <p class="note">Full list available at <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank" rel="noopener">SINTA</a> · <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header">
-    <h2>Research Projects</h2>
-  </div>
-
-  <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.6rem;">Funded research and community service projects registered in SINTA.</p>
-
-  <div class="group-label">Research</div>
-  <div class="pub-list" style="margin-bottom:2.5rem;">
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">CDM Integration in Web-Based Assessment for Measuring CT-PCK with Tri Hita Karana Philosophy</div>
-        <div class="pub-meta">
-          <span class="pub-badge q2" style="background:#032454;color:#fcc209;">Principal Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
+<!-- ═══ TALKS ═════════════════════════════════════════ -->
+<section id="talks" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">05</span>
+    <h2>Talks</h2>
+  </header>
+  <p class="section__intro">Recent talks are built as web decks, so they open in any browser and can be presented full screen.</p>
+  <!--data:talks-->
+  <ol class="entries">
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="presentation/present.html">Profiling Digital Competency of Prospective Vocational IT Educators</a>
+        <div class="entry__meta"><span class="badge">Web deck</span><span>PELITA research deck</span></div>
       </div>
-      <div class="pub-year">2025 · Rp 5M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Development of Online Digital Literacy Instrument for Informatics Education Students</div>
-        <div class="pub-meta">
-          <span class="pub-badge q2" style="background:#032454;color:#fcc209;">Principal Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2024 · Rp 7.5M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Backward Chaining-Based Digital Test Database for Critical Thinking in Differentiated Learning</div>
-        <div class="pub-meta">
-          <span class="pub-badge q4" style="background:#e7eaee;color:#032454;">Co-Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2025 · Rp 17.5M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Android Decision Support System for Digital Bank Recommendations using MAGIQ-MARCOS Method</div>
-        <div class="pub-meta">
-          <span class="pub-badge q4" style="background:#e7eaee;color:#032454;">Co-Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2025 · Rp 5M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">LLM-Based Early Detection System for Children's Scientific Reading and Writing Ability</div>
-        <div class="pub-meta">
-          <span class="pub-badge q4" style="background:#e7eaee;color:#032454;">Co-Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2025 · Rp 5M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Android Tourism Destination DSS for Bali using MAGIQ-ARAS Method</div>
-        <div class="pub-meta">
-          <span class="pub-badge q4" style="background:#e7eaee;color:#032454;">Co-Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2024 · Rp 7.5M</div>
-    </div>
-
-  </div>
-
-  <div class="group-label">Community Service</div>
-  <div class="pub-list">
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">"SIBONAR" — Bondres Art Performance for HIV/AIDS-Drug Prevention &amp; Youth Organization Capacity Building</div>
-        <div class="pub-meta">
-          <span class="pub-badge q2" style="background:#032454;color:#fcc209;">Principal Investigator</span>
-          <span>National Competitive PKM · BIMA Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2026</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Optimization of Maritime Tourism Village toward Safe Community Tourism based on Tri Hita Karana via Digital Media</div>
-        <div class="pub-meta">
-          <span class="pub-badge q4" style="background:#e7eaee;color:#032454;">Co-Investigator</span>
-          <span>National Competitive PKM · BIMA Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2025 · Rp 41.2M</div>
-    </div>
-
-    <div class="pub-item">
-      <div>
-        <div class="pub-title">Differentiated Learning Planning Assistance Based on Literacy &amp; Numeracy Assessment Results in Panji Anom and Selat Villages</div>
-        <div class="pub-meta">
-          <span class="pub-badge q2" style="background:#032454;color:#fcc209;">Principal Investigator</span>
-          <span>DIPA Institutional · Internal Source</span>
-        </div>
-      </div>
-      <div class="pub-year">2024 · Rp 10M</div>
-    </div>
-
-  </div>
+      <div class="entry__aside">2026</div>
+    </li>
+  </ol>
+  <!--/data:talks-->
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header">
-    <h2>Experience</h2>
-  </div>
-  <div class="exp-list">
-
-    <div class="exp-item">
-      <div class="exp-period">2022 — Present</div>
-      <div>
-        <div class="exp-role">Lecturer</div>
-        <div class="exp-place">Universitas Pendidikan Ganesha, Singaraja · Informatics Education</div>
-        <div class="exp-desc">Teaching courses in educational assessment, statistics, and programming. Active researcher in learning evaluation and computational psychometrics.</div>
-      </div>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-period">Research</div>
-      <div>
-        <div class="exp-role">Educational Assessment &amp; Evaluation</div>
-        <div class="exp-place">Learning Analytics · Cognitive Diagnostic Models · Program Evaluation</div>
-        <div class="exp-desc">Developing computational methods and measurement tools to improve assessment quality in vocational and general higher education contexts.</div>
-      </div>
-    </div>
-
-  </div>
-
-  <p style="margin-top:1.8rem;">
-    <a href="mailto:iwiradika@undiksha.ac.id" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:500;">
-      Request full CV by email →
-    </a>
-  </p>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <div class="section-header">
+<!-- ═══ WRITING ═══════════════════════════════════════ -->
+<section id="writing" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">06</span>
     <h2>Writing &amp; Notes</h2>
-  </div>
-  <div class="blog-list">
-    <a href="blog/consistent-is-not-correct.html" class="blog-item" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;">
-      <span class="blog-title">Consistent Is Not Correct: What AIME-Con 2026 Shows About LLMs as Measurement Tools</span>
-      <span class="blog-date">Oct 2026</span>
-    </a>
-    <a href="blog/behind-indonesias-pisa-2025-numbers.html" class="blog-item" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;">
-      <span class="blog-title">Behind Indonesia’s PISA 2025 Numbers</span>
-      <span class="blog-date">Sep 2026</span>
-    </a>
-    <a href="blog/differential-item-functioning.html" class="blog-item" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;">
-      <span class="blog-title">Is This Test Fair? A Practical Introduction to Differential Item Functioning</span>
-      <span class="blog-date">May 2026</span>
-    </a>
-    <a href="blog/understanding-cdm.html" class="blog-item" style="text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;">
-      <span class="blog-title">Understanding Cognitive Diagnostic Models: Seeing Beyond the Scores</span>
-      <span class="blog-date">Feb 2026</span>
-    </a>
-    <div class="blog-item">
-      <span class="blog-title">From Data to Decision: The Role of Computational Psychometrics</span>
-      <span class="blog-date">Coming soon</span>
-    </div>
-  </div>
-  <p style="margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">More posts coming soon.</p>
+  </header>
+  <!--data:writing-->
+  <ol class="entries entries--compact">
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="blog/consistent-is-not-correct.html">Consistent Is Not Correct: What AIME-Con 2026 Shows About LLMs as Measurement Tools</a>
+      </div>
+      <div class="entry__aside">Oct 2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="blog/behind-indonesias-pisa-2025-numbers.html">Behind Indonesia’s PISA 2025 Numbers</a>
+      </div>
+      <div class="entry__aside">Sep 2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="blog/differential-item-functioning.html">Is This Test Fair? A Practical Introduction to Differential Item Functioning</a>
+      </div>
+      <div class="entry__aside">May 2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <a class="entry__title" href="blog/understanding-cdm.html">Understanding Cognitive Diagnostic Models: Seeing Beyond the Scores</a>
+      </div>
+      <div class="entry__aside">Feb 2026</div>
+    </li>
+    <li class="entry">
+      <div class="entry__body">
+        <div class="entry__title entry__title--soon">From Data to Decision: The Role of Computational Psychometrics</div>
+      </div>
+      <div class="entry__aside">Coming soon</div>
+    </li>
+  </ol>
+  <!--/data:writing-->
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-header">
+<!-- ═══ CONTACT ═══════════════════════════════════════ -->
+<section id="contact" class="section reveal">
+  <header class="section__head">
+    <span class="section__num">07</span>
     <h2>Contact</h2>
-  </div>
-  <div class="contact-block">
+  </header>
+  <div class="contact">
     <div>
-      <p>Open to research collaboration, academic discussions, and inquiries related to educational assessment and evaluation.</p>
+      <p class="contact__lead">Open to research collaboration, academic discussions, and inquiries related to educational assessment and evaluation.</p>
+      <div class="affiliation">
+        <img src="img/logos/undiksha.png" alt="Universitas Pendidikan Ganesha logo" width="56" height="55">
+        <address>
+          <strong>Universitas Pendidikan Ganesha</strong><br>
+          Informatics Education<br>
+          Singaraja, Bali, Indonesia
+        </address>
+      </div>
     </div>
-    <div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <ul class="contact__list">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         <a href="mailto:iwiradika@undiksha.ac.id">iwiradika@undiksha.ac.id</a>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        <a href="https://github.com/indhiwiradika-edu" target="_blank">github.com/indhiwiradika-edu</a>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent)"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank">SINTA · ID 6806385</a>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z"/></svg>
-        <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank">Google Scholar</a>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Singaraja, Bali, Indonesia</span>
-      </div>
-    </div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5 12 0z"/></svg>
+        <a href="https://scholar.google.com/citations?user=54Ggga0AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6806385" target="_blank" rel="noopener">SINTA · ID 6806385</a>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        <a href="https://github.com/indhiwiradika-edu" target="_blank" rel="noopener">github.com/indhiwiradika-edu</a>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M12 3l9 9-9 9"/></svg>
+        <a href="https://assevlabs.web.app" target="_blank" rel="noopener">AssevLabs</a>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<footer class="footer">
   <span>© 2026 I Nyoman Indhi Wiradika</span>
   <span>Universitas Pendidikan Ganesha</span>
 </footer>
 
-<!-- TWEAKS PANEL -->
-<div id="tweaks-panel">
-  <h3>Tweaks</h3>
-  <div class="tweak-row">
-    <label>Accent Color</label>
-    <input type="color" id="tweak-accent" value="#032454">
-  </div>
-  <div class="tweak-row">
-    <label>Background</label>
-    <input type="color" id="tweak-bg" value="#f9fafb">
-  </div>
-  <div class="tweak-row">
-    <label>Photo Shape</label>
-    <select id="tweak-shape">
-      <option value="circle">Circle</option>
-      <option value="square">Square</option>
-    </select>
-  </div>
-</div>
+</main>
 
-<script>
-  // ─── NAV toggle ────────────────────────────
-  const toggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-  });
-  // tutup menu saat link diklik
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
-
-  // ─── NAV active on scroll ──────────────────
-  // Active section = the last one whose top has passed 40% of the viewport,
-  // so exactly one link is ever highlighted, and Contact lights up at the very bottom.
-  const sections = [...document.querySelectorAll('section[id]')];
-  const links = document.querySelectorAll('.nav-links a');
-  let scrollTick = false;
-  function onScroll() {
-    const h = document.documentElement;
-    let current = sections[0];
-    if (h.scrollTop >= h.scrollHeight - h.clientHeight - 2) current = sections[sections.length - 1];
-    else for (const s of sections) if (s.getBoundingClientRect().top <= innerHeight * 0.4) current = s;
-    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current.id));
-    scrollTick = false;
-  }
-  window.addEventListener('scroll', () => {
-    if (scrollTick) return;
-    scrollTick = true;
-    requestAnimationFrame(onScroll);
-  }, { passive: true });
-  onScroll();
-
-
-  // ─── TWEAKS ───────────────────────────────
-  const panel = document.getElementById('tweaks-panel');
-  window.addEventListener('message', e => {
-    if (e.data && e.data.type === '__activate_edit_mode') panel.classList.add('visible');
-    if (e.data && e.data.type === '__deactivate_edit_mode') panel.classList.remove('visible');
-  });
-  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
-
-  document.getElementById('tweak-accent').addEventListener('input', e => {
-    document.documentElement.style.setProperty('--accent', e.target.value);
-    document.documentElement.style.setProperty('--navy', e.target.value);
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accentColor: e.target.value } }, '*');
-  });
-  document.getElementById('tweak-bg').addEventListener('input', e => {
-    document.documentElement.style.setProperty('--bg', e.target.value);
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { bgColor: e.target.value } }, '*');
-  });
-  document.getElementById('tweak-shape').addEventListener('change', e => {
-    const img = document.getElementById('profile-photo');
-    if (img) img.style.borderRadius = e.target.value === 'square' ? '8px' : '50%';
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { photoShape: e.target.value } }, '*');
-  });
-</script>
+<script type="module" src="js/app.js"></script>
 <!--i18n:js--><script>document.querySelectorAll('.lang-switch a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('site-lang',a.dataset.lang)}catch(e){}})});</script><!--/i18n:js-->
 </body>
 </html>
