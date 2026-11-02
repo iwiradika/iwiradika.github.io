@@ -1,0 +1,17 @@
+[
+  {
+    "series": "CDM from the Ground Up",
+    "summary": "A step-by-step introduction to cognitive diagnostic models, from attributes and the Q-matrix to the mastery profile each student receives.",
+    "episodes": [
+      {
+        "episode": 1,
+        "youtube": "RCToAOiQf_U",
+        "title": "Same Score, Different Needs",
+        "date": "2026-11",
+        "duration": "7:56",
+        "summary": "Two students earn the same total score. Do they need the same help? This episode compares total scores, item response theory and CDM, builds a Q-matrix from three attributes, and shows why three attributes give eight possible mastery profiles.",
+        "related": { "title": "Understanding Cognitive Diagnostic Models", "url": "blog/understanding-cdm.html" }
+      }
+    ]
+  }
+]

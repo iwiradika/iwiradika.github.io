@@ -21,16 +21,16 @@ This website serves as a digital portfolio for my research, publications, and ac
 ## 🗂️ Structure
 
 ```
-index.html          home page: left sidebar + one scrolling page (Home, Bio, Research, Lab, Publications, Talks, Writing, Contact)
+index.html          home page: left sidebar + one scrolling page (Home, Bio, Research, Lab, Publications, Talks, Lectures, Writing, Contact)
 css/styles.css      all home-page styles; colours are tokens at the top of the file
-js/                 app.js loads nav.js (sidebar), contrast.js (high contrast), reveal.js (fade-in)
-data/*.json         publications, projects, experience, talks, writing — edit these, not the HTML lists
+js/                 app.js loads nav.js (sidebar), contrast.js (high contrast), reveal.js (fade-in), lectures.js (click-to-play video)
+data/*.json         publications, projects, experience, talks, lectures, writing — edit these, not the HTML lists
 img/logos/          AssevLabs and Undiksha logos
 _build/render.py    writes data/*.json into the lists in index.html
 blog/, presentation/, id/, zh/, _i18n/   unchanged
 ```
 
-To add a publication, talk, project or post: edit the JSON file, then run
+To add a publication, talk, lecture episode, project or post: edit the JSON file, then run
 
 ```bash
 python3 _build/render.py

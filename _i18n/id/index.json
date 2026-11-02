@@ -123,5 +123,17 @@
  "SINTA Profile": "Profil SINTA",
  "GitHub": "GitHub",
  "How a method reaches the platform": "Alur sebuah metode sampai ke platform",
- "Universitas Pendidikan Ganesha logo": "Logo Universitas Pendidikan Ganesha"
+ "Universitas Pendidikan Ganesha logo": "Logo Universitas Pendidikan Ganesha",
+ "<a href=\"#lectures\">Lectures</a>": "<a href=\"#lectures\">Kuliah</a>",
+ "Lectures": "Kuliah",
+ "Short video lectures that explain assessment methods step by step. Each episode has a companion article, so you can watch first and read later, or the other way round.": "Video kuliah singkat yang menjelaskan metode asesmen langkah demi langkah. Setiap episode punya artikel pendamping, jadi Anda bisa menonton dulu lalu membaca, atau sebaliknya.",
+ "CDM from the Ground Up": "CDM from the Ground Up",
+ "A step-by-step introduction to cognitive diagnostic models, from attributes and the Q-matrix to the mastery profile each student receives.": "Pengantar bertahap tentang model diagnostik kognitif, mulai dari atribut dan matriks Q hingga profil penguasaan yang diterima setiap siswa.",
+ "<span class=\"badge\">Episode 1</span><span>Nov 2026</span>": "<span class=\"badge\">Episode 1</span><span>Nov 2026</span>",
+ "Same Score, Different Needs": "Same Score, Different Needs",
+ "Two students earn the same total score. Do they need the same help? This episode compares total scores, item response theory and CDM, builds a Q-matrix from three attributes, and shows why three attributes give eight possible mastery profiles.": "Dua siswa memperoleh skor total yang sama. Apakah mereka membutuhkan bantuan yang sama? Episode ini membandingkan skor total, teori respons butir, dan CDM, menyusun matriks Q dari tiga atribut, lalu menunjukkan mengapa tiga atribut menghasilkan delapan kemungkinan profil penguasaan.",
+ "Companion article: <a href=\"blog/understanding-cdm.html\">Understanding Cognitive Diagnostic Models</a>": "Artikel pendamping: <a href=\"blog/understanding-cdm.html\">Memahami Model Diagnostik Kognitif</a>",
+ "New episodes appear first on <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a>.": "Episode baru tayang lebih dulu di <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a>.",
+ "YouTube": "YouTube",
+ "Play video: Same Score, Different Needs": "Putar video: Same Score, Different Needs"
 }

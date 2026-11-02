@@ -123,5 +123,17 @@
  "SINTA Profile": "SINTA 主页",
  "GitHub": "GitHub",
  "How a method reaches the platform": "一种方法如何进入平台",
- "Universitas Pendidikan Ganesha logo": "甘尼沙教育大学校徽"
+ "Universitas Pendidikan Ganesha logo": "甘尼沙教育大学校徽",
+ "<a href=\"#lectures\">Lectures</a>": "<a href=\"#lectures\">公开课</a>",
+ "Lectures": "公开课",
+ "Short video lectures that explain assessment methods step by step. Each episode has a companion article, so you can watch first and read later, or the other way round.": "简短的视频课程，一步步讲解测评方法。每一集都配有一篇文章，可以先看视频再读文章，也可以反过来。",
+ "CDM from the Ground Up": "CDM from the Ground Up",
+ "A step-by-step introduction to cognitive diagnostic models, from attributes and the Q-matrix to the mastery profile each student receives.": "循序渐进地介绍认知诊断模型：从属性和 Q 矩阵讲起，直到每位学生得到的掌握剖面。",
+ "<span class=\"badge\">Episode 1</span><span>Nov 2026</span>": "<span class=\"badge\">第 1 集</span><span>2026 年 11 月</span>",
+ "Same Score, Different Needs": "Same Score, Different Needs",
+ "Two students earn the same total score. Do they need the same help? This episode compares total scores, item response theory and CDM, builds a Q-matrix from three attributes, and shows why three attributes give eight possible mastery profiles.": "两名学生总分相同，他们需要的帮助也相同吗？本集比较总分、项目反应理论和认知诊断模型三种解读方式，用三个属性构建 Q 矩阵，并说明为什么三个属性会产生八种可能的掌握剖面。",
+ "Companion article: <a href=\"blog/understanding-cdm.html\">Understanding Cognitive Diagnostic Models</a>": "配套文章：<a href=\"blog/understanding-cdm.html\">理解认知诊断模型</a>",
+ "New episodes appear first on <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a>.": "新一集会先在 <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a> 上发布。",
+ "YouTube": "YouTube",
+ "Play video: Same Score, Different Needs": "播放视频：Same Score, Different Needs"
 }

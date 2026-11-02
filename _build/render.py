@@ -102,6 +102,35 @@ def talks():
     return entries(items)
 
 
+PLAY = ('<svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7A8.5 8.5 0 0 0 60.5 1.7C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z"/>'
+        '<path d="M45 24 27 14v20z" fill="#fff"/></svg>')
+
+
+def episode(e):
+    watch = f'https://www.youtube.com/watch?v={e["youtube"]}'
+    thumb = (f'<a class="episode__thumb" href="{a(watch)}" target="_blank" rel="noopener" data-yt="{a(e["youtube"])}" aria-label="{a("Play video: " + e["title"])}">'
+             f'<img src="https://i.ytimg.com/vi/{a(e["youtube"])}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">'
+             f'<span class="episode__play">{PLAY}</span><span class="episode__time">{t(e["duration"])}</span></a>')
+    related = ""
+    if e.get("related"):
+        r = e["related"]
+        related = f'\n          <p class="episode__related">Companion article: <a href="{a(r["url"])}">{t(r["title"])}</a></p>'
+    return (f'      <li class="episode">\n        {thumb}\n        <div class="episode__body">\n'
+            f'          <div class="entry__meta"><span class="badge">Episode {e["episode"]}</span><span>{month(e["date"])}</span></div>\n'
+            f'          {link(watch, e["title"], "entry__title")}\n'
+            f'          <p class="episode__summary">{t(e["summary"])}</p>{related}\n'
+            f'        </div>\n      </li>')
+
+
+def lectures():
+    out = []
+    for s in load("lectures"):
+        eps = "\n".join(episode(e) for e in sorted(s["episodes"], key=lambda e: e["episode"]))
+        out.append(f'  <div class="series">\n    <h3 class="series__title">{t(s["series"])}</h3>\n'
+                   f'    <p class="series__summary">{t(s["summary"])}</p>\n    <ol class="episodes">\n{eps}\n    </ol>\n  </div>')
+    return "\n" + "\n".join(out) + "\n  "
+
+
 def main():
     projects = load("projects")
     blocks = {
@@ -111,6 +140,7 @@ def main():
         "experience": experience(),
         "writing": writing(),
         "talks": talks(),
+        "lectures": lectures(),
     }
     path = os.path.join(ROOT, "index.html")
     html = open(path, encoding="utf-8").read()
