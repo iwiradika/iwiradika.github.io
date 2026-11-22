@@ -135,5 +135,13 @@
  "Companion article: <a href=\"blog/understanding-cdm.html\">Understanding Cognitive Diagnostic Models</a>": "配套文章：<a href=\"blog/understanding-cdm.html\">理解认知诊断模型</a>",
  "New episodes appear first on <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a>.": "新一集会先在 <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a> 上发布。",
  "YouTube": "YouTube",
- "Play video: Same Score, Different Needs": "播放视频：Same Score, Different Needs"
+ "Play video: Same Score, Different Needs": "播放视频：Same Score, Different Needs",
+ "<span class=\"badge\">Episode 2</span><span>Nov 2026</span>": "<span class=\"badge\">第 2 集</span><span>2026 年 11 月</span>",
+ "<span class=\"badge\">Episode 3</span><span>Nov 2026</span>": "<span class=\"badge\">第 3 集</span><span>2026 年 11 月</span>",
+ "The DINA Model: Why Mastering One Skill Isn’t Enough": "The DINA Model: Why Mastering One Skill Isn’t Enough",
+ "The DINO Model: When One Skill Is Enough": "The DINO Model: When One Skill Is Enough",
+ "Play video: The DINA Model: Why Mastering One Skill Isn’t Enough": "播放视频：The DINA Model: Why Mastering One Skill Isn’t Enough",
+ "Play video: The DINO Model: When One Skill Is Enough": "播放视频：The DINO Model: When One Skill Is Enough",
+ "A student has mastered one of the two skills an item requires. Does that raise the chance of a correct answer? Under the DINA model, no. This episode builds the model step by step: the conjunctive rule, the ideal response η, slip and guess, item discrimination, and a worked example in which two students with the same total score have very different chances on one item.": "一道题需要两项技能，某位学生已掌握其中一项。他答对的概率会因此提高吗？在 DINA 模型下，不会。本集一步步构建该模型：合取规则、理想反应 η、失误（slip）与猜测（guess）参数、题目区分度，并通过一个算例说明两名总分相同的学生在同一道题上的答对概率可能相差很大。",
+ "What if either skill is enough to answer an item? This episode introduces the DINO model, the disjunctive counterpart of DINA: the disjunctive rule, the ideal response ω, slip and guess, and a worked example in which two students with the same total score look different under DINA but identical under DINO. It ends with where DINO fits and why the choice of model should be checked against data.": "如果掌握任意一项技能就足以答对一道题呢？本集介绍 DINA 的析取对应模型 DINO：析取规则、理想反应 ω、失误与猜测参数，并通过一个算例说明两名总分相同的学生在 DINA 下表现不同，在 DINO 下却完全一样。最后讨论 DINO 适用的情形，以及为什么模型的选择需要用数据来检验。"
 }

@@ -107,6 +107,12 @@
  "Same Score, Different Needs",
  "Two students earn the same total score. Do they need the same help? This episode compares total scores, item response theory and CDM, builds a Q-matrix from three attributes, and shows why three attributes give eight possible mastery profiles.",
  "Companion article: <a href=\"blog/understanding-cdm.html\">Understanding Cognitive Diagnostic Models</a>",
+ "<span class=\"badge\">Episode 2</span><span>Nov 2026</span>",
+ "The DINA Model: Why Mastering One Skill Isn’t Enough",
+ "A student has mastered one of the two skills an item requires. Does that raise the chance of a correct answer? Under the DINA model, no. This episode builds the model step by step: the conjunctive rule, the ideal response η, slip and guess, item discrimination, and a worked example in which two students with the same total score have very different chances on one item.",
+ "<span class=\"badge\">Episode 3</span><span>Nov 2026</span>",
+ "The DINO Model: When One Skill Is Enough",
+ "What if either skill is enough to answer an item? This episode introduces the DINO model, the disjunctive counterpart of DINA: the disjunctive rule, the ideal response ω, slip and guess, and a worked example in which two students with the same total score look different under DINA but identical under DINO. It ends with where DINO fits and why the choice of model should be checked against data.",
  "New episodes appear first on <a href=\"https://www.youtube.com/@drinyomanindhiwiradika\" rel=\"noopener\" target=\"_blank\">YouTube</a>.",
  "Writing &amp; Notes",
  "<a class=\"entry__title\" href=\"blog/consistent-is-not-correct.html\">Consistent Is Not Correct: What AIME-Con 2026 Shows About LLMs as Measurement Tools</a>",
@@ -135,5 +141,7 @@
  "GitHub",
  "How a method reaches the platform",
  "Play video: Same Score, Different Needs",
+ "Play video: The DINA Model: Why Mastering One Skill Isn’t Enough",
+ "Play video: The DINO Model: When One Skill Is Enough",
  "Universitas Pendidikan Ganesha logo"
 ]
